@@ -14,6 +14,7 @@ engine = create_async_engine(
     settings.DATABASE_URL,
     echo=settings.DATABASE_ECHO,
     future=True,
+    connect_args={"server_settings": {"search_path": "public"}},
 )
 
 AsyncSessionLocal = async_sessionmaker(
