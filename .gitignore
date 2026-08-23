@@ -1,0 +1,92 @@
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# ----- Virtual env -----
+.venv/
+venv/
+ENV/
+env/
+.env.local
+
+# ----- Environment / secrets -----
+.env
+*.pem
+*.key
+secrets/
+
+# ----- IDE / editor -----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----- ML / models (large files) -----
+data/models/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.joblib
+*.pkl
+CACHEDIR.TAG
+
+# Hugging Face / transformers cache
+.cache/huggingface/
+.cache/torch/
+
+# ----- Data (bỏ comment nếu không muốn commit dataset) -----
+# data/processed/
+# data/raw/
+
+# ----- Logs / runtime -----
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+
+# ----- Jupyter -----
+.ipynb_checkpoints/
+
+# ----- Project-specific -----
+tree.txt
+debug_case.py.bak

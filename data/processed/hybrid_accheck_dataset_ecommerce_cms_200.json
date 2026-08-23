@@ -1,0 +1,3932 @@
+[
+  {
+    "id": "AC_001",
+    "source_id": "ecommerce#897",
+    "user_story": "As a customer, I would like to see related products on title detail pages for certain products so that my purchasing decisions are supported.",
+    "acceptance_criteria": [
+      "Display next to the texts",
+      "Display always on every detail page, so there is a fallback to the 3 most important products, the first 3 search priority",
+      "Recommendations for you",
+      "Related Code 23 is evaluated, then all products, maximum 5 for display",
+      "Demarcation must be clearly visible, as on the start page",
+      "The area of a recommendation is provided with a link to the corresponding detail page",
+      "The cover, the title, the gross price with VAT label are displayed"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "see",
+        "resource": "Related Products",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_002",
+    "source_id": "ecommerce#937",
+    "user_story": "As an anonymous user, I would like to be able to register or log in to the site in order to access my customer data.",
+    "acceptance_criteria": [
+      "as an anonymous user, after clicking on Checkout, the page with login and registration options appears",
+      "Click on Let's go to enter the address of the checkout",
+      "After successful registration, a completed address mask appears with all previous customer data",
+      "Email (correct) instead of email (patternlab)",
+      "E-mail text box intercepts incorrect entries via an e-mail validator",
+      "Error messages are displayed in such a way that they are up to date in terms of security, e.g. only \"Registration not correct\" instead of displaying which field is exactly incorrect",
+      "When clicking on Register, the previous address mask + password entry and repetition are displayed",
+      "After entering the data, the data is saved in the database and a login is possible with the data",
+      "After entering the data, the customer receives an e-mail in which he must confirm that he is the correct recipient",
+      "The customer is informed that he can only continue with the registered data after confirming the e-mail",
+      "The registration is retained for 7 days",
+      "Standard texts are included for this communication",
+      "After confirming the e-mail, the customer is taken to the login area in the WK and must log in, after which he continues as a logged-in user"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Anonymous User",
+        "action": "register",
+        "resource": "Account Registration Or Login",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_003",
+    "source_id": "ecommerce#965",
+    "user_story": "As a user, I would like to be able to access the shopping basket page via a more comprehensible navigation in the mobile view.",
+    "acceptance_criteria": [
+      "Button of the totaliser works as a link"
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "access",
+        "resource": "Shopping Basket Page",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Hệ thống thực tế thường yêu cầu đăng nhập mới cho vào giỏ hàng dạng mở rộng -> PM từ chối truy cập trực tiếp.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_004",
+    "source_id": "ecommerce#1006",
+    "user_story": "As an admin, I want to generate voucher codes to grant discounts to certain customers.",
+    "acceptance_criteria": [
+      "A random 8-digit alphanumeric code is generated when the button is clicked.",
+      "The generated voucher code is unique.",
+      "List of existing codes is displayed.",
+      "Visual indicators for used voucher codes.",
+      "The list is sorted in descending order by voucher creation date. The most recent voucher is displayed at the top.",
+      "Fixed € values can be specified for vouchers."
+    ],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "generate",
+        "resource": "Voucher Codes",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_005",
+    "source_id": "ecommerce#1007",
+    "user_story": "As a buyer, I would like to see the discount granted to me in order to be able to understand the price shown.",
+    "acceptance_criteria": [
+      "Discounts granted are shown in the order confirmation email.",
+      "The presentation corresponds to the design concept"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Buyer",
+        "action": "see",
+        "resource": "Discount Amount",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_006",
+    "source_id": "ecommerce#1008",
+    "user_story": "As a backend user, I would like to see my formatted text in the TinyMce editor as it will be displayed later in the frontend.",
+    "acceptance_criteria": [
+      "Customise TinyMCE CSS class"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Backend User",
+        "action": "see",
+        "resource": "Formatted Text",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_007",
+    "source_id": "ecommerce#157",
+    "user_story": "As a user, I would like to delete my account.",
+    "acceptance_criteria": [
+      "\"Delete account\" button available in the settings",
+      "Security prompt indicating that the deletion process cannot be undone",
+      "Data protection notice on the further use of personal data",
+      "Confirmation of the deletion",
+      "All user data (user data, orders, watch lists, addresses, etc.) is deleted from the store",
+      "Store generates email notification to configurable email address"
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "delete",
+        "resource": "My Account",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_008",
+    "source_id": "ecommerce#177",
+    "user_story": "As a logged in user, I would like to access my account.",
+    "acceptance_criteria": [
+      "Customised main navigation",
+      "First settings page is available and contains user-specific information"
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "access",
+        "resource": "My Account",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_009",
+    "source_id": "ecommerce#237",
+    "user_story": "As an administrator, I want to see all orders from the web shop.",
+    "acceptance_criteria": [
+      "There is a searchable and sortable list with all orders of the past 6 months",
+      "This list is protected by a login",
+      "The status \"transmitted to ERP\", \"Transmission pending\" and \"Manually accepted\" is displayed.",
+      "This status can be changed manually.",
+      "This list is based on the existing ERP Queque",
+      "A searchable and sortable list of all orders from the last 6 months is available",
+      "This list is protected by a login",
+      "The status \"Transmitted to ERP\", \"Pending transmission\" and \"Manually accepted\" is displayed.",
+      "This status can be changed manually.",
+      "This list is based on the existing ERP queue"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "see",
+        "resource": "All Orders From The Web Shop",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US đòi xem TẤT CẢ đơn hàng nhưng PM chỉ cho phép xem đơn được phân công.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_010",
+    "source_id": "ecommerce#238",
+    "user_story": "As an admin user, I would like to see a user list of users registered in the web shop and be able to delete users.",
+    "acceptance_criteria": [
+      "A searchable and sortable list with all users of the web shop is available",
+      "This list is protected by a login",
+      "A user can be deleted from the system using an action button",
+      "A searchable and sortable list with all users of the web shop is available",
+      "This list is protected by a login",
+      "A user can be deleted from the system using an action button"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "see",
+        "resource": "User List",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho Support Staff, không khớp role 'Admin User' trong US.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_011",
+    "source_id": "ecommerce#239",
+    "user_story": "As an administrator, I want  to configure the possible shipping costs for the web shop.",
+    "acceptance_criteria": [
+      "These setting options are available on a page secured by login",
+      "The matrix shown above can be maintained. The prices, minimum order value and availability must be stored here",
+      "The settings must be used in the shopping basket",
+      "The shipping costs must be transferred to the ERP (check whether the interface allows this)"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "configure",
+        "resource": "Shipping Costs",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_012",
+    "source_id": "ecommerce#241",
+    "user_story": "As an administrator, I want  to maintain an information page about shipping costs.",
+    "acceptance_criteria": [
+      "A page on shipping costs should be maintained via the CMS",
+      "This can be called by the user via the footer"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "maintain",
+        "resource": "Shipping Cost Info Page",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_013",
+    "source_id": "ecommerce#249",
+    "user_story": "As an administrator, I want to publish public title-lists.",
+    "acceptance_criteria": [
+      "Administrators can generate public wishlits by adding isbns to this list",
+      "Administrators can choose if an after search is displayed or not",
+      "An unique URL is generate and the wishlist can accessed by this URL",
+      "The URL should not be to long",
+      "A function is available for administrators to create title lists according to ISBNs",
+      "Furthermore, it can be set for each list whether an AfterSearch is output or not",
+      "These title lists can be accessed via a unique URL"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "draft",
+        "resource": "Public Title-Lists",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "US muốn PUBLISH trực tiếp nhưng PM chỉ cho phép DRAFT (soạn nháp, chưa xuất bản).",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_014",
+    "source_id": "ecommerce#255",
+    "user_story": "As an administrator, I want  to configure the possible shipping costs for the web shop.",
+    "acceptance_criteria": [
+      "These setting options are available on a page secured by login",
+      "The matrix shown above can be maintained. The prices, minimum order value and availability must be stored here",
+      "The settings must be used in the shopping basket",
+      "The shipping costs must be transferred to the ERP (check whether the interface allows this)"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "configure",
+        "resource": "The Possible Shipping Costs",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_015",
+    "source_id": "ecommerce#703",
+    "user_story": "As a user, I want to be able to log into the system and find the functions that are assigned to my role.",
+    "acceptance_criteria": [
+      "Login button available in the header",
+      "Query of user name/email and password.",
+      "Cursor jumps to the user name field after the login button has been clicked",
+      "Successful login is confirmed.",
+      "The login button becomes the logout button."
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "access",
+        "resource": "Assigned Functions",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_016",
+    "source_id": "ecommerce#729",
+    "user_story": "As a user, I would like to access the website via HTTPS.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "access",
+        "resource": "The Website Via Https",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_017",
+    "source_id": "ecommerce#744",
+    "user_story": "As a user, I would like to be able to delete created wishlists within the wishlist management.",
+    "acceptance_criteria": [
+      "In edit mode, the trash icon including the text \"Remove\" is visualized.",
+      "Click on the icon or the text to delete the watch list"
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "delete",
+        "resource": "Created Wishlists",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_018",
+    "source_id": "ecommerce#760",
+    "user_story": "As a user, I would like to delete an item in the shopping basket in order to remove it from the shopping basket.",
+    "acceptance_criteria": [
+      "One \"Remove item\" button is displayed for each item",
+      "Click on \"Delete\" to remove the item from the shopping cart"
+    ],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "delete",
+        "resource": "Shopping Basket Item",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_019",
+    "source_id": "ecommerce#805",
+    "user_story": "As a shop editor, I would like to be able to generate advertising blocks to draw attention to certain promotions and offers.",
+    "acceptance_criteria": [
+      "An advertising block is displayed as an example on the \"Legal\" page (with copied texts)",
+      "Clicking on the link takes me to a freely selected page in my own tab"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Shop Editor",
+        "action": "generate",
+        "resource": "Advertising Blocks",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Chính sách công ty cấm nhân viên Shop Editor tự tạo banner quảng cáo mà không qua duyệt.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_020",
+    "source_id": "ecommerce#815",
+    "user_story": "As an administrator I want to use an HTML-Editor to format texts for Titles.",
+    "acceptance_criteria": [
+      "Instead of the multiline textbox an HTML Editor should be integrated in Section \"additional information\" for the textfield",
+      "The TextFormat should be set to HTML (02)",
+      "The Devextreme HTML-Editor should be used"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "use",
+        "resource": "HTML Editor For Titles",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_021",
+    "source_id": "ecommerce#816",
+    "user_story": "As a user, I would like to access the  E-Book Store via the main menu.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "access",
+        "resource": "E-Book Store",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_022",
+    "source_id": "ecommerce#817",
+    "user_story": "As an administrator I want to add \"Aktualisierungszyklus\" (update cycle) to Online-Products.",
+    "acceptance_criteria": [
+      "An text-field has to be added to the section \"Hauptdaten\" is ProductType is \"Online\". Label: \"Aktualisierungszyklus\"",
+      "If this textfield is filled, it has to be disyplayed on the title detail page with Label \"Aktualisierungszyklus\" (see red marker)"
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "add",
+        "resource": "Update Cycle Field",
+        "effect": "Allow",
+        "condition": "Requires product manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "US không nhắc điều kiện, PM lại yêu cầu phải có phê duyệt từ Product Manager.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_023",
+    "source_id": "ecommerce#827",
+    "user_story": "As a user, I want to be able to delete wishlists that I received by link from other users.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "delete",
+        "resource": "Received Wishlists",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_024",
+    "source_id": "ecommerce#828",
+    "user_story": "As a user I would like to be notified when I have received a permission and when a video has been uploaded for my course.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "receive",
+        "resource": "Permission Notification",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_025",
+    "source_id": "ecommerce#831",
+    "user_story": "As a  user, I would like to have the orders of \"on-demand videos\" and \"webinars\" in the Shopadmin event table.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "User",
+        "action": "view",
+        "resource": "On-Demand Video And Webinar Orders",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_026",
+    "source_id": "ecommerce#99",
+    "user_story": "As a logged in B2B user with permission for libraries I want to see my own inventory articles in the search preview.",
+    "acceptance_criteria": [
+      "- Display of the first 4 hits. first without prices - \"Show all stocks\" - Linking by clicking on link in \"all stocks\" with restriction on search - The search of the DEVExpress table must contain the search word - Search term must be marked by highlighting."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "My Own Inventory Articles",
+        "effect": "Allow",
+        "condition": "Has explicit permission granted",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_027",
+    "source_id": "ecommerce#100",
+    "user_story": "As a logged in B2B user, I want to have permissions for \"Bestände\" (stocks).",
+    "acceptance_criteria": [
+      "If right \"Bestände ansehen\" is set the menu \"Bibliothek\" is shown, but not the entry \"Wareneingang\".If right \"Bestände berarbeiten\" is set menu \"Bibliothek\" is shown.If right \"Wareneingang\" is set menu \"Wareneingang\" is shown."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B Read-Only User",
+        "action": "have",
+        "resource": "Permissions For \"Bestände\" (Stocks)",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp cho role 'B2B Read-Only User', không khớp 'B2B User' thông thường trong US.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_028",
+    "source_id": "ecommerce#103",
+    "user_story": "As a logged in B2B user, I want to enter an EAN/ISBN in the order form which is not in the catalogue.",
+    "acceptance_criteria": [
+      "1. Enter 978-3-406-72500-5 -> article \"Palandt, Bürgerliches Gesetzbuch\" must be found and it must be possible to enter a note (\"Hinweis\" and \"Abobeginn\"). \"Abobeginn\" only for journals. 2. Enter 9786321547895 -> no article should be found and the number continues to be displayed. All fields can be edited. 3. The new tooltip text is shown, when hovering above the fields which cannot be edited.4. Enter 0341-1915 -> \"Abobeginn\" should be displayed and active."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "enter",
+        "resource": "EAN/ISBN In Order Form",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_029",
+    "source_id": "ecommerce#104",
+    "user_story": "As a logged in B2B customer admin I want to edit individual fields for my \"Bibliothek\" (stocks) -> \"Feldpflege\".",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B Customer Admin",
+        "action": "edit",
+        "resource": "Library Stock Fields",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ muốn sửa Library CỦA MÌNH (own) nhưng PM lại cho phép sửa TẤT CẢ (all) -> cấp dư quyền.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_030",
+    "source_id": "ecommerce#105",
+    "user_story": "As a logged in B2B admin I want to create users without a salutation to have general users.",
+    "acceptance_criteria": [
+      "Show selection list with empty entry.",
+      "Salutation could be empty for creating and editing users.",
+      "Default is \"Ms.\"."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B Admin",
+        "action": "create",
+        "resource": "Users Without Salutation",
+        "effect": "Deny",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Việc tạo user không có salutation bị chính sách hệ thống từ chối (bắt buộc phải có salutation).",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_031",
+    "source_id": "ecommerce#106",
+    "user_story": "As a logged in B2B user I want to change the order of the entries in the left flyout menu to optimize my workflows.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "change",
+        "resource": "Flyout Menu Entry Order",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_032",
+    "source_id": "ecommerce#107",
+    "user_story": "As a logged in B2B user I want to have a confirmation dialogue before resetting the list to the basic settings.",
+    "acceptance_criteria": [
+      "Click on \"reject changes\" sets the list back to basic settings.",
+      "Click on \"save changes\" opens the right flyout navigation to save the list."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "have",
+        "resource": "Reset Confirmation Dialogue",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_033",
+    "source_id": "ecommerce#111",
+    "user_story": "As a B2B user I want to see net or gross values as configured for my customer.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Net Or Gross Values As Configured",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_034",
+    "source_id": "ecommerce#113",
+    "user_story": "As a logged in B2B user I want to change the order of readers in existing reader lists.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "change",
+        "resource": "Reader Order In Reader Lists",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_035",
+    "source_id": "ecommerce#114",
+    "user_story": "As a logged in administrator I want to set \"Rechnungsadresse\" and \"Lieferadresse\" for a user in \"Nutzer verwalten\" to restrict the access.",
+    "acceptance_criteria": [
+      "If the restriction for one or more invoice or delivery addresses is set, only the orders, receipts and statistics for this addresses are shown in DevExtreme lists, tiles, shopping cart and user settings."
+    ],
+    "permission_matrix": [
+      {
+        "role": "Administrator",
+        "action": "set",
+        "resource": "Invoice And Delivery Address",
+        "effect": "Allow",
+        "condition": "Only for enterprise-tier customers",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "US không giới hạn, PM lại chỉ cho phép áp dụng với khách hàng gói Enterprise.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_036",
+    "source_id": "ecommerce#117",
+    "user_story": "As a logged in B2B administrator I want to set gross or net values for customers in \"Kundeneinstellungen\".",
+    "acceptance_criteria": [
+      "If the switch is not activated show net prices in the whole system. See list in user story 17363."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B Finance Admin",
+        "action": "set",
+        "resource": "Customer Price Values",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM cấp quyền set giá cho 'B2B Finance Admin' riêng biệt, không khớp 'B2B Administrator' chung trong US.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_037",
+    "source_id": "ecommerce#118",
+    "user_story": "As a logged in B2B administrator I want to have the right to set \"Preisdarstellung\" (prices) for customers.",
+    "acceptance_criteria": [
+      "If the right is set the entry \"Preisdarstellung\" is displayed.If the right is not set the whole entry \"Preisdarstellung\" is not displayed.If the right is set the user with permission can change the switch control button to inactive."
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B Administrator",
+        "action": "have",
+        "resource": "Price Display Setting",
+        "effect": "Deny",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM quy định B2B Administrator KHÔNG được tự set hiển thị giá (phải do hệ thống trung tâm quản lý).",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_038",
+    "source_id": "ecommerce#119",
+    "user_story": "As a logged in IT Admin I want to find and edit all B2C users.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "It Admin",
+        "action": "find",
+        "resource": "B2C Users",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US muốn sửa TẤT CẢ user B2C, PM chỉ cho phép sửa user được phân công (assigned) cho IT Admin đó.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_039",
+    "source_id": "ecommerce#122",
+    "user_story": "As a logged in B2B user I want to have order confirmations as a default.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "have",
+        "resource": "Default Order Confirmation Setting",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_040",
+    "source_id": "ecommerce#123",
+    "user_story": "As a logged in B2B user I want to filter more than one \"Verlag\" (publisher) in lists.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "filter",
+        "resource": "Publisher Filter In Lists",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_041",
+    "source_id": "ecommerce#124",
+    "user_story": "As a logged in B2B user I want to enter an EAN/ISBN in the order form which is not in the catalogue without validation message.",
+    "acceptance_criteria": [
+      "1. Enter 9786321547895 -> no article should be found and the number continues to be displayed. All fields can be edited.2. The red validation text \"ISBN nicht gefunden\" is not displayed any more"
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "enter",
+        "resource": "EAN/ISBN In Order Form",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_042",
+    "source_id": "ecommerce#125",
+    "user_story": "As a B2B user I want to see net or gross values as configured for my customer.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Net Or Gross Values As Configured",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_043",
+    "source_id": "ecommerce#128",
+    "user_story": "As a logged in B2B user with permission I want to have a column \"Leserliste\" in \"Aufträge\" lists for journals and sequels.",
+    "acceptance_criteria": [
+      "Test on staging:Customer: 14024540 Order number:\" 1697690 with reader list\"Order number:\""
+    ],
+    "permission_matrix": [
+      {
+        "role": "B2B Premium User",
+        "action": "have",
+        "resource": "Reader List Column",
+        "effect": "Allow",
+        "condition": "Has explicit permission granted",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "Cột 'Leserliste' chỉ cấp cho 'B2B Premium User', không khớp 'B2B User' thường.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_044",
+    "source_id": "ecommerce#130",
+    "user_story": "As a logged in B2B user I want to send my notes for \"Auftragstyp: Abonnement\" (subscriptions) to the responsible  branch \"Abo\".",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "send",
+        "resource": "Subscription Notes",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_045",
+    "source_id": "ecommerce#134",
+    "user_story": "As a logged in B2B user with permission I want to search and filter my journals and sequels for readers.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "view",
+        "resource": "Journals And Sequels",
+        "effect": "Allow",
+        "condition": "Has explicit permission granted",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "US muốn SEARCH/FILTER chủ động, PM chỉ cho phép VIEW (chỉ xem danh sách có sẵn).",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_046",
+    "source_id": "ecommerce#137",
+    "user_story": "As a logged in B2B user with permission for libraries I want to create new titles with information from catalogue.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "create",
+        "resource": "New Titles With Information From Catalogue",
+        "effect": "Allow",
+        "condition": "Has explicit permission granted",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_047",
+    "source_id": "ecommerce#138",
+    "user_story": "As a logged in B2B user with permission I want to have a link to the detail view of my library articles in the search preview.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "have",
+        "resource": "Library Article Detail Link",
+        "effect": "Allow",
+        "condition": "Has explicit permission granted",
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_048",
+    "source_id": "ecommerce#139",
+    "user_story": "As a logged in B2B user I want to have only one order label as a default.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "have",
+        "resource": "Default Order Label",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_049",
+    "source_id": "ecommerce#140",
+    "user_story": "As a logged in B2B user I want to see shares that are distributed among different cost centers - column \"Kostenstelle\".",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Cost Center Shares",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_050",
+    "source_id": "ecommerce#141",
+    "user_story": "As a logged in B2B user I want to see shares that are distributed among different cost centers - tab \"Kostenstellen\".",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Cost Center Shares",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_051",
+    "source_id": "ecommerce#142",
+    "user_story": "As a logged in B2B user I want to see shares that are distributed among different cost centers - tab \"Belege\" amount.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Cost Center Shares",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_052",
+    "source_id": "ecommerce#143",
+    "user_story": "As a logged in B2B user I want to see shares that are distributed among different cost centers - \"Belege\" tab \"Beleg\".",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Cost Center Shares",
+        "effect": "Allow",
+        "condition": "Must be logged in",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_053",
+    "source_id": "ecommerce#147",
+    "user_story": "As a B2B user in net mode I want to see net values for different product forms.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "B2B User",
+        "action": "see",
+        "resource": "Net Values For Different Product Forms",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Chế độ Net Mode bị giới hạn, PM từ chối hiển thị giá trị net cho role này theo chính sách giá.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_054",
+    "source_id": "ecommerce#639",
+    "user_story": "As a  Marketing Admin I want to use any extension provided by Umbraco to generate content and functionallity under .",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Marketing Admin",
+        "action": "use",
+        "resource": "Umbraco Extensions",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_055",
+    "source_id": "cms#1",
+    "user_story": "As an editor, I want to maintain language labels for different site parts by categories, so that I can search and maintain language labels easily.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "maintain",
+        "resource": "Language Labels For Different Site Parts",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_056",
+    "source_id": "cms#2",
+    "user_story": "As a system administrator, I want to deploy filters run-time, so that I can roll-out filter dependent functionality efficiently througout DTAP",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "System Administrator",
+        "action": "deploy",
+        "resource": "Filters Run-Time",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_057",
+    "source_id": "cms#13",
+    "user_story": "As an editor, I want to assign page sections  to pages using the current page section structure, so I can easily and efficiently manage page sections assigned to pages",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "assign",
+        "resource": "Page Sections To Pages Using",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ định gán page section theo cấu trúc hiện có (assigned/thiết lập), PM lại cho phép gán vào TẤT CẢ page bất kỳ.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_058",
+    "source_id": "cms#14",
+    "user_story": "As an editor, I want to access content items quickly from a content element, so I do not have to look up these content types in the menu and therefore, I can work more productive.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "access",
+        "resource": "Content Items From Content Element",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_059",
+    "source_id": "cms#15",
+    "user_story": "As an editor, I want to crop images, so I can edit images easily without using photo editing tools, and therefore, I can work more productive.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "crop",
+        "resource": "Images",
+        "effect": "Allow",
+        "condition": "Requires main editor approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ Main Editor trước khi crop ảnh, US không đề cập điều kiện này.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_060",
+    "source_id": "cms#16",
+    "user_story": "As a developer, I want to check on all released flash versions supported by browsers, so  I can adjust my flash presentation towards new flash versions in particular.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Developer",
+        "action": "check",
+        "resource": "Released Flash Versions List",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_061",
+    "source_id": "cms#17",
+    "user_story": "As a developer, I want to pass on variables to flash files directly.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Developer",
+        "action": "pass",
+        "resource": "Flash File Variables",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_062",
+    "source_id": "cms#18",
+    "user_story": "As an editor, I want to set a default editor environment language, so I can easily login in the preffered language without changing languages each time I login.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "set",
+        "resource": "Editor Environment Language",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_063",
+    "source_id": "cms#19",
+    "user_story": "As an editor, I want to set a content language, so I see SiteManager in my personal language without having to change content language each time after login",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "set",
+        "resource": "A Content Language",
+        "effect": "Deny",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Việc đổi content language bị khoá theo chính sách đa ngôn ngữ tập trung, PM từ chối cho Editor tự set.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_064",
+    "source_id": "cms#20",
+    "user_story": "As a developer, I want to  define presentation variants in my presentation configuration xml file, so I can easily and efficiently deploy my presentation throughout DTAP",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Developer",
+        "action": "define",
+        "resource": "Presentation Configuration Variants",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_065",
+    "source_id": "cms#21",
+    "user_story": "As a system administrator, I want to  define presentation variants in my presentation configuration xml file, so I can easily and efficiently deploy my presentation throughout DTAP",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "System Administrator",
+        "action": "define",
+        "resource": "Presentation Configuration Variants",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_066",
+    "source_id": "cms#22",
+    "user_story": "As an editor, I want to search on media item titles and terms in the Media Repository in an case insensitive way, so the number of media item results are increased, and I find relevant media items more efficiently.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "search",
+        "resource": "Media Item Titles And Terms",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_067",
+    "source_id": "cms#23",
+    "user_story": "As an editor, I want to show media items from another web initiative using  thesaurus relationships  of that web initiative on my website, so I do not have to reconstruct the thesaurus of the other web initiative for my own website, which saves time since its duplication.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "show",
+        "resource": "Media Items From Other Initiative",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_068",
+    "source_id": "cms#25",
+    "user_story": "As a main editor, I want to configure workflow on classification-level, so that I can control what editors are allowed to use several terms which are used on specific site parts / facets in order to prevent publishing faulty content",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Workflow Admin",
+        "action": "configure",
+        "resource": "Workflow On Classification-Level",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "Cấu hình workflow classification-level chỉ dành cho 'Workflow Admin' chuyên biệt, không khớp 'Main Editor' trong US.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_069",
+    "source_id": "cms#26",
+    "user_story": "As a main editor, I want to configure workflow on media item-level for specific content types, so that I can control who can modify what specific item in order to prevent editors from publishing faulty content",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Main Editor",
+        "action": "configure",
+        "resource": "Media Item-Level Workflow",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_070",
+    "source_id": "cms#27",
+    "user_story": "As a online channel manager, I want to publish content in multiple languages, so I can target my audience in their native language, which increases relevancy and attract more traffic to my website",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Online Channel Manager",
+        "action": "draft",
+        "resource": "Content In Multiple Languages",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "US muốn PUBLISH trực tiếp nội dung đa ngôn ngữ, PM chỉ cho phép DRAFT chờ duyệt trước khi publish.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_071",
+    "source_id": "cms#28",
+    "user_story": "As an editor, I want to translate media items to multiple languages,  so I can produce content in different language easily",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "translate",
+        "resource": "Media Items To Multiple Languages",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_072",
+    "source_id": "cms#29",
+    "user_story": "As an editor, I want to maintain media items in multiple languages easily and in an intuitive way, so that I can work productively",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "maintain",
+        "resource": "Media Items In Multiple Languages Easily",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_073",
+    "source_id": "cms#31",
+    "user_story": "As an system administrator, I want to monitor the performance of CMS SiteManager, so I can analyze indicators which influence the health of CMS SiteManager, and undertake action upon this analysis in order to make CMS SiteManager healthy again.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "System Administrator",
+        "action": "monitor",
+        "resource": "CMS SiteManager Performance",
+        "effect": "Allow",
+        "condition": "Only accessible via VPN",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM giới hạn chỉ được monitor performance khi kết nối qua VPN nội bộ, US không đề cập điều kiện này.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_074",
+    "source_id": "cms#32",
+    "user_story": "As an editor, I want to search full-text on content in the editor environment, so that I can find relevant content faster and therefore work more productive",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "search",
+        "resource": "Full-Text On Content In The Editor",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_075",
+    "source_id": "cms#33",
+    "user_story": "As a business decision-maker, I want to use French as native language for CMS SiteManager, so that native french-speaking editors adopt CMS SiteManager easily, and as a result gain a better understanding of the application",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Business Decision-Maker",
+        "action": "use",
+        "resource": "French Language Setting",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "Việc đổi ngôn ngữ mặc định hệ thống bị giới hạn ở cấp Business Decision-Maker, cần phê duyệt IT trước, PM ghi nhận Deny cho tới khi có phê duyệt.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_076",
+    "source_id": "cms#34",
+    "user_story": "As an editor, I want to maintain FAQs in multiple languages easily and in an intuitive way, so that I can work productively",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Editor",
+        "action": "maintain",
+        "resource": "Faqs In Multiple Languages Easily",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US/AC.",
+    "origin": "cruise-ac"
+  },
+  {
+    "id": "AC_077",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_001",
+    "origin": "synthetic",
+    "user_story": "As a Localization Manager, I want to approve translation, so that I can ensure translation quality.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Localization Manager",
+        "action": "approve",
+        "resource": "Translation",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_078",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_002",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to remove user account, so that I can remove a deactivated employee account.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "view",
+        "resource": "User Account",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu delete — không khớp hành động."
+  },
+  {
+    "id": "AC_079",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_003",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to reject vendor payment, so that I can flag a suspicious invoice.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "reject",
+        "resource": "Vendor Payment",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_080",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_004",
+    "origin": "synthetic",
+    "user_story": "As a Returns Coordinator, I want to add restock note, so that I can return an item to inventory.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Returns Coordinator",
+        "action": "create",
+        "resource": "Restock Note",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_081",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_005",
+    "origin": "synthetic",
+    "user_story": "As a Support Staff, I want to add refund request, so that I can process a customer's refund.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "create",
+        "resource": "Refund Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_082",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_006",
+    "origin": "synthetic",
+    "user_story": "As a Brand Manager, I want to approve product listing, so that I can ensure listings meet brand standards.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Senior Brand Manager",
+        "action": "approve",
+        "resource": "Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho vai trò cấp cao hơn ('Senior Brand Manager'), không khớp role thông thường trong US."
+  },
+  {
+    "id": "AC_083",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_007",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to cancel my own payment method, so that I can remove an unused card.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "delete",
+        "resource": "Payment Method",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_084",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_008",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to update faq page, so that I can keep help content accurate.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "edit",
+        "resource": "FAQ Page",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_085",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_009",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to check all audit log, so that I can review recent system activity.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "view",
+        "resource": "Audit Log",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_086",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_010",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to download inventory report, so that I can share stock levels with suppliers.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Inventory Manager",
+        "action": "export",
+        "resource": "Inventory Report",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_087",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_011",
+    "origin": "synthetic",
+    "user_story": "As a SEO Specialist, I want to see traffic analytics, so that I can analyze visitor behaviour.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "SEO Specialist",
+        "action": "view",
+        "resource": "Traffic Analytics",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_088",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_012",
+    "origin": "synthetic",
+    "user_story": "As a Returns Coordinator, I want to confirm return request, so that I can authorize a product return.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Returns Coordinator",
+        "action": "view",
+        "resource": "Return Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu approve — không khớp hành động."
+  },
+  {
+    "id": "AC_089",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_013",
+    "origin": "synthetic",
+    "user_story": "As a Data Analyst, I want to view customer segment, so that I can understand purchasing patterns.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Data Analyst",
+        "action": "view",
+        "resource": "Customer Segment",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_090",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_014",
+    "origin": "synthetic",
+    "user_story": "As a Category Manager, I want to remove product category, so that I can remove an unused category.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Category Manager",
+        "action": "delete",
+        "resource": "Product Category",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_091",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_015",
+    "origin": "synthetic",
+    "user_story": "As a Data Analyst, I want to create custom report, so that I can answer a specific business question.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Data Analyst",
+        "action": "create",
+        "resource": "Custom Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_092",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_016",
+    "origin": "synthetic",
+    "user_story": "As a Product Manager, I want to delete product listing, so that I can discontinue an old item.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Product Manager",
+        "action": "delete",
+        "resource": "Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_093",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_017",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to edit user role, so that I can adjust permissions after a role change.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "view",
+        "resource": "User Role",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu edit — không khớp hành động."
+  },
+  {
+    "id": "AC_094",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_018",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to export order report, so that I can share sales data with finance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Order Manager",
+        "action": "export",
+        "resource": "Order Report",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_095",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_019",
+    "origin": "synthetic",
+    "user_story": "As a Product Manager, I want to register product listing, so that I can launch a new item for sale.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Product Manager",
+        "action": "create",
+        "resource": "Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_096",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_020",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to manage system backup, so that I can ensure data is recoverable.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "manage",
+        "resource": "System Backup",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_097",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_021",
+    "origin": "synthetic",
+    "user_story": "As an Affiliate Partner, I want to check my own referral commission, so that I can track my affiliate earnings.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Affiliate Partner",
+        "action": "view",
+        "resource": "Referral Commission",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_098",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_022",
+    "origin": "synthetic",
+    "user_story": "As a Warehouse Staff, I want to maintain assigned delivery status, so that I can mark packages as shipped.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Warehouse Staff",
+        "action": "edit",
+        "resource": "Delivery Status",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_099",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_023",
+    "origin": "synthetic",
+    "user_story": "As a SEO Specialist, I want to register sitemap entry, so that I can help search engines index new pages.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "SEO Specialist",
+        "action": "create",
+        "resource": "Sitemap Entry",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_100",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_024",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to decline refund request, so that I can decline an invalid refund claim.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Order Manager",
+        "action": "reject",
+        "resource": "Refund Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_101",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_025",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to confirm refund request, so that I can finalize a customer refund.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Order Manager",
+        "action": "approve",
+        "resource": "Refund Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_102",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_026",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to see my own loyalty points, so that I can check my rewards balance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "view",
+        "resource": "Loyalty Points",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_103",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_027",
+    "origin": "synthetic",
+    "user_story": "As a Warehouse Staff, I want to see assigned shipping label, so that I can prepare packages for dispatch.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Warehouse Staff",
+        "action": "edit",
+        "resource": "Shipping Label",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền edit trong khi US yêu cầu view — không khớp hành động."
+  },
+  {
+    "id": "AC_104",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_028",
+    "origin": "synthetic",
+    "user_story": "As a Data Analyst, I want to check sales dashboard, so that I can track business performance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Data Analyst",
+        "action": "view",
+        "resource": "Sales Dashboard",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_105",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_029",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to publish landing page, so that I can launch a new marketing page.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "publish",
+        "resource": "Landing Page",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_106",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_030",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to export invoice report, so that I can prepare monthly accounting.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "export",
+        "resource": "Invoice Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_107",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_031",
+    "origin": "synthetic",
+    "user_story": "As a Site Administrator, I want to manage system configuration, so that I can keep the platform running smoothly.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Site Administrator",
+        "action": "manage",
+        "resource": "System Configuration",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_108",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_032",
+    "origin": "synthetic",
+    "user_story": "As a Customer Service Lead, I want to approve refund request, so that I can authorize a large refund.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer Service Lead",
+        "action": "view",
+        "resource": "Refund Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu approve — không khớp hành động."
+  },
+  {
+    "id": "AC_109",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_033",
+    "origin": "synthetic",
+    "user_story": "As a Category Manager, I want to see category performance, so that I can see which categories sell best.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Category Manager",
+        "action": "view",
+        "resource": "Category Performance",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_110",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_034",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to cancel my own wishlist item, so that I can clean up my saved items.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "delete",
+        "resource": "Wishlist Item",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_111",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_035",
+    "origin": "synthetic",
+    "user_story": "As a HR Coordinator, I want to check assigned employee timesheet, so that I can verify hours worked.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "HR Coordinator",
+        "action": "view",
+        "resource": "Employee Timesheet",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_112",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_036",
+    "origin": "synthetic",
+    "user_story": "As a Marketing Manager, I want to check campaign analytics, so that I can measure campaign performance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Marketing Manager",
+        "action": "view",
+        "resource": "Campaign Analytics",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_113",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_037",
+    "origin": "synthetic",
+    "user_story": "As a Delivery Partner, I want to check assigned assigned delivery route, so that I can plan today's deliveries.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Delivery Partner",
+        "action": "view",
+        "resource": "Assigned Delivery Route",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_114",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_038",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to edit product description, so that I can keep listings accurate.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "edit",
+        "resource": "Product Description",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_115",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_039",
+    "origin": "synthetic",
+    "user_story": "As a Marketing Manager, I want to register discount coupon, so that I can run a promotional campaign.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Marketing Manager",
+        "action": "create",
+        "resource": "Discount Coupon",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_116",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_040",
+    "origin": "synthetic",
+    "user_story": "As a Brand Manager, I want to add brand guideline, so that I can ensure consistent product presentation.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Brand Manager",
+        "action": "create",
+        "resource": "Brand Guideline",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_117",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_041",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to view my own invoice, so that I can keep a record of my purchase.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "view",
+        "resource": "Invoice",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_118",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_042",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to confirm purchase order, so that I can confirm a restocking order.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Inventory Manager",
+        "action": "approve",
+        "resource": "Purchase Order",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_119",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_043",
+    "origin": "synthetic",
+    "user_story": "As a Subscription Manager, I want to cancel customer subscription, so that I can process a cancellation request.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Subscription Manager",
+        "action": "cancel",
+        "resource": "Customer Subscription",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_120",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_044",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to assign user role, so that I can grant appropriate access to new staff.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "assign",
+        "resource": "User Role",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_121",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_045",
+    "origin": "synthetic",
+    "user_story": "As a SEO Specialist, I want to download seo audit report, so that I can share findings with the team.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "SEO Specialist",
+        "action": "export",
+        "resource": "SEO Audit Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_122",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_046",
+    "origin": "synthetic",
+    "user_story": "As a Returns Coordinator, I want to decline return request, so that I can decline an ineligible return.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Returns Coordinator",
+        "action": "reject",
+        "resource": "Return Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_123",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_047",
+    "origin": "synthetic",
+    "user_story": "As a Guest, I want to see store locator, so that I can find a nearby physical store.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Guest",
+        "action": "view",
+        "resource": "Store Locator",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_124",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_048",
+    "origin": "synthetic",
+    "user_story": "As a Quality Assurance Staff, I want to view product defect report, so that I can investigate a quality issue.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Quality Assurance Staff",
+        "action": "view",
+        "resource": "Product Defect Report",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_125",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_049",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to cancel order, so that I can process a customer cancellation request.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Order Manager",
+        "action": "cancel",
+        "resource": "Order",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_126",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_050",
+    "origin": "synthetic",
+    "user_story": "As a Customer Onboarding Specialist, I want to view new customer list, so that I can reach out to recent signups.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer Onboarding Specialist",
+        "action": "view",
+        "resource": "New Customer List",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_127",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_051",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to view all order queue, so that I can process pending orders.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Senior Order Manager",
+        "action": "view",
+        "resource": "Order Queue",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho vai trò cấp cao hơn ('Senior Order Manager'), không khớp role thông thường trong US."
+  },
+  {
+    "id": "AC_128",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_052",
+    "origin": "synthetic",
+    "user_story": "As a Compliance Officer, I want to decline vendor onboarding, so that I can block a non-compliant supplier.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Compliance Officer",
+        "action": "reject",
+        "resource": "Vendor Onboarding",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_129",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_053",
+    "origin": "synthetic",
+    "user_story": "As a Customer Service Lead, I want to allocate support ticket, so that I can distribute workload across the team.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer Service Lead",
+        "action": "assign",
+        "resource": "Support Ticket",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_130",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_054",
+    "origin": "synthetic",
+    "user_story": "As a HR Coordinator, I want to confirm leave request, so that I can process a staff vacation request.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "HR Coordinator",
+        "action": "approve",
+        "resource": "Leave Request",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_131",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_055",
+    "origin": "synthetic",
+    "user_story": "As a Customer Service Lead, I want to check team performance report, so that I can evaluate support quality.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer Service Lead",
+        "action": "view",
+        "resource": "Team Performance Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_132",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_056",
+    "origin": "synthetic",
+    "user_story": "As a Site Administrator, I want to update feature flag, so that I can roll out a new feature gradually.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Site Administrator",
+        "action": "edit",
+        "resource": "Feature Flag",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_133",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_057",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to edit my own notification preference, so that I can control what emails I receive.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "view",
+        "resource": "Notification Preference",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu edit — không khớp hành động."
+  },
+  {
+    "id": "AC_134",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_058",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to modify my own account password, so that I can keep my account secure.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "edit",
+        "resource": "Account Password",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_135",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_059",
+    "origin": "synthetic",
+    "user_story": "As a System Auditor, I want to export audit trail, so that I can provide evidence for a compliance review.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "System Auditor",
+        "action": "export",
+        "resource": "Audit Trail",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_136",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_060",
+    "origin": "synthetic",
+    "user_story": "As a Delivery Partner, I want to maintain assigned delivery status, so that I can confirm a completed delivery.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Delivery Partner",
+        "action": "edit",
+        "resource": "Delivery Status",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_137",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_061",
+    "origin": "synthetic",
+    "user_story": "As a Guest, I want to register shopping cart, so that I can start shopping before logging in.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Guest",
+        "action": "create",
+        "resource": "Shopping Cart",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_138",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_062",
+    "origin": "synthetic",
+    "user_story": "As a Data Analyst, I want to export sales dataset, so that I can run deeper analysis offline.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Data Analyst",
+        "action": "view",
+        "resource": "Sales Dataset",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu export — không khớp hành động."
+  },
+  {
+    "id": "AC_139",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_063",
+    "origin": "synthetic",
+    "user_story": "As a System Auditor, I want to check all access log, so that I can conduct a security audit.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "System Auditor",
+        "action": "view",
+        "resource": "Access Log",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_140",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_064",
+    "origin": "synthetic",
+    "user_story": "As a Returns Coordinator, I want to view all return request queue, so that I can process pending returns.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Returns Coordinator",
+        "action": "view",
+        "resource": "Return Request Queue",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_141",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_065",
+    "origin": "synthetic",
+    "user_story": "As a Compliance Officer, I want to create audit report, so that I can document a compliance review.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Compliance Officer",
+        "action": "create",
+        "resource": "Audit Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_142",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_066",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to maintain my own own product listing, so that I can update pricing and stock.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Vendor",
+        "action": "edit",
+        "resource": "Own Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_143",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_067",
+    "origin": "synthetic",
+    "user_story": "As a Subscription Manager, I want to modify subscription plan, so that I can update recurring billing terms.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Subscription Manager",
+        "action": "edit",
+        "resource": "Subscription Plan",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_144",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_068",
+    "origin": "synthetic",
+    "user_story": "As a Product Manager, I want to check product feedback, so that I can understand customer sentiment.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Product Manager",
+        "action": "view",
+        "resource": "Product Feedback",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_145",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_069",
+    "origin": "synthetic",
+    "user_story": "As a Compliance Officer, I want to see all transaction log, so that I can audit for regulatory compliance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Compliance Officer",
+        "action": "view",
+        "resource": "Transaction Log",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_146",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_070",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to approve vendor payment, so that I can release funds to a supplier.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "approve",
+        "resource": "Vendor Payment",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_147",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_071",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to delete my own own product listing, so that I can remove a discontinued item.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Vendor",
+        "action": "delete",
+        "resource": "Own Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_148",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_072",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to create product video, so that I can showcase a new product.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "create",
+        "resource": "Product Video",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_149",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_073",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to generate support ticket, so that I can get help with an issue.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "create",
+        "resource": "Support Ticket",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_150",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_074",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to view my own own product listing, so that I can check how my products appear.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Vendor",
+        "action": "view",
+        "resource": "Own Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_151",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_075",
+    "origin": "synthetic",
+    "user_story": "As a Support Staff, I want to register support note, so that I can document a customer interaction.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "create",
+        "resource": "Support Note",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_152",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_076",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to see stock level, so that I can monitor warehouse inventory.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Senior Inventory Manager",
+        "action": "view",
+        "resource": "Stock Level",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho vai trò cấp cao hơn ('Senior Inventory Manager'), không khớp role thông thường trong US."
+  },
+  {
+    "id": "AC_153",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_077",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to view my own order history, so that I can my past orders.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "edit",
+        "resource": "Order History",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền edit trong khi US yêu cầu view — không khớp hành động."
+  },
+  {
+    "id": "AC_154",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_078",
+    "origin": "synthetic",
+    "user_story": "As an Order Manager, I want to edit order details, so that I can correct a shipping mistake.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Order Manager",
+        "action": "edit",
+        "resource": "Order Details",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_155",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_079",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to view my own commission report, so that I can track my earnings.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Vendor",
+        "action": "view",
+        "resource": "Commission Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_156",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_080",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to download customer data, so that I can comply with a data request.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "export",
+        "resource": "Customer Data",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_157",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_081",
+    "origin": "synthetic",
+    "user_story": "As a Marketing Manager, I want to cancel banner ad, so that I can remove an expired promotion.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Senior Marketing Manager",
+        "action": "delete",
+        "resource": "Banner Ad",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho vai trò cấp cao hơn ('Senior Marketing Manager'), không khớp role thông thường trong US."
+  },
+  {
+    "id": "AC_158",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_082",
+    "origin": "synthetic",
+    "user_story": "As a Category Manager, I want to modify product category, so that I can reorganize the site navigation.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Category Manager",
+        "action": "view",
+        "resource": "Product Category",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu edit — không khớp hành động."
+  },
+  {
+    "id": "AC_159",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_083",
+    "origin": "synthetic",
+    "user_story": "As a Localization Manager, I want to edit translated content, so that I can adapt content for a new market.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Localization Manager",
+        "action": "edit",
+        "resource": "Translated Content",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_160",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_084",
+    "origin": "synthetic",
+    "user_story": "As a Guest, I want to add newsletter subscription, so that I can receive promotional updates.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Guest",
+        "action": "create",
+        "resource": "Newsletter Subscription",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_161",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_085",
+    "origin": "synthetic",
+    "user_story": "As a Compliance Officer, I want to download compliance report, so that I can submit to regulators.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Compliance Officer",
+        "action": "export",
+        "resource": "Compliance Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_162",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_086",
+    "origin": "synthetic",
+    "user_story": "As a Support Staff, I want to escalate support ticket, so that I can route a complex issue to a specialist.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "escalate",
+        "resource": "Support Ticket",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_163",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_087",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to view product review, so that I can read feedback before buying.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "view",
+        "resource": "Product Review",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_164",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_088",
+    "origin": "synthetic",
+    "user_story": "As a Quality Assurance Staff, I want to generate inspection report, so that I can document a quality check.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Quality Assurance Staff",
+        "action": "create",
+        "resource": "Inspection Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_165",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_089",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to view payment transaction, so that I can reconcile daily sales.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "view",
+        "resource": "Payment Transaction",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_166",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_090",
+    "origin": "synthetic",
+    "user_story": "As a Fraud Analyst, I want to decline transaction, so that I can block a fraudulent payment.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Fraud Analyst",
+        "action": "reject",
+        "resource": "Transaction",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_167",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_091",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to create product review, so that I can share my experience with others.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "create",
+        "resource": "Product Review",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_168",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_092",
+    "origin": "synthetic",
+    "user_story": "As a Support Staff, I want to see assigned customer ticket, so that I can help resolve customer issues.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "view",
+        "resource": "Customer Ticket",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_169",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_093",
+    "origin": "synthetic",
+    "user_story": "As a Support Staff, I want to edit assigned order status, so that I can update customers on delivery progress.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Support Staff",
+        "action": "edit",
+        "resource": "Order Status",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_170",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_094",
+    "origin": "synthetic",
+    "user_story": "As a Marketing Manager, I want to download customer segment, so that I can target a marketing campaign.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Marketing Manager",
+        "action": "export",
+        "resource": "Customer Segment",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_171",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_095",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to maintain my own shipping address, so that I can keep delivery info up to date.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "edit",
+        "resource": "Shipping Address",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_172",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_096",
+    "origin": "synthetic",
+    "user_story": "As a Warehouse Staff, I want to create assigned packing slip, so that I can prepare an order for shipment.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Warehouse Staff",
+        "action": "create",
+        "resource": "Packing Slip",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_173",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_097",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to create blog post, so that I can publish new content for the store.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "view",
+        "resource": "Blog Post",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền view trong khi US yêu cầu create — không khớp hành động."
+  },
+  {
+    "id": "AC_174",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_098",
+    "origin": "synthetic",
+    "user_story": "As a Store Manager, I want to view assigned daily sales summary, so that I can track store performance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Store Manager",
+        "action": "view",
+        "resource": "Daily Sales Summary",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "assigned"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_175",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_099",
+    "origin": "synthetic",
+    "user_story": "As a Legal Counsel, I want to approve privacy policy update, so that I can ensure legal compliance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Legal Counsel",
+        "action": "approve",
+        "resource": "Privacy Policy Update",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_176",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_100",
+    "origin": "synthetic",
+    "user_story": "As a Product Manager, I want to edit product listing, so that I can update product specifications.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Product Manager",
+        "action": "edit",
+        "resource": "Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_177",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_101",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to download my own sales report, so that I can track my own performance.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Vendor",
+        "action": "export",
+        "resource": "Sales Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_178",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_102",
+    "origin": "synthetic",
+    "user_story": "As an Affiliate Partner, I want to download my own referral report, so that I can reconcile my monthly payout.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Affiliate Partner",
+        "action": "export",
+        "resource": "Referral Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_179",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_103",
+    "origin": "synthetic",
+    "user_story": "As a Customer, I want to check my own wishlist, so that I can save items for later.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Customer",
+        "action": "view",
+        "resource": "Wishlist",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_180",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_104",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to register financial report, so that I can prepare a quarterly summary.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "create",
+        "resource": "Financial Report",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_181",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_105",
+    "origin": "synthetic",
+    "user_story": "As a Guest, I want to see product catalog, so that I can browse items before signing up.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Guest",
+        "action": "view",
+        "resource": "Product Catalog",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_182",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_106",
+    "origin": "synthetic",
+    "user_story": "As a Vendor, I want to generate my own product listing, so that I can add a new product to sell.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Senior Vendor",
+        "action": "create",
+        "resource": "Product Listing",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "own"
+      }
+    ],
+    "conflict_label": "Missing Permission",
+    "notes": "PM chỉ cấp quyền cho vai trò cấp cao hơn ('Senior Vendor'), không khớp role thông thường trong US."
+  },
+  {
+    "id": "AC_183",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_107",
+    "origin": "synthetic",
+    "user_story": "As a Site Administrator, I want to see system health dashboard, so that I can monitor platform uptime.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Site Administrator",
+        "action": "edit",
+        "resource": "System Health Dashboard",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Action Conflict",
+    "notes": "PM chỉ cấp quyền edit trong khi US yêu cầu view — không khớp hành động."
+  },
+  {
+    "id": "AC_184",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_108",
+    "origin": "synthetic",
+    "user_story": "As a Procurement Officer, I want to authorise vendor contract, so that I can finalize a supplier agreement.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Procurement Officer",
+        "action": "approve",
+        "resource": "Vendor Contract",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_185",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_109",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to check content calendar, so that I can plan upcoming publications.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "view",
+        "resource": "Content Calendar",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Scope Conflict",
+    "notes": "US chỉ cần phạm vi hẹp nhưng PM lại cấp quyền trên toàn bộ dữ liệu (scope=all) — cấp dư quyền."
+  },
+  {
+    "id": "AC_186",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_110",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to edit stock level, so that I can adjust inventory counts after a delivery.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Inventory Manager",
+        "action": "edit",
+        "resource": "Stock Level",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_187",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_111",
+    "origin": "synthetic",
+    "user_story": "As a Marketing Manager, I want to publish banner ad, so that I can promote a seasonal sale.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Marketing Manager",
+        "action": "publish",
+        "resource": "Banner Ad",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_188",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_112",
+    "origin": "synthetic",
+    "user_story": "As a SEO Specialist, I want to modify meta tag, so that I can improve search engine ranking.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "SEO Specialist",
+        "action": "edit",
+        "resource": "Meta Tag",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_189",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_113",
+    "origin": "synthetic",
+    "user_story": "As a Pricing Analyst, I want to check competitor pricing report, so that I can benchmark our prices.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Pricing Analyst",
+        "action": "view",
+        "resource": "Competitor Pricing Report",
+        "effect": "Deny",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Effect Conflict",
+    "notes": "PM từ chối (Deny) quyền này theo chính sách nội bộ, trong khi US giả định được phép (Allow)."
+  },
+  {
+    "id": "AC_190",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_114",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to create purchase order, so that I can restock low inventory items.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Inventory Manager",
+        "action": "create",
+        "resource": "Purchase Order",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_191",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_115",
+    "origin": "synthetic",
+    "user_story": "As a Fraud Analyst, I want to see suspicious transaction, so that I can investigate potential fraud.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Fraud Analyst",
+        "action": "view",
+        "resource": "Suspicious Transaction",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_192",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_116",
+    "origin": "synthetic",
+    "user_story": "As a Store Manager, I want to approve staff schedule, so that I can confirm the weekly roster.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Store Manager",
+        "action": "approve",
+        "resource": "Staff Schedule",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_193",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_117",
+    "origin": "synthetic",
+    "user_story": "As a Finance Manager, I want to view tax summary, so that I can prepare a tax filing.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Finance Manager",
+        "action": "view",
+        "resource": "Tax Summary",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_194",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_118",
+    "origin": "synthetic",
+    "user_story": "As a Warehouse Staff, I want to check warehouse layout, so that I can locate items efficiently.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Warehouse Staff",
+        "action": "view",
+        "resource": "Warehouse Layout",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_195",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_119",
+    "origin": "synthetic",
+    "user_story": "As an Inventory Manager, I want to delete discontinued product, so that I can remove items no longer sold.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Inventory Manager",
+        "action": "delete",
+        "resource": "Discontinued Product",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_196",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_120",
+    "origin": "synthetic",
+    "user_story": "As a Pricing Analyst, I want to maintain product price, so that I can adjust pricing based on market data.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Pricing Analyst",
+        "action": "edit",
+        "resource": "Product Price",
+        "effect": "Allow",
+        "condition": "Requires manager approval",
+        "scope": null
+      }
+    ],
+    "conflict_label": "Condition Conflict",
+    "notes": "PM yêu cầu phải có phê duyệt từ quản lý trước khi thực hiện, nhưng US không đề cập điều kiện này."
+  },
+  {
+    "id": "AC_197",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_121",
+    "origin": "synthetic",
+    "user_story": "As a Procurement Officer, I want to generate purchase order, so that I can order supplies from a vendor.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Procurement Officer",
+        "action": "create",
+        "resource": "Purchase Order",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_198",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_122",
+    "origin": "synthetic",
+    "user_story": "As a Content Editor, I want to remove blog post, so that I can remove outdated content.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Content Editor",
+        "action": "delete",
+        "resource": "Blog Post",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_199",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_123",
+    "origin": "synthetic",
+    "user_story": "As a Category Manager, I want to create product category, so that I can organize the catalog structure.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Category Manager",
+        "action": "create",
+        "resource": "Product Category",
+        "effect": "Allow",
+        "condition": null,
+        "scope": null
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  },
+  {
+    "id": "AC_200",
+    "source_id": "self-authored-ecommerce#SYN_ECOM_124",
+    "origin": "synthetic",
+    "user_story": "As an Admin, I want to see all error log, so that I can diagnose a system issue.",
+    "acceptance_criteria": [],
+    "permission_matrix": [
+      {
+        "role": "Admin",
+        "action": "view",
+        "resource": "Error Log",
+        "effect": "Allow",
+        "condition": null,
+        "scope": "all"
+      }
+    ],
+    "conflict_label": "Normal",
+    "notes": "PM khớp với nội dung US."
+  }
+]

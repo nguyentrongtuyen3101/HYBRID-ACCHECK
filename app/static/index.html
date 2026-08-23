@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReqSentinel</title>
+  <link rel="icon" type="image/png" href="https://i.pinimg.com/736x/1b/67/57/1b67571055528fcd7a09ade1f3a03c1c.jpg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div class="brand" id="brand">
+        <div class="brand-mark">
+            <img id="brand-logo" class="brand-logo"
+                src="https://i.pinimg.com/736x/1b/67/57/1b67571055528fcd7a09ade1f3a03c1c.jpg"
+                alt="Logo" />
+        </div>
+        <div>
+            <div class="brand-title">ReqSentinel</div>
+            <div class="brand-sub">Access-control requirement analysis</div>
+        </div>
+        </div>
+      <nav class="nav">
+        <button type="button" id="nav-projects" data-view="projects" class="active">Projects</button>
+        <button type="button" id="nav-history" data-view="history">History</button>
+        <a href="/docs" target="_blank" style="font-size:12px;margin-left:8px">API Docs</a>
+        <span id="healthStatus" class="muted" style="margin-left:8px">…</span>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section id="view-projects">
+      <div class="row-between mb-3">
+        <div>
+          <h1>Projects</h1>
+          <p class="muted">Manage requirements projects, permission matrices, and analysis runs.</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <h2>Create project</h2>
+        <div class="stack">
+          <div>
+            <label class="label">Name</label>
+            <input id="new-project-name" class="field" placeholder="e.g. E-commerce ACL" />
+          </div>
+          <div>
+            <label class="label">Description (optional)</label>
+            <input id="new-project-desc" class="field" placeholder="Short description" />
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" id="btn-create-project">Create project</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="projects-list" class="stack"></div>
+    </section>
+
+    <section id="view-project" class="hidden">
+      <div class="row-between mb-3">
+        <div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-back">← Projects</button>
+          <h1 id="project-title" class="mt-2">Project</h1>
+          <p class="muted" id="project-sub"></p>
+        </div>
+        <button type="button" class="btn btn-danger" id="btn-delete-project">Delete project</button>
+      </div>
+
+      <div id="project-detail"></div>
+
+      <div id="project-body" class="hidden">
+        <div class="tabs">
+          <button type="button" data-tab="stories" class="active">User Stories</button>
+          <button type="button" data-tab="matrix">Permission Matrix</button>
+          <button type="button" data-tab="check">Run analysis</button>
+          <button type="button" data-tab="runs">Runs</button>
+        </div>
+
+        <div id="tab-stories" class="card">
+          <h2>User stories</h2>
+          <div id="stories-list" class="mb-3"></div>
+          <h2>Add user story</h2>
+          <div class="stack">
+            <div>
+              <label class="label">Content</label>
+              <textarea id="us-content" class="field" placeholder="As a …, I want to … so that …"></textarea>
+            </div>
+            <div>
+              <label class="label">Acceptance criteria (one per line, optional)</label>
+              <textarea id="us-ac" class="field" rows="2"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-add-story">Add user story</button>
+          </div>
+        </div>
+
+        <div id="tab-matrix" class="card hidden">
+          <h2>Permission matrix</h2>
+          <div id="matrix-list" class="mb-3"></div>
+          <h2>Add row</h2>
+          <div class="form-grid mb-3">
+            <div>
+              <label class="label">Role</label>
+              <input id="pm-role" class="field" />
+            </div>
+            <div>
+              <label class="label">Action</label>
+              <input id="pm-action" class="field" />
+            </div>
+            <div>
+              <label class="label">Resource</label>
+              <input id="pm-resource" class="field" />
+            </div>
+            <div>
+              <label class="label">Effect</label>
+              <select id="pm-effect" class="field">
+                <option value="Allow">Allow</option>
+                <option value="Deny">Deny</option>
+              </select>
+            </div>
+            <div>
+              <label class="label">Scope</label>
+              <input id="pm-scope" class="field" placeholder="own / assigned / all" />
+            </div>
+            <div>
+              <label class="label">Condition</label>
+              <input id="pm-condition" class="field" />
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" id="btn-add-pm">Add PM row</button>
+        </div>
+
+        <div id="tab-check" class="card hidden">
+          <h2>Run analysis</h2>
+          <p class="muted mb-3">Uses selected user story + all permission matrix rows of this project. Result is saved to DB.</p>
+          <div class="stack">
+            <div>
+              <label class="label">User story</label>
+              <div class="custom-select" id="check-us-wrap" data-value="">
+                <button type="button" class="custom-select-trigger" id="check-us-trigger"
+                        aria-haspopup="listbox" aria-expanded="false">No user stories</button>
+                <div class="custom-select-menu" id="check-us-menu" role="listbox"></div>
+                <input type="hidden" id="check-us" value="" />
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-run-check">Run analysis</button>
+            <div id="check-error" class="alert alert-error hidden"></div>
+            <div id="check-result"></div>
+          </div>
+        </div>
+
+        <div id="tab-runs" class="card hidden">
+          <h2>Analysis runs</h2>
+          <div id="runs-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-history" class="hidden">
+      <h1 class="mb-3">Global history</h1>
+      <p class="muted mb-3">All pipeline runs saved in the database.</p>
+      <div class="card">
+        <div id="global-history"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast (chỉ 1 lần) -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <!-- Modal (chỉ 1 lần) -->
+  <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <h3 id="modal-title">Confirm</h3>
+      <p id="modal-message">Are you sure?</p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
