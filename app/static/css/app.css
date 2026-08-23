@@ -591,3 +591,16 @@ select.field option {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ---------- Edit modals (US / PM) ---------- */
+#modal-us, #modal-pm {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fade-in 0.15s ease;
+}
+#modal-us.hidden, #modal-pm.hidden { display: none !important; }

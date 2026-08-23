@@ -1,0 +1,29 @@
+.venv/
+venv/
+env/
+.env
+__pycache__/
+*.pyc
+*.pyo
+.git/
+.gitignore
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Model weights (data/models) SẼ được copy vào image (bundle sẵn) - không loại trừ
+
+# Node/frontend nếu có
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# Docs, tests không cần trong image production (tùy chọn, có thể bỏ dòng dưới nếu cần)
+tests/
+docs/
+*.md

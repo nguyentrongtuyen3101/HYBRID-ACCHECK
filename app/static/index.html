@@ -13,15 +13,15 @@
     <div class="app-header-inner">
       <div class="brand" id="brand">
         <div class="brand-mark">
-            <img id="brand-logo" class="brand-logo"
-                src="https://i.pinimg.com/736x/1b/67/57/1b67571055528fcd7a09ade1f3a03c1c.jpg"
-                alt="Logo" />
+          <img id="brand-logo" class="brand-logo"
+               src="https://i.pinimg.com/736x/1b/67/57/1b67571055528fcd7a09ade1f3a03c1c.jpg"
+               alt="Logo" />
         </div>
         <div>
-            <div class="brand-title">ReqSentinel</div>
-            <div class="brand-sub">Access-control requirement analysis</div>
+          <div class="brand-title">ReqSentinel</div>
+          <div class="brand-sub">Access-control requirement analysis</div>
         </div>
-        </div>
+      </div>
       <nav class="nav">
         <button type="button" id="nav-projects" data-view="projects" class="active">Projects</button>
         <button type="button" id="nav-history" data-view="history">History</button>
@@ -78,6 +78,7 @@
           <button type="button" data-tab="matrix">Permission Matrix</button>
           <button type="button" data-tab="check">Run analysis</button>
           <button type="button" data-tab="runs">Runs</button>
+          <button type="button" data-tab="settings">Settings</button>
         </div>
 
         <div id="tab-stories" class="card">
@@ -156,6 +157,21 @@
           <h2>Analysis runs</h2>
           <div id="runs-list"></div>
         </div>
+
+        <div id="tab-settings" class="card hidden">
+          <h2>Project settings</h2>
+          <div class="stack">
+            <div>
+              <label class="label">Name</label>
+              <input id="edit-project-name" class="field" />
+            </div>
+            <div>
+              <label class="label">Description</label>
+              <input id="edit-project-desc" class="field" />
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-save-project">Save changes</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -166,12 +182,18 @@
         <div id="global-history"></div>
       </div>
     </section>
+
+    <section id="view-run" class="hidden">
+      <button type="button" class="btn btn-secondary btn-sm mb-3" id="btn-back-run">← Back</button>
+      <h1 class="mb-3">Run detail</h1>
+      <div class="card">
+        <div id="run-detail"></div>
+      </div>
+    </section>
   </div>
 
-  <!-- Toast (chỉ 1 lần) -->
   <div id="toast-container" aria-live="polite"></div>
 
-  <!-- Modal (chỉ 1 lần) -->
   <div id="modal-overlay" class="hidden" role="dialog" aria-modal="true">
     <div class="modal">
       <h3 id="modal-title">Confirm</h3>
@@ -179,6 +201,50 @@
       <div class="modal-actions">
         <button type="button" class="btn btn-secondary" id="modal-cancel">Cancel</button>
         <button type="button" class="btn btn-primary" id="modal-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-us" class="hidden" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:480px">
+      <h3>Edit user story</h3>
+      <div class="stack">
+        <div>
+          <label class="label">Content</label>
+          <textarea id="modal-us-content" class="field"></textarea>
+        </div>
+        <div>
+          <label class="label">Acceptance criteria (one per line)</label>
+          <textarea id="modal-us-ac" class="field" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="btn-cancel-us">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-save-us">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-pm" class="hidden" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:520px">
+      <h3>Edit permission row</h3>
+      <div class="form-grid">
+        <div><label class="label">Role</label><input id="modal-pm-role" class="field" /></div>
+        <div><label class="label">Action</label><input id="modal-pm-action" class="field" /></div>
+        <div><label class="label">Resource</label><input id="modal-pm-resource" class="field" /></div>
+        <div>
+          <label class="label">Effect</label>
+          <select id="modal-pm-effect" class="field">
+            <option value="Allow">Allow</option>
+            <option value="Deny">Deny</option>
+          </select>
+        </div>
+        <div><label class="label">Scope</label><input id="modal-pm-scope" class="field" /></div>
+        <div><label class="label">Condition</label><input id="modal-pm-condition" class="field" /></div>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="btn-cancel-pm">Cancel</button>
+        <button type="button" class="btn btn-primary" id="btn-save-pm">Save</button>
       </div>
     </div>
   </div>
