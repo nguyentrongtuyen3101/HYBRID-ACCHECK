@@ -111,6 +111,51 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;");
 }
 
+function closeAllCustomSelects() {
+  document.querySelectorAll(".custom-select.open").forEach((el) => {
+    el.classList.remove("open");
+    const t = el.querySelector(".custom-select-trigger");
+    if (t) t.setAttribute("aria-expanded", "false");
+  });
+}
+
+function initEffectSelect(wrapId, triggerId, menuId, hiddenId) {
+  const wrap = $(wrapId);
+  const trigger = $(triggerId);
+  const menu = $(menuId);
+  const hidden = $(hiddenId);
+  if (!wrap || !trigger || !menu || !hidden) return;
+
+  function setValue(val) {
+    hidden.value = val;
+    wrap.dataset.value = val;
+    trigger.textContent = val;
+    menu.querySelectorAll(".custom-select-option").forEach((o) => {
+      o.classList.toggle("selected", o.dataset.value === val);
+    });
+  }
+
+  menu.querySelectorAll(".custom-select-option").forEach((opt) => {
+    opt.onclick = (e) => {
+      e.stopPropagation();
+      setValue(opt.dataset.value);
+      closeAllCustomSelects();
+    };
+  });
+
+  trigger.onclick = (e) => {
+    e.stopPropagation();
+    const willOpen = !wrap.classList.contains("open");
+    closeAllCustomSelects();
+    if (willOpen) {
+      wrap.classList.add("open");
+      trigger.setAttribute("aria-expanded", "true");
+    }
+  };
+
+  wrap._setEffect = setValue;
+}
+
 async function loadProjects() {
   const el = $("projects-list");
   el.innerHTML = "<div class='empty'>Loading…</div>";
@@ -244,19 +289,21 @@ function renderStories(list) {
   }
   el.innerHTML = `
     <table class="table">
-      <thead><tr><th>Content</th><th>AC</th><th></th></tr></thead>
+      <thead><tr><th>Content</th><th>AC</th><th class="col-actions"></th></tr></thead>
       <tbody>
         ${list
           .map(
             (us) => `
           <tr>
-            <td>${escapeHtml(us.content)}</td>
-            <td class="muted">${(us.acceptance_criteria || [])
+            <td class="col-content">${escapeHtml(us.content)}</td>
+            <td class="col-ac muted">${(us.acceptance_criteria || [])
               .map((a) => escapeHtml(a.content))
               .join("<br>") || "—"}</td>
-            <td class="row">
-              <button class="btn btn-secondary btn-sm" data-edit-us="${us.id}">Edit</button>
-              <button class="btn btn-danger" data-del-us="${us.id}">Delete</button>
+            <td class="col-actions">
+              <div class="row">
+                <button class="btn btn-secondary btn-sm" data-edit-us="${us.id}">Edit</button>
+                <button class="btn btn-danger" data-del-us="${us.id}">Delete</button>
+              </div>
             </td>
           </tr>`
           )
@@ -315,7 +362,7 @@ function renderMatrix(list) {
   }
   el.innerHTML = `
     <table class="table">
-      <thead><tr><th>Role</th><th>Action</th><th>Resource</th><th>Effect</th><th>Scope</th><th>Condition</th><th></th></tr></thead>
+      <thead><tr><th>Role</th><th>Action</th><th>Resource</th><th>Effect</th><th>Scope</th><th>Condition</th><th class="col-actions"></th></tr></thead>
       <tbody>
         ${list
           .map(
@@ -327,9 +374,11 @@ function renderMatrix(list) {
             <td>${escapeHtml(r.effect)}</td>
             <td>${escapeHtml(r.scope || "—")}</td>
             <td>${escapeHtml(r.condition || "—")}</td>
-            <td class="row">
-              <button class="btn btn-secondary btn-sm" data-edit-pm="${r.id}">Edit</button>
-              <button class="btn btn-danger" data-del-pm="${r.id}">Delete</button>
+            <td class="col-actions">
+              <div class="row">
+                <button class="btn btn-secondary btn-sm" data-edit-pm="${r.id}">Edit</button>
+                <button class="btn btn-danger" data-del-pm="${r.id}">Delete</button>
+              </div>
             </td>
           </tr>`
           )
@@ -377,21 +426,15 @@ async function addPmRow() {
     ["pm-role", "pm-action", "pm-resource", "pm-scope", "pm-condition"].forEach(
       (id) => ($(id).value = "")
     );
-    $("pm-effect").value = "Allow";
+    const wrap = $("pm-effect-wrap");
+    if (wrap && wrap._setEffect) wrap._setEffect("Allow");
+    else if ($("pm-effect")) $("pm-effect").value = "Allow";
     showToast("Permission row added", "success");
     await refreshProjectDetail();
   } catch (e) {
     showToast(e.message, "error");
   }
 }
-function closeAllCustomSelects() {
-  document.querySelectorAll(".custom-select.open").forEach((el) => {
-    el.classList.remove("open");
-    const t = el.querySelector(".custom-select-trigger");
-    if (t) t.setAttribute("aria-expanded", "false");
-  });
-}
-
 function fillCheckSelect(stories) {
   const wrap = $("check-us-wrap");
   const menu = $("check-us-menu");
@@ -484,7 +527,9 @@ function openEditPm(id) {
   $("modal-pm-role").value = r.role;
   $("modal-pm-action").value = r.action;
   $("modal-pm-resource").value = r.resource;
-  $("modal-pm-effect").value = r.effect;
+  const wrap = $("modal-pm-effect-wrap");
+  if (wrap && wrap._setEffect) wrap._setEffect(r.effect || "Allow");
+  else if ($("modal-pm-effect")) $("modal-pm-effect").value = r.effect || "Allow";
   $("modal-pm-scope").value = r.scope || "";
   $("modal-pm-condition").value = r.condition || "";
   $("modal-pm").classList.remove("hidden");
@@ -624,7 +669,7 @@ async function loadProjectRuns() {
     }
     el.innerHTML = `
       <table class="table">
-        <thead><tr><th>Status</th><th>User story</th><th>When</th><th></th></tr></thead>
+        <thead><tr><th>Status</th><th>User story</th><th>When</th><th class="col-actions"></th></tr></thead>
         <tbody>
           ${data.items
             .map(
@@ -635,7 +680,9 @@ async function loadProjectRuns() {
               }</span></td>
               <td>${escapeHtml(r.user_story)}</td>
               <td class="muted">${r.created_at ? r.created_at.replace("T", " ").slice(0, 19) : ""}</td>
-              <td><button type="button" class="btn btn-secondary btn-sm" data-run="${r.id}">View</button></td>
+              <td class="col-actions">
+                <button type="button" class="btn btn-secondary btn-sm" data-run="${r.id}">View</button>
+              </td>
             </tr>`
             )
             .join("")}
@@ -705,7 +752,7 @@ async function loadGlobalHistory() {
     }
     el.innerHTML = `
       <table class="table">
-        <thead><tr><th>Status</th><th>Types</th><th>User story</th><th>When</th><th></th></tr></thead>
+        <thead><tr><th>Status</th><th>Types</th><th>User story</th><th>When</th><th class="col-actions"></th></tr></thead>
         <tbody>
           ${data.items
             .map(
@@ -717,7 +764,9 @@ async function loadGlobalHistory() {
               <td class="muted">${escapeHtml((r.conflict_types || []).join(", ") || "—")}</td>
               <td>${escapeHtml(r.user_story)}</td>
               <td class="muted">${r.created_at ? r.created_at.replace("T", " ").slice(0, 19) : ""}</td>
-              <td><button type="button" class="btn btn-secondary btn-sm" data-run="${r.id}">View</button></td>
+              <td class="col-actions">
+                <button type="button" class="btn btn-secondary btn-sm" data-run="${r.id}">View</button>
+              </td>
             </tr>`
             )
             .join("")}
@@ -761,6 +810,51 @@ async function checkHealth() {
     $("healthStatus").textContent = "API offline";
     $("healthStatus").style.color = "#c41e3a";
   }
+}
+
+function bindExcelImport() {
+  const excelInput = $("excel-import-input");
+  if (!excelInput) return;
+  excelInput.onchange = async () => {
+    const file = excelInput.files && excelInput.files[0];
+    excelInput.value = "";
+    if (!file || !state.projectId) return;
+    const fd = new FormData();
+    fd.append("file", file);
+    try {
+      const res = await fetch(`${API}/projects/${state.projectId}/import/excel`, {
+        method: "POST",
+        body: fd,
+      });
+      const text = await res.text();
+      let data = null;
+      try {
+        data = text ? JSON.parse(text) : null;
+      } catch {
+        data = { detail: text };
+      }
+      if (!res.ok) {
+        throw new Error(
+          data?.detail
+            ? typeof data.detail === "string"
+              ? data.detail
+              : JSON.stringify(data.detail)
+            : res.statusText
+        );
+      }
+      const warn =
+        data.warnings && data.warnings.length
+          ? ` (${data.warnings.length} warnings)`
+          : "";
+      showToast(
+        `Imported ${data.user_stories_imported} US, ${data.acceptance_criteria_imported || 0} AC, ${data.pm_rows_imported} PM${warn}`,
+        "success"
+      );
+      await refreshProjectDetail();
+    } catch (e) {
+      showToast(e.message, "error");
+    }
+  };
 }
 
 function bind() {
@@ -827,6 +921,15 @@ function bind() {
   document.addEventListener("click", () => {
     closeAllCustomSelects();
   });
+
+  bindExcelImport();
+  initEffectSelect("pm-effect-wrap", "pm-effect-trigger", "pm-effect-menu", "pm-effect");
+  initEffectSelect(
+    "modal-pm-effect-wrap",
+    "modal-pm-effect-trigger",
+    "modal-pm-effect-menu",
+    "modal-pm-effect"
+  );
 }
 
 document.addEventListener("DOMContentLoaded", () => {

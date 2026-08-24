@@ -604,3 +604,49 @@ select.field option {
   animation: fade-in 0.15s ease;
 }
 #modal-us.hidden, #modal-pm.hidden { display: none !important; }
+
+a.btn,
+a.btn:hover,
+a.btn:focus {
+  text-decoration: none;
+}
+
+.btn-download-excel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none !important;
+}
+
+.btn-download-excel .icon-download {
+  flex-shrink: 0;
+}
+/* Cột actions: căn giữa theo chiều dọc, không xuống dòng */
+.table td {
+  vertical-align: middle;
+}
+
+.table td.col-actions,
+.table th.col-actions {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.table td.col-actions .row {
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+
+.table td.col-content {
+  vertical-align: middle;
+}
+
+.table td.col-ac {
+  vertical-align: middle;
+  max-width: 280px;
+}
+

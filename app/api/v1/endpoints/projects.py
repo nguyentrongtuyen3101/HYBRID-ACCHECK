@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi.responses import Response
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -25,6 +26,7 @@ from app.domain.schemas.project import (
 from app.infrastructure.db.session import get_db
 from app.infrastructure.db import project_repo as repo
 from app.infrastructure.db.repository import save_pipeline_run
+from app.infrastructure.db.excel_io import build_template_bytes, parse_import_excel
 from app.services.pipeline import HybridACCheckPipeline
 
 router = APIRouter(prefix="/projects", tags=["Projects"])
@@ -39,6 +41,18 @@ def _project_out(p, us_c=0, pm_c=0, run_c=0) -> ProjectOut:
         user_story_count=us_c,
         pm_row_count=pm_c,
         run_count=run_c,
+    )
+
+
+@router.get("/template/excel", summary="Tai file Excel mau US+AC+PM")
+async def download_excel_template():
+    data = build_template_bytes()
+    return Response(
+        content=data,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={
+            "Content-Disposition": 'attachment; filename="reqsentinel_import_template.xlsx"'
+        },
     )
 
 
@@ -111,6 +125,51 @@ async def delete_project(project_id: str, db: AsyncSession = Depends(get_db)):
     ok = await repo.delete_project(db, project_id)
     if not ok:
         raise HTTPException(404, "Project not found")
+
+
+@router.post("/{project_id}/import/excel", summary="Import US+AC+PM tu Excel")
+async def import_excel(
+    project_id: str,
+    file: UploadFile = File(...),
+    db: AsyncSession = Depends(get_db),
+):
+    p = await repo.get_project(db, project_id)
+    if not p:
+        raise HTTPException(404, "Project not found")
+
+    if not file.filename or not file.filename.lower().endswith((".xlsx", ".xlsm")):
+        raise HTTPException(400, "Chi nhan file .xlsx")
+
+    raw = await file.read()
+    if not raw:
+        raise HTTPException(400, "File trong")
+
+    parsed = parse_import_excel(raw)
+    created_us = 0
+    created_pm = 0
+    created_ac = 0
+
+    for us in parsed["user_stories"]:
+        await repo.add_user_story(
+            db, project_id, us["content"], us["acceptance_criteria"]
+        )
+        created_us += 1
+        created_ac += len(us["acceptance_criteria"])
+
+    for row in parsed["permission_matrix"]:
+        await repo.add_pm_row(db, project_id, row)
+        created_pm += 1
+
+    logger.info(
+        f"Import project={project_id} us={created_us} ac={created_ac} pm={created_pm}"
+    )
+    return {
+        "project_id": project_id,
+        "user_stories_imported": created_us,
+        "acceptance_criteria_imported": created_ac,
+        "pm_rows_imported": created_pm,
+        "warnings": parsed["errors"],
+    }
 
 
 @router.post("/{project_id}/user-stories", response_model=UserStoryOut, status_code=201)

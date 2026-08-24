@@ -82,7 +82,25 @@
         </div>
 
         <div id="tab-stories" class="card">
-          <h2>User stories</h2>
+          <div class="row-between mb-3">
+            <h2 style="margin:0">User stories</h2>
+            <div class="row">
+              <a class="btn btn-secondary btn-sm btn-download-excel"
+                 href="/api/v1/projects/template/excel"
+                 download="reqsentinel_import_template.xlsx">
+                <svg class="icon-download" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 3v12"/>
+                  <path d="M7 10l5 5 5-5"/>
+                  <path d="M5 21h14"/>
+                </svg>
+                Download Excel template
+              </a>
+              <label class="btn btn-secondary btn-sm" style="cursor:pointer;margin:0">
+                Import Excel
+                <input type="file" id="excel-import-input" accept=".xlsx,.xlsm" hidden />
+              </label>
+            </div>
+          </div>
           <div id="stories-list" class="mb-3"></div>
           <h2>Add user story</h2>
           <div class="stack">
@@ -117,10 +135,15 @@
             </div>
             <div>
               <label class="label">Effect</label>
-              <select id="pm-effect" class="field">
-                <option value="Allow">Allow</option>
-                <option value="Deny">Deny</option>
-              </select>
+              <div class="custom-select" id="pm-effect-wrap" data-value="Allow">
+                <button type="button" class="custom-select-trigger" id="pm-effect-trigger"
+                        aria-haspopup="listbox" aria-expanded="false">Allow</button>
+                <div class="custom-select-menu" id="pm-effect-menu" role="listbox">
+                  <div class="custom-select-option selected" role="option" data-value="Allow">Allow</div>
+                  <div class="custom-select-option" role="option" data-value="Deny">Deny</div>
+                </div>
+                <input type="hidden" id="pm-effect" value="Allow" />
+              </div>
             </div>
             <div>
               <label class="label">Scope</label>
@@ -234,10 +257,15 @@
         <div><label class="label">Resource</label><input id="modal-pm-resource" class="field" /></div>
         <div>
           <label class="label">Effect</label>
-          <select id="modal-pm-effect" class="field">
-            <option value="Allow">Allow</option>
-            <option value="Deny">Deny</option>
-          </select>
+          <div class="custom-select" id="modal-pm-effect-wrap" data-value="Allow">
+            <button type="button" class="custom-select-trigger" id="modal-pm-effect-trigger"
+                    aria-haspopup="listbox" aria-expanded="false">Allow</button>
+            <div class="custom-select-menu" id="modal-pm-effect-menu" role="listbox">
+              <div class="custom-select-option selected" role="option" data-value="Allow">Allow</div>
+              <div class="custom-select-option" role="option" data-value="Deny">Deny</div>
+            </div>
+            <input type="hidden" id="modal-pm-effect" value="Allow" />
+          </div>
         </div>
         <div><label class="label">Scope</label><input id="modal-pm-scope" class="field" /></div>
         <div><label class="label">Condition</label><input id="modal-pm-condition" class="field" /></div>
