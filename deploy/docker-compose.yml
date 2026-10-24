@@ -1,0 +1,108 @@
+# Chạy toàn bộ hệ thống (từ thư mục deploy/): docker compose up --build
+#   UI (Vue)        http://localhost:8080
+#   API (Go)        http://localhost:8000
+#   Email dev       http://localhost:8025   (Mailpit bắt mọi email gửi đi)
+#   RabbitMQ UI     http://localhost:15673  (guest / guest)
+# ML service và notification service chỉ mở trong mạng nội bộ (đi qua nginx của web).
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: hybrid_accheck
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hybrid_accheck"]
+      interval: 5s
+      retries: 10
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
+    ports:
+      - "127.0.0.1:${RABBITMQ_UI_PORT:-15673}:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
+
+  ml:
+    build: ../ml-service
+    environment:
+      INTERNAL_TOKEN: ${ML_SERVICE_TOKEN:-change-me-internal-token}
+      LOG_LEVEL: INFO
+    volumes:
+      # checkpoint DeBERTa (data/models/deberta-extractor) + cache SBERT, giữ qua các lần restart
+      - ../ml-service/data/models:/srv/data/models
+      - hf-cache:/srv/.cache/huggingface
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 10s
+      start_period: 120s
+      retries: 10
+
+  api:
+    build: ../api-service
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck?sslmode=disable
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (min 32 chars)}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
+      ALLOW_SIGNUP: ${ALLOW_SIGNUP:-true}
+      ML_SERVICE_URL: http://ml:8001
+      ML_SERVICE_TOKEN: ${ML_SERVICE_TOKEN:-change-me-internal-token}
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      WEB_URL: ${WEB_URL:-http://localhost:8080}
+      JOB_WORKERS: ${JOB_WORKERS:-1}
+      TRUST_PROXY: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      ml:
+        condition: service_started
+    ports:
+      - "${API_PORT:-8000}:8000"
+
+  notification:
+    build: ../notification-service
+    environment:
+      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck
+      RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (min 32 chars)}
+      # Mặc định gửi vào Mailpit; đặt SMTP_* trong .env để gửi email thật
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      MAIL_FROM: ${MAIL_FROM:-ReqSentinel <no-reply@reqsentinel.local>}
+    depends_on:
+      db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  web:
+    build: ../web-app
+    depends_on:
+      - api
+      - notification
+    ports:
+      - "${WEB_PORT:-8080}:80"
+
+volumes:
+  pgdata:
+  rabbitmq:
+  hf-cache:

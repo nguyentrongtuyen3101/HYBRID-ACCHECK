@@ -1,0 +1,331 @@
+{
+  "app": { "name": "ReqSentinel", "tagline": "Access-control requirement analysis" },
+  "common": {
+    "add": "Add", "back": "← Back", "cancel": "Cancel", "close": "Close", "confirm": "Confirm", "create": "Create",
+    "delete": "Delete", "edit": "Edit", "leave": "Leave", "loading": "Loading…", "never": "never", "next": "Next page",
+    "none": "None", "prev": "Previous page", "remove": "Remove", "save": "Save", "saveChanges": "Save changes",
+    "saving": "Saving…", "view": "View", "you": "(you)"
+  },
+  "nav": { "projects": "Projects", "history": "History", "admin": "Admin" },
+  "header": {
+    "accountMenu": "Account menu", "statusOk": "All systems operational",
+    "mlOfflineHint": "Analysis service is unavailable",
+    "apiOffline": "API offline", "logout": "Log out", "profile": "Profile", "language": "Language",
+    "themeLight": "Switch to light theme", "themeDark": "Switch to dark theme"
+  },
+  "languages": {
+    "short": { "vi": "VI", "en": "EN", "ja": "JA" },
+    "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
+  },
+  "auth": {
+    "signIn": "Sign in", "createAccount": "Create account", "email": "Email", "password": "Password",
+    "fullName": "Full name", "passwordHint": "Password (min 8 characters)", "forgotLink": "Forgot password?",
+    "forgotTitle": "Forgot password", "forgotIntro": "Enter your account email and we'll send you a reset link.",
+    "sendLink": "Send reset link",
+    "forgotSent": "If an account exists for {email}, we sent a link to reset the password. It is valid for 30 minutes.",
+    "backToSignIn": "← Back to sign in", "resetTitle": "Set a new password",
+    "newPassword": "New password (min 8 characters)", "confirmPassword": "Confirm new password",
+    "changePassword": "Change password", "resetDone": "Your password has been changed.",
+    "resetMissingToken": "This reset link is missing its token.", "requestNewLink": "Request a new link",
+    "passwordsMismatch": "Passwords do not match"
+  },
+  "invitation": {
+    "join": "Join {project}", "invited": "{inviter} invited {email} as",
+    "notPending": "This invitation is {status}.", "expires": "Expires {date}",
+    "signInToAccept": "Sign in to accept", "createAccount": "Create an account",
+    "wrongAccount": "You are signed in as {current}, but this invitation is for {email}.",
+    "switchAccount": "Sign in with another account", "accept": "Accept invitation",
+    "backToProjects": "← Back to projects"
+  },
+  "roleDescriptions": {
+    "owner": "Full control: members, settings, delete project",
+    "editor": "Edit requirements, run analysis, triage conflicts",
+    "viewer": "Read results and comment"
+  },
+  "projects": {
+    "title": "Projects", "subtitle": "Manage requirements projects, permission matrices, and analysis runs.",
+    "createTitle": "Create project", "name": "Name", "namePlaceholder": "e.g. E-commerce ACL",
+    "description": "Description (optional)", "descriptionPlaceholder": "Short description",
+    "createButton": "Create project", "nameRequired": "Project name is required", "created": "Project created",
+    "deleteTitle": "Delete project", "deleteConfirm": "Delete this project and all related data?",
+    "deleted": "Project deleted", "empty": "No projects yet. Create one above, or ask a teammate to invite you.",
+    "noDescription": "No description", "stats": "{stories} stories · {rows} PM rows · {runs} runs",
+    "openConflicts": "{count} open conflicts", "createdBy": "created by {email}"
+  },
+  "project": {
+    "backToProjects": "← Projects", "fallbackTitle": "Project", "deleteButton": "Delete project",
+    "deleteConfirm": "Delete this project and all related data (stories, matrix, runs, conflicts)?",
+    "tabs": {
+      "stories": "User Stories", "matrix": "Permission Matrix", "dictionary": "Dictionary", "check": "Run analysis",
+      "conflicts": "Conflicts", "runs": "Runs", "report": "Report", "members": "Members", "settings": "Settings"
+    }
+  },
+  "stories": {
+    "title": "User stories", "downloadTemplate": "Download Excel template", "importExcel": "Import Excel",
+    "emptyEditable": "No user stories. Add one below.", "empty": "No user stories.", "content": "Content",
+    "ac": "AC", "addTitle": "Add user story", "contentPlaceholder": "As a …, I want to … so that …",
+    "acHint": "Acceptance criteria (one per line, optional)", "acEditHint": "Acceptance criteria (one per line)",
+    "addButton": "Add user story", "editTitle": "Edit user story", "contentRequired": "User story content required",
+    "added": "User story added", "updated": "User story updated", "deleted": "User story deleted",
+    "deleteTitle": "Delete user story", "deleteConfirm": "Delete this user story? Its conflicts will be removed too.",
+    "imported": "Imported {stories} US, {criteria} AC, {rows} PM", "importWarnings": "({count} warnings)"
+  },
+  "matrix": {
+    "title": "Permission matrix", "empty": "No permission matrix rows.", "role": "Role", "action": "Action",
+    "resource": "Resource", "effect": "Effect", "scope": "Scope", "condition": "Condition",
+    "scopePlaceholder": "own / assigned / all", "addTitle": "Add row", "addButton": "Add PM row",
+    "editTitle": "Edit permission row", "fieldsRequired": "Role, Action, Resource are required",
+    "added": "Permission row added", "updated": "Permission row updated", "deleted": "Row deleted",
+    "deleteTitle": "Delete row", "deleteConfirm": "Delete this permission matrix row?"
+  },
+  "versions": {
+    "title": "Versions", "hint": "A version is saved automatically before every analysis whenever the matrix changed.",
+    "labelPlaceholder": "Label (optional), e.g. v1 signed off", "save": "Save version", "empty": "No versions yet.",
+    "version": "Version", "label": "Label", "rows": "Rows", "savedAt": "Saved", "compare": "Compare with current",
+    "restore": "Restore", "saved": "Saved as version {version}", "restoreTitle": "Restore version",
+    "restoreConfirm": "Replace the current permission matrix with version {version}? The current state is saved as a new version first.",
+    "restored": "Restored version {version}", "diffTitle": "Version {version} → current", "restoreVersion": "Restore v{version}"
+  },
+  "diff": { "none": "No differences in the permission matrix.", "scope": "scope {scope}", "condition": "if {condition}" },
+  "dictionary": {
+    "title": "Dictionary",
+    "hint": "Canonical names and their synonyms. Before each analysis, synonyms in user stories, acceptance criteria and the permission matrix are replaced by the canonical name (e.g. \"Sales employee\" → \"Sales Staff\"), which improves matching.",
+    "empty": "No terms yet.", "kind": "Kind", "canonical": "Canonical name", "synonyms": "Synonyms",
+    "synonymsPlaceholder": "Synonyms, comma separated", "addTitle": "Add term", "editTitle": "Edit term",
+    "added": "Added \"{term}\"", "updated": "Term updated", "deleteTitle": "Remove term",
+    "deleteConfirm": "Remove \"{term}\" from the dictionary?", "suggestionsTitle": "Not in the dictionary yet",
+    "suggestionsHint": "Values used in the permission matrix that have no dictionary entry.", "quickAdd": "+ add"
+  },
+  "check": {
+    "projectTitle": "Analyze the whole project",
+    "projectHint": "Runs every user story in the background and updates the conflict board.",
+    "analyzeAll": "Analyze all stories", "waiting": "Waiting for a worker…", "analyzing": "Analyzing…",
+    "status": "Status", "stories": "Stories", "failed": "Failed", "model": "Model", "started": "Started",
+    "finished": "Finished", "jobStarted": "Analyzing {count} user stories in the background",
+    "singleTitle": "Analyze one user story",
+    "singleHint": "Uses the selected user story + the project's permission matrix and dictionary. Result is saved.",
+    "viewerHint": "Viewers can read results but cannot run analyses.", "userStory": "User story",
+    "noStories": "No user stories", "run": "Run analysis", "running": "Running…", "selectStory": "Select a user story",
+    "doneConsistent": "Analysis complete — consistent", "doneConflicts": "Analysis complete — conflicts found"
+  },
+  "analysis": {
+    "consistent": "Consistent", "conflictsFound": "Conflicts found",
+    "conflictCount": "{count} conflict | {count} conflicts", "saved": "saved {id}…", "model": "model {version}",
+    "conflicts": "Conflicts", "openInBoard": "Open in conflict board →", "evidenceStory": "US/AC: {value}",
+    "evidencePm": "PM: {value}", "extracted": "Extracted", "summary": "Summary"
+  },
+  "conflicts": {
+    "title": "Conflicts", "hint": "Each conflict is tracked across runs: re-running a story updates, reopens or auto-resolves it.",
+    "filterActive": "Open + acknowledged", "filterAllStatuses": "All statuses", "filterAllTypes": "All types",
+    "filterAnyone": "Anyone", "filterMe": "Assigned to me", "filterAllStories": "All stories",
+    "empty": "No conflicts match. Run an analysis to detect conflicts.", "status": "Status", "type": "Type",
+    "roleResource": "Role · Resource", "userStory": "User story", "assignee": "Assignee", "updated": "Updated",
+    "auto": "auto", "showing": "Showing {shown} of {total}."
+  },
+  "conflictDetail": {
+    "title": "Conflict", "autoResolved": "resolved automatically", "userStory": "User story:",
+    "lastDetected": "Last detected {date}", "viewRun": "view run", "moveTo": "Move to:", "unassigned": "Unassigned",
+    "formerMember": "a former member", "activity": "Activity", "system": "System",
+    "commentPlaceholder": "Add a comment…", "comment": "Comment", "statusChanged": "Marked as {status}",
+    "assigneeChanged": "Assignee updated"
+  },
+  "activity": {
+    "detected": "detected the conflict", "reopened": "reopened it (detected again)",
+    "auto_resolved": "auto-resolved it (no longer detected)", "status_changed": "changed status {from} → {to}",
+    "assigned": "assigned it to {name}", "unassigned": "removed the assignee", "comment": "commented"
+  },
+  "runs": {
+    "title": "Analysis runs", "compareSelected": "Compare selected ({count}/2)", "empty": "No runs yet for this project.",
+    "select": "Select for comparison", "ok": "OK", "conflict": "Conflict", "compareTitle": "Compare runs",
+    "storyChanged": "the user story / acceptance criteria changed", "introduced": "New", "resolved": "Fixed",
+    "unchanged": "Still there", "noConflictsEither": "Neither run has conflicts.", "pmChanges": "Permission matrix changes"
+  },
+  "report": {
+    "basedOn": "Based on the latest run of each user story · generated {date}", "export": "Export Excel report",
+    "exporting": "Exporting…", "storiesAnalyzed": "Stories analyzed", "consistency": "Consistency",
+    "consistentStories": "{count} consistent stories", "openConflicts": "Open conflicts",
+    "unusedAllow": "Unused Allow permissions", "overGranting": "possible over-granting",
+    "byStatus": "Conflicts by status", "byType": "Conflicts by type", "byRole": "Open conflicts by role",
+    "noConflicts": "No conflicts.", "noOpenConflicts": "No open conflicts.", "coverageTitle": "Permission coverage",
+    "coverageHint": "Which permissions are actually needed by a user story ({count} analyzed). Allow permissions that no story uses may grant more access than required.",
+    "roleResource": "Role \\ Resource", "legendFull": "all used", "legendPartial": "partly used",
+    "legendUnused": "unused Allow", "legendDeny": "Deny only", "unusedTitle": "Unused Allow permissions",
+    "storiesTitle": "User stories", "notAnalyzed": "Not analyzed", "lastAnalyzed": "Last analyzed"
+  },
+  "members": {
+    "title": "Members", "member": "Member", "role": "Role", "joined": "Joined", "inviteTitle": "Invite by email",
+    "inviteHint": "The person receives an email with a link to join. If they have no account yet, they can sign up from it.",
+    "emailPlaceholder": "teammate{'@'}company.com", "send": "Send invitation", "sending": "Sending…",
+    "pendingTitle": "Pending invitations", "noPending": "No pending invitations.", "invitedBy": "Invited by",
+    "expires": "Expires", "revoke": "Revoke", "invitationSent": "Invitation email sent to {email}",
+    "revokeTitle": "Revoke invitation", "revokeConfirm": "Revoke the invitation for {email}? The link in the email stops working.",
+    "roleTitle": "Change role", "roleConfirm": "Change {email}'s role to {role}?", "roleUpdated": "Role updated",
+    "leaveTitle": "Leave project", "leaveConfirm": "Leave this project? You will lose access to it.",
+    "removeTitle": "Remove member", "removeConfirm": "Remove {email} from the project?",
+    "left": "You left the project", "removed": "Member removed"
+  },
+  "settings": { "title": "Project settings", "description": "Description", "saved": "Project updated" },
+  "history": {
+    "title": "Global history", "subtitle": "All pipeline runs you have access to.", "empty": "No saved runs.",
+    "status": "Status", "project": "Project", "types": "Types", "userStory": "User story", "when": "When", "adhoc": "ad-hoc"
+  },
+  "run": { "title": "Run detail", "userStory": "User story", "noConflicts": "No conflicts" },
+  "profile": {
+    "title": "Profile", "subtitle": "Your personal information and preferences.",
+    "memberSince": "Member since {date}", "lastLogin": "Last sign-in {date}", "personalInfo": "Personal information",
+    "fullName": "Full name", "phone": "Phone", "jobTitle": "Job title", "jobTitlePlaceholder": "e.g. Business Analyst",
+    "organization": "Organization", "bio": "About you", "bioPlaceholder": "A few words about your role and work",
+    "saved": "Profile saved", "preferences": "Preferences",
+    "preferencesHint": "Saved to your account, so they follow you on every device.", "theme": "Theme",
+    "themes": { "light": "Light", "dark": "Dark" }, "changePassword": "Change password",
+    "currentPassword": "Current password", "passwordChanged": "Password changed"
+  },
+  "admin": {
+    "title": "Administration", "subtitle": "Users, activity and system overview.",
+    "tabs": { "overview": "Overview", "users": "Users", "audit": "Audit log" }
+  },
+  "adminOverview": {
+    "users": "Users", "usersSub": "{active} active · {admins} admin", "disabledUsers": "Disabled users",
+    "projects": "Projects", "runs": "Analysis runs", "runsSub": "{count} in last 7 days",
+    "consistentRuns": "Consistent runs", "consistentSub": "{count} with conflicts", "openConflicts": "Open conflicts",
+    "openConflictsSub": "open + acknowledged", "conflictsByType": "Conflicts by type",
+    "runsPerDay": "Analysis runs · last 14 days", "noConflicts": "No conflicts recorded yet.", "noRuns": "No runs yet.",
+    "feedbackTitle": "Model feedback",
+    "feedbackHint": "Stories whose conflicts were reviewed by a BA (acknowledged, resolved, or marked false positive) can be exported as a labeled dataset in the ml-service format, then used with accheck-ml-train.",
+    "exportDataset": "Export dataset (JSON)", "runsByModel": "Runs by model version"
+  },
+  "adminUsers": {
+    "search": "Search email or name", "allRoles": "All roles", "allStatuses": "All statuses", "newUser": "New user",
+    "empty": "No users match.", "user": "User", "role": "Role", "status": "Status", "projects": "Projects",
+    "runs": "Runs", "lastLogin": "Last login", "resetPassword": "Reset password", "reset": "Reset",
+    "disable": "Disable", "enable": "Enable", "pageInfo": "{total} users · page {page}/{pages}",
+    "initialPassword": "Initial password (min 8 characters)", "roleTitle": "Change role",
+    "roleConfirm": "Change role of {email} to \"{role}\"?", "roleUpdated": "Role updated",
+    "disableTitle": "Disable user", "disableConfirm": "Disable {email}? They will be signed out immediately.",
+    "enableTitle": "Enable user", "enableConfirm": "Enable {email}?", "disabled": "User disabled",
+    "enabled": "User enabled", "created": "User created", "passwordReset": "Password reset"
+  },
+  "adminAudit": {
+    "allActions": "All actions", "empty": "No activity recorded.", "when": "When", "actor": "Actor",
+    "action": "Action", "target": "Target", "detail": "Detail", "ip": "IP", "range": "{from}–{to} of {total}"
+  },
+  "auditActions": {
+    "auth.login": "Signed in", "auth.login_failed": "Failed sign-in", "auth.register": "Registered",
+    "auth.change_password": "Changed password", "auth.password_reset_requested": "Requested password reset",
+    "auth.password_reset": "Reset password", "user.create": "Created user", "user.update": "Updated user",
+    "user.reset_password": "Reset a user's password", "project.create": "Created project",
+    "project.update": "Updated project", "project.delete": "Deleted project", "project.import_excel": "Imported Excel",
+    "project.member_invited": "Invited member", "project.member_joined": "Joined project",
+    "project.member_role_changed": "Changed member role", "project.member_removed": "Removed member",
+    "project.invitation_revoked": "Revoked invitation", "project.pm_restored": "Restored permission matrix",
+    "conflict.update": "Updated conflict", "analysis.run": "Ran analysis", "analysis.job_started": "Started project analysis"
+  },
+  "notifications": {
+    "title": "Notifications", "markAllRead": "Mark all read", "empty": "No notifications yet.",
+    "ariaLabel": "Notifications ({count} unread)",
+    "project": {
+      "member_invited": { "title": "You were invited to {project}", "body": "{actor} invited you to join as {role}." },
+      "member_joined": { "title": "{member} joined {project}", "body": "They accepted your invitation as {role}." },
+      "member_role_changed": { "title": "Your role in {project} changed", "body": "{actor} changed your role to {role}." },
+      "member_removed": { "title": "You were removed from {project}", "body": "{actor} removed you from the project." }
+    },
+    "conflict": {
+      "assigned": { "title": "{actor} assigned you a {conflict_type}", "body": "{project}: {explanation}" },
+      "status_changed": { "title": "{actor} marked a {conflict_type} as {to}", "body": "{project}: {explanation}" },
+      "commented": { "title": "{actor} commented on a {conflict_type}", "body": "{comment}" }
+    },
+    "analysis": {
+      "job_finished": { "title": "Analysis of {project} finished", "body": "{succeeded}/{total} stories analyzed · {open_issues} open conflicts" },
+      "job_failed": { "title": "Analysis of {project} failed" }
+    }
+  },
+  "enums": {
+    "systemRole": { "admin": "admin", "user": "user" },
+    "userStatus": { "active": "active", "disabled": "disabled" },
+    "projectRole": { "owner": "owner", "editor": "editor", "viewer": "viewer" },
+    "invitationStatus": { "pending": "pending", "accepted": "accepted", "revoked": "revoked" },
+    "issueStatus": { "open": "Open", "acknowledged": "Acknowledged", "resolved": "Resolved", "false_positive": "False positive" },
+    "jobStatus": { "queued": "queued", "running": "running", "completed": "completed", "failed": "failed" },
+    "termKind": { "role": "role", "resource": "resource", "action": "action" },
+    "effect": { "Allow": "Allow", "Deny": "Deny" },
+    "conflictType": {
+      "Normal": "Normal", "Missing Permission": "Missing Permission", "Action Conflict": "Action Conflict",
+      "Effect Conflict": "Effect Conflict", "Scope Conflict": "Scope Conflict", "Condition Conflict": "Condition Conflict"
+    }
+  },
+  "errors": {
+    "unknown": "Something went wrong. Please try again.",
+    "session_expired": "Your session has expired. Please sign in again.",
+    "account_disabled": "This account is disabled.",
+    "admin_required": "Administrator rights are required.",
+    "already_member": "This user is already a member of the project.",
+    "analysis_job_running": "An analysis is already running for this project.",
+    "analysis_rejected": "The analysis service rejected the input.",
+    "analysis_unavailable": "The analysis service is unavailable. Please try again later.",
+    "body_required": "The request is empty.",
+    "cannot_change_self": "You cannot demote or disable your own account.",
+    "conflict_not_found": "Conflict not found.",
+    "email_taken": "This email is already registered.",
+    "file_empty": "The file is empty.",
+    "file_missing": "Please choose a file (max 10 MB).",
+    "file_type": "Only .xlsx files are accepted.",
+    "internal_error": "Server error. Please try again later.",
+    "invalid_assignee": "The assignee must be an owner or editor of this project.",
+    "invalid_bio": "About you must be at most {max} characters.",
+    "invalid_comment": "A comment must be 1–5000 characters.",
+    "invalid_credentials": "Incorrect email or password.",
+    "invalid_effect": "Effect must be Allow or Deny.",
+    "invalid_email": "Invalid email address.",
+    "invalid_excel": "The Excel file could not be read.",
+    "invalid_full_name": "Full name must be at most {max} characters.",
+    "invalid_issue_status": "Invalid conflict status.",
+    "invalid_job_title": "Job title must be at most {max} characters.",
+    "invalid_json": "The request is malformed.",
+    "invalid_locale": "Unsupported language.",
+    "invalid_organization": "Organization must be at most {max} characters.",
+    "invalid_param": "Invalid parameter.",
+    "invalid_phone": "Invalid phone number.",
+    "invalid_project_name": "Project name must be 1–255 characters.",
+    "invalid_project_role": "Role must be owner, editor or viewer.",
+    "invalid_run_ids": "Choose two runs to compare.",
+    "invalid_status_filter": "Invalid status filter.",
+    "invalid_system_role": "Role must be admin or user.",
+    "invalid_term_kind": "Kind must be role, resource or action.",
+    "invalid_theme": "Unsupported theme.",
+    "invalid_token": "Your session is invalid or has expired.",
+    "invalid_transition": "A conflict cannot move from {from} to {to}.",
+    "invalid_user_status": "Status must be active or disabled.",
+    "invalid_version_ids": "Invalid versions selected.",
+    "invitation_expired": "This invitation has expired.",
+    "invitation_not_found": "Invitation not found.",
+    "invitation_not_pending": "This invitation is no longer valid.",
+    "invitation_wrong_email": "This invitation was sent to a different email address.",
+    "job_not_found": "Analysis job not found.",
+    "last_admin": "The last active administrator cannot be removed.",
+    "last_owner": "A project must keep at least one owner.",
+    "member_not_found": "Member not found.",
+    "not_authenticated": "Please sign in.",
+    "not_found": "Not found.",
+    "notification_not_found": "Notification not found.",
+    "password_length": "Password must be {min}–{max} characters.",
+    "password_unchanged": "The new password must differ from the current one.",
+    "pm_fields_required": "Role, Action and Resource are required.",
+    "pm_row_not_found": "Permission row not found.",
+    "project_forbidden": "You do not have permission to do this in this project.",
+    "project_no_pm": "The project has no permission matrix rows.",
+    "project_no_stories": "The project has no user stories.",
+    "project_not_found": "Project not found.",
+    "reset_link_invalid": "This reset link is invalid or has expired.",
+    "run_not_found": "Run not found.",
+    "signup_disabled": "Self sign-up is disabled. Contact an administrator.",
+    "story_content_required": "User story content is required.",
+    "story_not_found": "User story not found.",
+    "term_canonical_required": "A canonical name is required.",
+    "term_exists": "This term already exists in the dictionary.",
+    "term_not_found": "Term not found.",
+    "too_many_login_attempts": "Too many failed sign-in attempts. Try again later.",
+    "user_not_found": "User not found.",
+    "version_not_found": "Version not found.",
+    "wrong_current_password": "The current password is incorrect."
+  }
+}

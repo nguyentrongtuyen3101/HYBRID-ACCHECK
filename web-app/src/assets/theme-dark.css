@@ -1,0 +1,80 @@
+/* Theme tối. app.css gốc giữ nguyên (theme sáng); file này chỉ đặt lại biến màu
+   và ghi đè những chỗ app.css viết cứng màu (#fff, #000, màu badge...). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #141414;
+  --card: #1c1c1c;
+  --border: #d9d9d9;
+  --text: #ececec;
+  --muted: #a3a3a3;
+  --ink: #e2e2e2;
+  --ink-soft: #c9c9c9;
+  --paper: #232323;
+  --ok: #34d399;
+  --ok-bg: #0f2c22;
+  --err: #f87171;
+  --err-bg: #3b1719;
+
+  --surface: #1c1c1c;
+  --hover: #262626;
+  --selected: #2e2e2e;
+  --divider: #333;
+  --overlay: rgba(0, 0, 0, 0.6);
+  --on-ink: #141414;
+  --warn: #fbbf24;
+  --warn-bg: #352812;
+  --admin-bg: #352812;
+  --disabled: #9a9a9a;
+  --disabled-bg: #2a2a2a;
+  --unread-bg: #1e2433;
+  --neutral-border: #555;
+}
+
+/* Nền trắng viết cứng trong app.css */
+[data-theme="dark"] .brand-mark,
+[data-theme="dark"] .field,
+[data-theme="dark"] .btn,
+[data-theme="dark"] .btn-secondary,
+[data-theme="dark"] .btn-danger,
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .toast,
+[data-theme="dark"] .modal,
+[data-theme="dark"] select.field,
+[data-theme="dark"] select.field option,
+[data-theme="dark"] .custom-select-trigger,
+[data-theme="dark"] .custom-select-menu {
+  background-color: var(--surface);
+}
+[data-theme="dark"] .btn-primary { background: var(--ink); color: var(--on-ink); }
+[data-theme="dark"] .btn-primary:hover:not(:disabled) { background: #fff; }
+[data-theme="dark"] .btn-danger:hover:not(:disabled) { background: var(--err-bg); }
+[data-theme="dark"] a:hover { color: #fff; }
+[data-theme="dark"] .field:focus,
+[data-theme="dark"] .custom-select-trigger:hover,
+[data-theme="dark"] .custom-select-trigger:focus { border-color: #fff; }
+[data-theme="dark"] .table tr:hover td { background: var(--hover); }
+[data-theme="dark"] .custom-select-option.selected { background: var(--selected); }
+[data-theme="dark"] .custom-select-option:hover,
+[data-theme="dark"] .custom-select-option.highlighted { background: var(--hover); }
+[data-theme="dark"] #modal-overlay,
+[data-theme="dark"] #modal-us,
+[data-theme="dark"] #modal-pm { background: var(--overlay); }
+[data-theme="dark"] .toast-icon { color: var(--on-ink); }
+
+/* Bóng đen trên nền tối không thấy → bóng theo màu viền */
+[data-theme="dark"] .field,
+[data-theme="dark"] .custom-select-trigger { box-shadow: 1px 1px 0 0 rgba(255, 255, 255, 0.12); }
+
+/* Badge loại conflict: nền tối, chữ sáng */
+[data-theme="dark"] .b-normal { background: #0f2c22; color: #34d399; }
+[data-theme="dark"] .b-missing { background: #352812; color: #fbbf24; }
+[data-theme="dark"] .b-action { background: #1f2142; color: #a5b4fc; }
+[data-theme="dark"] .b-effect { background: #3b1720; color: #fb7185; }
+[data-theme="dark"] .b-scope { background: #2a1f42; color: #c4b5fd; }
+[data-theme="dark"] .b-condition { background: #3b1730; color: #f472b6; }
+
+/* Mũi tên của select gốc là SVG màu tối → đổi sang mũi tên sáng */
+[data-theme="dark"] select.field {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e2e2e2' d='M2.5 4.5L6 8l3.5-3.5'/%3E%3C/svg%3E");
+}

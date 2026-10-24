@@ -1,0 +1,331 @@
+{
+  "app": { "name": "ReqSentinel", "tagline": "Phân tích yêu cầu kiểm soát truy cập" },
+  "common": {
+    "add": "Thêm", "back": "← Quay lại", "cancel": "Hủy", "close": "Đóng", "confirm": "Xác nhận", "create": "Tạo",
+    "delete": "Xóa", "edit": "Sửa", "leave": "Rời", "loading": "Đang tải…", "never": "chưa bao giờ", "next": "Trang sau",
+    "none": "Không có", "prev": "Trang trước", "remove": "Gỡ", "save": "Lưu", "saveChanges": "Lưu thay đổi",
+    "saving": "Đang lưu…", "view": "Xem", "you": "(bạn)"
+  },
+  "nav": { "projects": "Dự án", "history": "Lịch sử", "admin": "Quản trị" },
+  "header": {
+    "accountMenu": "Menu tài khoản", "statusOk": "Hệ thống hoạt động bình thường",
+    "mlOfflineHint": "Dịch vụ phân tích không khả dụng",
+    "apiOffline": "API ngoại tuyến", "logout": "Đăng xuất", "profile": "Hồ sơ", "language": "Ngôn ngữ",
+    "themeLight": "Chuyển sang giao diện sáng", "themeDark": "Chuyển sang giao diện tối"
+  },
+  "languages": {
+    "short": { "vi": "VI", "en": "EN", "ja": "JA" },
+    "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
+  },
+  "auth": {
+    "signIn": "Đăng nhập", "createAccount": "Tạo tài khoản", "email": "Email", "password": "Mật khẩu",
+    "fullName": "Họ và tên", "passwordHint": "Mật khẩu (tối thiểu 8 ký tự)", "forgotLink": "Quên mật khẩu?",
+    "forgotTitle": "Quên mật khẩu", "forgotIntro": "Nhập email tài khoản, chúng tôi sẽ gửi liên kết đặt lại mật khẩu.",
+    "sendLink": "Gửi liên kết đặt lại",
+    "forgotSent": "Nếu tồn tại tài khoản với {email}, chúng tôi đã gửi liên kết đặt lại mật khẩu. Liên kết có hiệu lực 30 phút.",
+    "backToSignIn": "← Quay lại đăng nhập", "resetTitle": "Đặt mật khẩu mới",
+    "newPassword": "Mật khẩu mới (tối thiểu 8 ký tự)", "confirmPassword": "Nhập lại mật khẩu mới",
+    "changePassword": "Đổi mật khẩu", "resetDone": "Mật khẩu của bạn đã được thay đổi.",
+    "resetMissingToken": "Liên kết đặt lại thiếu mã xác thực.", "requestNewLink": "Yêu cầu liên kết mới",
+    "passwordsMismatch": "Mật khẩu nhập lại không khớp"
+  },
+  "invitation": {
+    "join": "Tham gia {project}", "invited": "{inviter} đã mời {email} với vai trò",
+    "notPending": "Lời mời này đang ở trạng thái {status}.", "expires": "Hết hạn {date}",
+    "signInToAccept": "Đăng nhập để chấp nhận", "createAccount": "Tạo tài khoản",
+    "wrongAccount": "Bạn đang đăng nhập bằng {current}, nhưng lời mời này dành cho {email}.",
+    "switchAccount": "Đăng nhập bằng tài khoản khác", "accept": "Chấp nhận lời mời",
+    "backToProjects": "← Quay lại danh sách dự án"
+  },
+  "roleDescriptions": {
+    "owner": "Toàn quyền: thành viên, cài đặt, xóa dự án",
+    "editor": "Sửa yêu cầu, chạy phân tích, xử lý xung đột",
+    "viewer": "Xem kết quả và bình luận"
+  },
+  "projects": {
+    "title": "Dự án", "subtitle": "Quản lý dự án yêu cầu, ma trận phân quyền và các lần phân tích.",
+    "createTitle": "Tạo dự án", "name": "Tên", "namePlaceholder": "VD: ACL thương mại điện tử",
+    "description": "Mô tả (không bắt buộc)", "descriptionPlaceholder": "Mô tả ngắn",
+    "createButton": "Tạo dự án", "nameRequired": "Vui lòng nhập tên dự án", "created": "Đã tạo dự án",
+    "deleteTitle": "Xóa dự án", "deleteConfirm": "Xóa dự án này và toàn bộ dữ liệu liên quan?",
+    "deleted": "Đã xóa dự án", "empty": "Chưa có dự án nào. Hãy tạo ở trên hoặc nhờ đồng đội mời bạn.",
+    "noDescription": "Không có mô tả", "stats": "{stories} user story · {rows} dòng PM · {runs} lần chạy",
+    "openConflicts": "{count} xung đột đang mở", "createdBy": "tạo bởi {email}"
+  },
+  "project": {
+    "backToProjects": "← Dự án", "fallbackTitle": "Dự án", "deleteButton": "Xóa dự án",
+    "deleteConfirm": "Xóa dự án này và toàn bộ dữ liệu liên quan (user story, ma trận, lần chạy, xung đột)?",
+    "tabs": {
+      "stories": "User Story", "matrix": "Ma trận phân quyền", "dictionary": "Từ điển", "check": "Chạy phân tích",
+      "conflicts": "Xung đột", "runs": "Lần chạy", "report": "Báo cáo", "members": "Thành viên", "settings": "Cài đặt"
+    }
+  },
+  "stories": {
+    "title": "User story", "downloadTemplate": "Tải mẫu Excel", "importExcel": "Nhập Excel",
+    "emptyEditable": "Chưa có user story. Thêm ở bên dưới.", "empty": "Chưa có user story.", "content": "Nội dung",
+    "ac": "AC", "addTitle": "Thêm user story", "contentPlaceholder": "Là một …, tôi muốn … để …",
+    "acHint": "Tiêu chí chấp nhận (mỗi dòng một tiêu chí, không bắt buộc)", "acEditHint": "Tiêu chí chấp nhận (mỗi dòng một tiêu chí)",
+    "addButton": "Thêm user story", "editTitle": "Sửa user story", "contentRequired": "Vui lòng nhập nội dung user story",
+    "added": "Đã thêm user story", "updated": "Đã cập nhật user story", "deleted": "Đã xóa user story",
+    "deleteTitle": "Xóa user story", "deleteConfirm": "Xóa user story này? Các xung đột của nó cũng sẽ bị xóa.",
+    "imported": "Đã nhập {stories} US, {criteria} AC, {rows} PM", "importWarnings": "({count} cảnh báo)"
+  },
+  "matrix": {
+    "title": "Ma trận phân quyền", "empty": "Chưa có dòng nào trong ma trận phân quyền.", "role": "Vai trò", "action": "Hành động",
+    "resource": "Tài nguyên", "effect": "Hiệu lực", "scope": "Phạm vi", "condition": "Điều kiện",
+    "scopePlaceholder": "own / assigned / all", "addTitle": "Thêm dòng", "addButton": "Thêm dòng PM",
+    "editTitle": "Sửa dòng phân quyền", "fieldsRequired": "Vai trò, Hành động, Tài nguyên là bắt buộc",
+    "added": "Đã thêm dòng phân quyền", "updated": "Đã cập nhật dòng phân quyền", "deleted": "Đã xóa dòng",
+    "deleteTitle": "Xóa dòng", "deleteConfirm": "Xóa dòng này khỏi ma trận phân quyền?"
+  },
+  "versions": {
+    "title": "Phiên bản", "hint": "Một phiên bản được tự động lưu trước mỗi lần phân tích nếu ma trận có thay đổi.",
+    "labelPlaceholder": "Nhãn (không bắt buộc), VD: v1 đã chốt", "save": "Lưu phiên bản", "empty": "Chưa có phiên bản nào.",
+    "version": "Phiên bản", "label": "Nhãn", "rows": "Số dòng", "savedAt": "Lưu lúc", "compare": "So với hiện tại",
+    "restore": "Khôi phục", "saved": "Đã lưu thành phiên bản {version}", "restoreTitle": "Khôi phục phiên bản",
+    "restoreConfirm": "Thay ma trận phân quyền hiện tại bằng phiên bản {version}? Trạng thái hiện tại sẽ được lưu thành phiên bản mới trước.",
+    "restored": "Đã khôi phục phiên bản {version}", "diffTitle": "Phiên bản {version} → hiện tại", "restoreVersion": "Khôi phục v{version}"
+  },
+  "diff": { "none": "Ma trận phân quyền không có khác biệt.", "scope": "phạm vi {scope}", "condition": "nếu {condition}" },
+  "dictionary": {
+    "title": "Từ điển",
+    "hint": "Tên chuẩn và các từ đồng nghĩa. Trước mỗi lần phân tích, từ đồng nghĩa trong user story, tiêu chí chấp nhận và ma trận phân quyền được thay bằng tên chuẩn (VD: \"Nhân viên bán hàng\" → \"Sales Staff\"), giúp so khớp chính xác hơn.",
+    "empty": "Chưa có thuật ngữ nào.", "kind": "Loại", "canonical": "Tên chuẩn", "synonyms": "Từ đồng nghĩa",
+    "synonymsPlaceholder": "Các từ đồng nghĩa, phân cách bằng dấu phẩy", "addTitle": "Thêm thuật ngữ", "editTitle": "Sửa thuật ngữ",
+    "added": "Đã thêm \"{term}\"", "updated": "Đã cập nhật thuật ngữ", "deleteTitle": "Gỡ thuật ngữ",
+    "deleteConfirm": "Gỡ \"{term}\" khỏi từ điển?", "suggestionsTitle": "Chưa có trong từ điển",
+    "suggestionsHint": "Các giá trị dùng trong ma trận phân quyền nhưng chưa có mục từ điển.", "quickAdd": "+ thêm"
+  },
+  "check": {
+    "projectTitle": "Phân tích toàn bộ dự án",
+    "projectHint": "Chạy nền mọi user story và cập nhật bảng xung đột.",
+    "analyzeAll": "Phân tích tất cả user story", "waiting": "Đang chờ worker…", "analyzing": "Đang phân tích…",
+    "status": "Trạng thái", "stories": "User story", "failed": "Lỗi", "model": "Mô hình", "started": "Bắt đầu",
+    "finished": "Kết thúc", "jobStarted": "Đang phân tích nền {count} user story",
+    "singleTitle": "Phân tích một user story",
+    "singleHint": "Dùng user story đã chọn + ma trận phân quyền và từ điển của dự án. Kết quả được lưu lại.",
+    "viewerHint": "Người xem có thể đọc kết quả nhưng không thể chạy phân tích.", "userStory": "User story",
+    "noStories": "Chưa có user story", "run": "Chạy phân tích", "running": "Đang chạy…", "selectStory": "Chọn một user story",
+    "doneConsistent": "Phân tích xong — nhất quán", "doneConflicts": "Phân tích xong — phát hiện xung đột"
+  },
+  "analysis": {
+    "consistent": "Nhất quán", "conflictsFound": "Phát hiện xung đột",
+    "conflictCount": "{count} xung đột", "saved": "đã lưu {id}…", "model": "mô hình {version}",
+    "conflicts": "Xung đột", "openInBoard": "Mở trong bảng xung đột →", "evidenceStory": "US/AC: {value}",
+    "evidencePm": "PM: {value}", "extracted": "Trích xuất", "summary": "Tóm tắt"
+  },
+  "conflicts": {
+    "title": "Xung đột", "hint": "Mỗi xung đột được theo dõi qua các lần chạy: chạy lại một user story sẽ cập nhật, mở lại hoặc tự đóng nó.",
+    "filterActive": "Đang mở + đã ghi nhận", "filterAllStatuses": "Mọi trạng thái", "filterAllTypes": "Mọi loại",
+    "filterAnyone": "Bất kỳ ai", "filterMe": "Giao cho tôi", "filterAllStories": "Mọi user story",
+    "empty": "Không có xung đột phù hợp. Hãy chạy phân tích để phát hiện xung đột.", "status": "Trạng thái", "type": "Loại",
+    "roleResource": "Vai trò · Tài nguyên", "userStory": "User story", "assignee": "Người xử lý", "updated": "Cập nhật",
+    "auto": "tự động", "showing": "Hiển thị {shown}/{total}."
+  },
+  "conflictDetail": {
+    "title": "Xung đột", "autoResolved": "đã tự động đóng", "userStory": "User story:",
+    "lastDetected": "Phát hiện gần nhất {date}", "viewRun": "xem lần chạy", "moveTo": "Chuyển sang:", "unassigned": "Chưa giao",
+    "formerMember": "một cựu thành viên", "activity": "Hoạt động", "system": "Hệ thống",
+    "commentPlaceholder": "Thêm bình luận…", "comment": "Bình luận", "statusChanged": "Đã chuyển sang {status}",
+    "assigneeChanged": "Đã cập nhật người xử lý"
+  },
+  "activity": {
+    "detected": "đã phát hiện xung đột", "reopened": "đã mở lại (phát hiện lần nữa)",
+    "auto_resolved": "đã tự động đóng (không còn phát hiện)", "status_changed": "đã đổi trạng thái {from} → {to}",
+    "assigned": "đã giao cho {name}", "unassigned": "đã bỏ người xử lý", "comment": "đã bình luận"
+  },
+  "runs": {
+    "title": "Các lần phân tích", "compareSelected": "So sánh đã chọn ({count}/2)", "empty": "Dự án chưa có lần chạy nào.",
+    "select": "Chọn để so sánh", "ok": "OK", "conflict": "Xung đột", "compareTitle": "So sánh lần chạy",
+    "storyChanged": "user story / tiêu chí chấp nhận đã thay đổi", "introduced": "Mới", "resolved": "Đã hết",
+    "unchanged": "Vẫn còn", "noConflictsEither": "Cả hai lần chạy đều không có xung đột.", "pmChanges": "Thay đổi ma trận phân quyền"
+  },
+  "report": {
+    "basedOn": "Dựa trên lần chạy gần nhất của mỗi user story · tạo lúc {date}", "export": "Xuất báo cáo Excel",
+    "exporting": "Đang xuất…", "storiesAnalyzed": "User story đã phân tích", "consistency": "Độ nhất quán",
+    "consistentStories": "{count} user story nhất quán", "openConflicts": "Xung đột đang mở",
+    "unusedAllow": "Quyền Allow không dùng", "overGranting": "có thể cấp thừa quyền",
+    "byStatus": "Xung đột theo trạng thái", "byType": "Xung đột theo loại", "byRole": "Xung đột đang mở theo vai trò",
+    "noConflicts": "Không có xung đột.", "noOpenConflicts": "Không có xung đột đang mở.", "coverageTitle": "Độ phủ phân quyền",
+    "coverageHint": "Những quyền thực sự được user story cần đến ({count} đã phân tích). Quyền Allow không story nào dùng có thể đang cấp nhiều quyền hơn cần thiết.",
+    "roleResource": "Vai trò \\ Tài nguyên", "legendFull": "dùng hết", "legendPartial": "dùng một phần",
+    "legendUnused": "Allow không dùng", "legendDeny": "Chỉ Deny", "unusedTitle": "Quyền Allow không dùng",
+    "storiesTitle": "User story", "notAnalyzed": "Chưa phân tích", "lastAnalyzed": "Phân tích gần nhất"
+  },
+  "members": {
+    "title": "Thành viên", "member": "Thành viên", "role": "Vai trò", "joined": "Tham gia", "inviteTitle": "Mời qua email",
+    "inviteHint": "Người được mời sẽ nhận email có liên kết tham gia. Nếu chưa có tài khoản, họ có thể đăng ký từ đó.",
+    "emailPlaceholder": "dongdoi{'@'}congty.com", "send": "Gửi lời mời", "sending": "Đang gửi…",
+    "pendingTitle": "Lời mời đang chờ", "noPending": "Không có lời mời nào đang chờ.", "invitedBy": "Người mời",
+    "expires": "Hết hạn", "revoke": "Thu hồi", "invitationSent": "Đã gửi email mời tới {email}",
+    "revokeTitle": "Thu hồi lời mời", "revokeConfirm": "Thu hồi lời mời của {email}? Liên kết trong email sẽ không còn hiệu lực.",
+    "roleTitle": "Đổi vai trò", "roleConfirm": "Đổi vai trò của {email} thành {role}?", "roleUpdated": "Đã cập nhật vai trò",
+    "leaveTitle": "Rời dự án", "leaveConfirm": "Rời dự án này? Bạn sẽ mất quyền truy cập.",
+    "removeTitle": "Gỡ thành viên", "removeConfirm": "Gỡ {email} khỏi dự án?",
+    "left": "Bạn đã rời dự án", "removed": "Đã gỡ thành viên"
+  },
+  "settings": { "title": "Cài đặt dự án", "description": "Mô tả", "saved": "Đã cập nhật dự án" },
+  "history": {
+    "title": "Lịch sử chung", "subtitle": "Mọi lần chạy pipeline bạn có quyền xem.", "empty": "Chưa có lần chạy nào được lưu.",
+    "status": "Trạng thái", "project": "Dự án", "types": "Loại", "userStory": "User story", "when": "Thời điểm", "adhoc": "ad-hoc"
+  },
+  "run": { "title": "Chi tiết lần chạy", "userStory": "User story", "noConflicts": "Không có xung đột" },
+  "profile": {
+    "title": "Hồ sơ", "subtitle": "Thông tin cá nhân và tùy chọn của bạn.",
+    "memberSince": "Thành viên từ {date}", "lastLogin": "Đăng nhập gần nhất {date}", "personalInfo": "Thông tin cá nhân",
+    "fullName": "Họ và tên", "phone": "Số điện thoại", "jobTitle": "Chức danh", "jobTitlePlaceholder": "VD: Business Analyst",
+    "organization": "Tổ chức", "bio": "Giới thiệu", "bioPlaceholder": "Vài dòng về vai trò và công việc của bạn",
+    "saved": "Đã lưu hồ sơ", "preferences": "Tùy chọn",
+    "preferencesHint": "Được lưu vào tài khoản nên áp dụng trên mọi thiết bị.", "theme": "Giao diện",
+    "themes": { "light": "Sáng", "dark": "Tối" }, "changePassword": "Đổi mật khẩu",
+    "currentPassword": "Mật khẩu hiện tại", "passwordChanged": "Đã đổi mật khẩu"
+  },
+  "admin": {
+    "title": "Quản trị", "subtitle": "Người dùng, hoạt động và tổng quan hệ thống.",
+    "tabs": { "overview": "Tổng quan", "users": "Người dùng", "audit": "Nhật ký hoạt động" }
+  },
+  "adminOverview": {
+    "users": "Người dùng", "usersSub": "{active} hoạt động · {admins} quản trị", "disabledUsers": "Người dùng bị khóa",
+    "projects": "Dự án", "runs": "Lần phân tích", "runsSub": "{count} trong 7 ngày qua",
+    "consistentRuns": "Lần chạy nhất quán", "consistentSub": "{count} có xung đột", "openConflicts": "Xung đột đang mở",
+    "openConflictsSub": "đang mở + đã ghi nhận", "conflictsByType": "Xung đột theo loại",
+    "runsPerDay": "Lần phân tích · 14 ngày qua", "noConflicts": "Chưa ghi nhận xung đột nào.", "noRuns": "Chưa có lần chạy nào.",
+    "feedbackTitle": "Phản hồi cho mô hình",
+    "feedbackHint": "Các user story có xung đột đã được BA xem xét (đã ghi nhận, đã xử lý, hoặc đánh dấu báo nhầm) có thể xuất thành bộ dữ liệu gán nhãn theo định dạng ml-service, rồi dùng với accheck-ml-train.",
+    "exportDataset": "Xuất dataset (JSON)", "runsByModel": "Lần chạy theo phiên bản mô hình"
+  },
+  "adminUsers": {
+    "search": "Tìm theo email hoặc tên", "allRoles": "Mọi vai trò", "allStatuses": "Mọi trạng thái", "newUser": "Người dùng mới",
+    "empty": "Không có người dùng phù hợp.", "user": "Người dùng", "role": "Vai trò", "status": "Trạng thái", "projects": "Dự án",
+    "runs": "Lần chạy", "lastLogin": "Đăng nhập gần nhất", "resetPassword": "Đặt lại mật khẩu", "reset": "Đặt lại",
+    "disable": "Khóa", "enable": "Mở khóa", "pageInfo": "{total} người dùng · trang {page}/{pages}",
+    "initialPassword": "Mật khẩu ban đầu (tối thiểu 8 ký tự)", "roleTitle": "Đổi vai trò",
+    "roleConfirm": "Đổi vai trò của {email} thành \"{role}\"?", "roleUpdated": "Đã cập nhật vai trò",
+    "disableTitle": "Khóa người dùng", "disableConfirm": "Khóa {email}? Người này sẽ bị đăng xuất ngay lập tức.",
+    "enableTitle": "Mở khóa người dùng", "enableConfirm": "Mở khóa {email}?", "disabled": "Đã khóa người dùng",
+    "enabled": "Đã mở khóa người dùng", "created": "Đã tạo người dùng", "passwordReset": "Đã đặt lại mật khẩu"
+  },
+  "adminAudit": {
+    "allActions": "Mọi hành động", "empty": "Chưa ghi nhận hoạt động nào.", "when": "Thời điểm", "actor": "Người thực hiện",
+    "action": "Hành động", "target": "Đối tượng", "detail": "Chi tiết", "ip": "IP", "range": "{from}–{to} / {total}"
+  },
+  "auditActions": {
+    "auth.login": "Đăng nhập", "auth.login_failed": "Đăng nhập thất bại", "auth.register": "Đăng ký",
+    "auth.change_password": "Đổi mật khẩu", "auth.password_reset_requested": "Yêu cầu đặt lại mật khẩu",
+    "auth.password_reset": "Đặt lại mật khẩu", "user.create": "Tạo người dùng", "user.update": "Cập nhật người dùng",
+    "user.reset_password": "Đặt lại mật khẩu người dùng", "project.create": "Tạo dự án",
+    "project.update": "Cập nhật dự án", "project.delete": "Xóa dự án", "project.import_excel": "Nhập Excel",
+    "project.member_invited": "Mời thành viên", "project.member_joined": "Tham gia dự án",
+    "project.member_role_changed": "Đổi vai trò thành viên", "project.member_removed": "Gỡ thành viên",
+    "project.invitation_revoked": "Thu hồi lời mời", "project.pm_restored": "Khôi phục ma trận phân quyền",
+    "conflict.update": "Cập nhật xung đột", "analysis.run": "Chạy phân tích", "analysis.job_started": "Bắt đầu phân tích dự án"
+  },
+  "notifications": {
+    "title": "Thông báo", "markAllRead": "Đánh dấu đã đọc tất cả", "empty": "Chưa có thông báo nào.",
+    "ariaLabel": "Thông báo ({count} chưa đọc)",
+    "project": {
+      "member_invited": { "title": "Bạn được mời vào {project}", "body": "{actor} đã mời bạn tham gia với vai trò {role}." },
+      "member_joined": { "title": "{member} đã tham gia {project}", "body": "Đã chấp nhận lời mời của bạn với vai trò {role}." },
+      "member_role_changed": { "title": "Vai trò của bạn trong {project} đã thay đổi", "body": "{actor} đã đổi vai trò của bạn thành {role}." },
+      "member_removed": { "title": "Bạn đã bị gỡ khỏi {project}", "body": "{actor} đã gỡ bạn khỏi dự án." }
+    },
+    "conflict": {
+      "assigned": { "title": "{actor} giao cho bạn một {conflict_type}", "body": "{project}: {explanation}" },
+      "status_changed": { "title": "{actor} chuyển một {conflict_type} sang {to}", "body": "{project}: {explanation}" },
+      "commented": { "title": "{actor} bình luận về một {conflict_type}", "body": "{comment}" }
+    },
+    "analysis": {
+      "job_finished": { "title": "Đã phân tích xong {project}", "body": "{succeeded}/{total} user story đã phân tích · {open_issues} xung đột đang mở" },
+      "job_failed": { "title": "Phân tích {project} thất bại" }
+    }
+  },
+  "enums": {
+    "systemRole": { "admin": "quản trị", "user": "người dùng" },
+    "userStatus": { "active": "hoạt động", "disabled": "bị khóa" },
+    "projectRole": { "owner": "chủ sở hữu", "editor": "biên tập", "viewer": "người xem" },
+    "invitationStatus": { "pending": "đang chờ", "accepted": "đã chấp nhận", "revoked": "đã thu hồi" },
+    "issueStatus": { "open": "Đang mở", "acknowledged": "Đã ghi nhận", "resolved": "Đã xử lý", "false_positive": "Báo nhầm" },
+    "jobStatus": { "queued": "đang chờ", "running": "đang chạy", "completed": "hoàn tất", "failed": "thất bại" },
+    "termKind": { "role": "vai trò", "resource": "tài nguyên", "action": "hành động" },
+    "effect": { "Allow": "Allow", "Deny": "Deny" },
+    "conflictType": {
+      "Normal": "Bình thường", "Missing Permission": "Thiếu quyền", "Action Conflict": "Xung đột hành động",
+      "Effect Conflict": "Xung đột hiệu lực", "Scope Conflict": "Xung đột phạm vi", "Condition Conflict": "Xung đột điều kiện"
+    }
+  },
+  "errors": {
+    "unknown": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+    "session_expired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+    "account_disabled": "Tài khoản này đã bị khóa.",
+    "admin_required": "Cần quyền quản trị.",
+    "already_member": "Người dùng này đã là thành viên của dự án.",
+    "analysis_job_running": "Dự án đang có một lượt phân tích chạy.",
+    "analysis_rejected": "Dịch vụ phân tích từ chối dữ liệu đầu vào.",
+    "analysis_unavailable": "Dịch vụ phân tích không khả dụng. Vui lòng thử lại sau.",
+    "body_required": "Yêu cầu trống.",
+    "cannot_change_self": "Bạn không thể hạ quyền hoặc khóa chính tài khoản của mình.",
+    "conflict_not_found": "Không tìm thấy xung đột.",
+    "email_taken": "Email này đã được đăng ký.",
+    "file_empty": "Tệp trống.",
+    "file_missing": "Vui lòng chọn một tệp (tối đa 10 MB).",
+    "file_type": "Chỉ chấp nhận tệp .xlsx.",
+    "internal_error": "Lỗi máy chủ. Vui lòng thử lại sau.",
+    "invalid_assignee": "Người xử lý phải là chủ sở hữu hoặc biên tập viên của dự án.",
+    "invalid_bio": "Giới thiệu tối đa {max} ký tự.",
+    "invalid_comment": "Bình luận phải từ 1–5000 ký tự.",
+    "invalid_credentials": "Email hoặc mật khẩu không đúng.",
+    "invalid_effect": "Hiệu lực phải là Allow hoặc Deny.",
+    "invalid_email": "Email không hợp lệ.",
+    "invalid_excel": "Không đọc được tệp Excel.",
+    "invalid_full_name": "Họ và tên tối đa {max} ký tự.",
+    "invalid_issue_status": "Trạng thái xung đột không hợp lệ.",
+    "invalid_job_title": "Chức danh tối đa {max} ký tự.",
+    "invalid_json": "Yêu cầu sai định dạng.",
+    "invalid_locale": "Ngôn ngữ không được hỗ trợ.",
+    "invalid_organization": "Tổ chức tối đa {max} ký tự.",
+    "invalid_param": "Tham số không hợp lệ.",
+    "invalid_phone": "Số điện thoại không hợp lệ.",
+    "invalid_project_name": "Tên dự án phải từ 1–255 ký tự.",
+    "invalid_project_role": "Vai trò phải là chủ sở hữu, biên tập hoặc người xem.",
+    "invalid_run_ids": "Hãy chọn hai lần chạy để so sánh.",
+    "invalid_status_filter": "Bộ lọc trạng thái không hợp lệ.",
+    "invalid_system_role": "Vai trò phải là quản trị hoặc người dùng.",
+    "invalid_term_kind": "Loại phải là vai trò, tài nguyên hoặc hành động.",
+    "invalid_theme": "Giao diện không được hỗ trợ.",
+    "invalid_token": "Phiên đăng nhập không hợp lệ hoặc đã hết hạn.",
+    "invalid_transition": "Không thể chuyển xung đột từ {from} sang {to}.",
+    "invalid_user_status": "Trạng thái phải là hoạt động hoặc bị khóa.",
+    "invalid_version_ids": "Phiên bản được chọn không hợp lệ.",
+    "invitation_expired": "Lời mời đã hết hạn.",
+    "invitation_not_found": "Không tìm thấy lời mời.",
+    "invitation_not_pending": "Lời mời này không còn hiệu lực.",
+    "invitation_wrong_email": "Lời mời này được gửi tới một địa chỉ email khác.",
+    "job_not_found": "Không tìm thấy lượt phân tích.",
+    "last_admin": "Không thể gỡ quản trị viên đang hoạt động cuối cùng.",
+    "last_owner": "Dự án phải còn ít nhất một chủ sở hữu.",
+    "member_not_found": "Không tìm thấy thành viên.",
+    "not_authenticated": "Vui lòng đăng nhập.",
+    "not_found": "Không tìm thấy.",
+    "notification_not_found": "Không tìm thấy thông báo.",
+    "password_length": "Mật khẩu phải từ {min}–{max} ký tự.",
+    "password_unchanged": "Mật khẩu mới phải khác mật khẩu hiện tại.",
+    "pm_fields_required": "Vai trò, Hành động và Tài nguyên là bắt buộc.",
+    "pm_row_not_found": "Không tìm thấy dòng phân quyền.",
+    "project_forbidden": "Bạn không có quyền thực hiện thao tác này trong dự án.",
+    "project_no_pm": "Dự án chưa có dòng nào trong ma trận phân quyền.",
+    "project_no_stories": "Dự án chưa có user story.",
+    "project_not_found": "Không tìm thấy dự án.",
+    "reset_link_invalid": "Liên kết đặt lại không hợp lệ hoặc đã hết hạn.",
+    "run_not_found": "Không tìm thấy lần chạy.",
+    "signup_disabled": "Tự đăng ký đã bị tắt. Hãy liên hệ quản trị viên.",
+    "story_content_required": "Vui lòng nhập nội dung user story.",
+    "story_not_found": "Không tìm thấy user story.",
+    "term_canonical_required": "Vui lòng nhập tên chuẩn.",
+    "term_exists": "Thuật ngữ này đã có trong từ điển.",
+    "term_not_found": "Không tìm thấy thuật ngữ.",
+    "too_many_login_attempts": "Đăng nhập sai quá nhiều lần. Vui lòng thử lại sau.",
+    "user_not_found": "Không tìm thấy người dùng.",
+    "version_not_found": "Không tìm thấy phiên bản.",
+    "wrong_current_password": "Mật khẩu hiện tại không đúng."
+  }
+}

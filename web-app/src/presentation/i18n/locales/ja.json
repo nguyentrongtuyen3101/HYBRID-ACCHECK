@@ -1,0 +1,331 @@
+{
+  "app": { "name": "ReqSentinel", "tagline": "アクセス制御要件の分析" },
+  "common": {
+    "add": "追加", "back": "← 戻る", "cancel": "キャンセル", "close": "閉じる", "confirm": "確認", "create": "作成",
+    "delete": "削除", "edit": "編集", "leave": "退出", "loading": "読み込み中…", "never": "なし", "next": "次のページ",
+    "none": "なし", "prev": "前のページ", "remove": "外す", "save": "保存", "saveChanges": "変更を保存",
+    "saving": "保存中…", "view": "表示", "you": "(あなた)"
+  },
+  "nav": { "projects": "プロジェクト", "history": "履歴", "admin": "管理" },
+  "header": {
+    "accountMenu": "アカウントメニュー", "statusOk": "システムは正常に稼働中",
+    "mlOfflineHint": "分析サービスを利用できません",
+    "apiOffline": "API オフライン", "logout": "ログアウト", "profile": "プロフィール", "language": "言語",
+    "themeLight": "ライトテーマに切り替え", "themeDark": "ダークテーマに切り替え"
+  },
+  "languages": {
+    "short": { "vi": "VI", "en": "EN", "ja": "JA" },
+    "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
+  },
+  "auth": {
+    "signIn": "ログイン", "createAccount": "アカウント作成", "email": "メールアドレス", "password": "パスワード",
+    "fullName": "氏名", "passwordHint": "パスワード(8文字以上)", "forgotLink": "パスワードをお忘れですか?",
+    "forgotTitle": "パスワードの再設定", "forgotIntro": "アカウントのメールアドレスを入力すると、再設定用のリンクをお送りします。",
+    "sendLink": "再設定リンクを送信",
+    "forgotSent": "{email} のアカウントが存在する場合、パスワード再設定用のリンクを送信しました。リンクの有効期限は30分です。",
+    "backToSignIn": "← ログインに戻る", "resetTitle": "新しいパスワードを設定",
+    "newPassword": "新しいパスワード(8文字以上)", "confirmPassword": "新しいパスワード(確認)",
+    "changePassword": "パスワードを変更", "resetDone": "パスワードを変更しました。",
+    "resetMissingToken": "この再設定リンクにはトークンがありません。", "requestNewLink": "新しいリンクを請求",
+    "passwordsMismatch": "パスワードが一致しません"
+  },
+  "invitation": {
+    "join": "{project} に参加", "invited": "{inviter} が {email} を次のロールで招待しました:",
+    "notPending": "この招待は {status} です。", "expires": "有効期限 {date}",
+    "signInToAccept": "ログインして承諾", "createAccount": "アカウントを作成",
+    "wrongAccount": "{current} でログインしていますが、この招待は {email} 宛てです。",
+    "switchAccount": "別のアカウントでログイン", "accept": "招待を承諾",
+    "backToProjects": "← プロジェクト一覧に戻る"
+  },
+  "roleDescriptions": {
+    "owner": "すべての権限:メンバー、設定、プロジェクト削除",
+    "editor": "要件の編集、分析の実行、コンフリクトの対応",
+    "viewer": "結果の閲覧とコメント"
+  },
+  "projects": {
+    "title": "プロジェクト", "subtitle": "要件プロジェクト、権限マトリクス、分析実行を管理します。",
+    "createTitle": "プロジェクトを作成", "name": "名前", "namePlaceholder": "例:EC サイト ACL",
+    "description": "説明(任意)", "descriptionPlaceholder": "短い説明",
+    "createButton": "プロジェクトを作成", "nameRequired": "プロジェクト名は必須です", "created": "プロジェクトを作成しました",
+    "deleteTitle": "プロジェクトを削除", "deleteConfirm": "このプロジェクトと関連データをすべて削除しますか?",
+    "deleted": "プロジェクトを削除しました", "empty": "プロジェクトはまだありません。上で作成するか、チームメイトに招待してもらってください。",
+    "noDescription": "説明なし", "stats": "ストーリー {stories} 件 · PM {rows} 行 · 実行 {runs} 回",
+    "openConflicts": "未解決のコンフリクト {count} 件", "createdBy": "作成者 {email}"
+  },
+  "project": {
+    "backToProjects": "← プロジェクト", "fallbackTitle": "プロジェクト", "deleteButton": "プロジェクトを削除",
+    "deleteConfirm": "このプロジェクトと関連データ(ストーリー、マトリクス、実行、コンフリクト)をすべて削除しますか?",
+    "tabs": {
+      "stories": "ユーザーストーリー", "matrix": "権限マトリクス", "dictionary": "辞書", "check": "分析を実行",
+      "conflicts": "コンフリクト", "runs": "実行履歴", "report": "レポート", "members": "メンバー", "settings": "設定"
+    }
+  },
+  "stories": {
+    "title": "ユーザーストーリー", "downloadTemplate": "Excel テンプレートをダウンロード", "importExcel": "Excel をインポート",
+    "emptyEditable": "ユーザーストーリーがありません。下で追加してください。", "empty": "ユーザーストーリーがありません。", "content": "内容",
+    "ac": "AC", "addTitle": "ユーザーストーリーを追加", "contentPlaceholder": "…として、…したい。なぜなら…",
+    "acHint": "受け入れ基準(1行に1つ、任意)", "acEditHint": "受け入れ基準(1行に1つ)",
+    "addButton": "ユーザーストーリーを追加", "editTitle": "ユーザーストーリーを編集", "contentRequired": "ユーザーストーリーの内容は必須です",
+    "added": "ユーザーストーリーを追加しました", "updated": "ユーザーストーリーを更新しました", "deleted": "ユーザーストーリーを削除しました",
+    "deleteTitle": "ユーザーストーリーを削除", "deleteConfirm": "このユーザーストーリーを削除しますか?関連するコンフリクトも削除されます。",
+    "imported": "US {stories} 件、AC {criteria} 件、PM {rows} 件をインポートしました", "importWarnings": "(警告 {count} 件)"
+  },
+  "matrix": {
+    "title": "権限マトリクス", "empty": "権限マトリクスの行がありません。", "role": "ロール", "action": "アクション",
+    "resource": "リソース", "effect": "効果", "scope": "スコープ", "condition": "条件",
+    "scopePlaceholder": "own / assigned / all", "addTitle": "行を追加", "addButton": "PM 行を追加",
+    "editTitle": "権限行を編集", "fieldsRequired": "ロール、アクション、リソースは必須です",
+    "added": "権限行を追加しました", "updated": "権限行を更新しました", "deleted": "行を削除しました",
+    "deleteTitle": "行を削除", "deleteConfirm": "この権限マトリクスの行を削除しますか?"
+  },
+  "versions": {
+    "title": "バージョン", "hint": "マトリクスが変更されている場合、分析の前に自動でバージョンが保存されます。",
+    "labelPlaceholder": "ラベル(任意)、例:v1 承認済み", "save": "バージョンを保存", "empty": "バージョンはまだありません。",
+    "version": "バージョン", "label": "ラベル", "rows": "行数", "savedAt": "保存日時", "compare": "現在と比較",
+    "restore": "復元", "saved": "バージョン {version} として保存しました", "restoreTitle": "バージョンを復元",
+    "restoreConfirm": "現在の権限マトリクスをバージョン {version} で置き換えますか?現在の状態は先に新しいバージョンとして保存されます。",
+    "restored": "バージョン {version} を復元しました", "diffTitle": "バージョン {version} → 現在", "restoreVersion": "v{version} を復元"
+  },
+  "diff": { "none": "権限マトリクスに差分はありません。", "scope": "スコープ {scope}", "condition": "条件 {condition}" },
+  "dictionary": {
+    "title": "辞書",
+    "hint": "正式名称とその同義語です。分析の前に、ユーザーストーリー・受け入れ基準・権限マトリクス内の同義語は正式名称に置き換えられ(例:\"販売員\" → \"Sales Staff\")、照合の精度が向上します。",
+    "empty": "用語はまだありません。", "kind": "種類", "canonical": "正式名称", "synonyms": "同義語",
+    "synonymsPlaceholder": "同義語(カンマ区切り)", "addTitle": "用語を追加", "editTitle": "用語を編集",
+    "added": "\"{term}\" を追加しました", "updated": "用語を更新しました", "deleteTitle": "用語を削除",
+    "deleteConfirm": "\"{term}\" を辞書から削除しますか?", "suggestionsTitle": "辞書に未登録",
+    "suggestionsHint": "権限マトリクスで使われているが辞書に登録されていない値です。", "quickAdd": "+ 追加"
+  },
+  "check": {
+    "projectTitle": "プロジェクト全体を分析",
+    "projectHint": "すべてのユーザーストーリーをバックグラウンドで分析し、コンフリクトボードを更新します。",
+    "analyzeAll": "すべてのストーリーを分析", "waiting": "ワーカーを待機中…", "analyzing": "分析中…",
+    "status": "ステータス", "stories": "ストーリー", "failed": "失敗", "model": "モデル", "started": "開始",
+    "finished": "終了", "jobStarted": "{count} 件のユーザーストーリーをバックグラウンドで分析中",
+    "singleTitle": "ユーザーストーリーを1件分析",
+    "singleHint": "選択したユーザーストーリーとプロジェクトの権限マトリクス・辞書を使用します。結果は保存されます。",
+    "viewerHint": "閲覧者は結果を見ることはできますが、分析は実行できません。", "userStory": "ユーザーストーリー",
+    "noStories": "ユーザーストーリーがありません", "run": "分析を実行", "running": "実行中…", "selectStory": "ユーザーストーリーを選択",
+    "doneConsistent": "分析完了 — 整合性あり", "doneConflicts": "分析完了 — コンフリクトを検出"
+  },
+  "analysis": {
+    "consistent": "整合性あり", "conflictsFound": "コンフリクトを検出",
+    "conflictCount": "コンフリクト {count} 件", "saved": "保存済み {id}…", "model": "モデル {version}",
+    "conflicts": "コンフリクト", "openInBoard": "コンフリクトボードで開く →", "evidenceStory": "US/AC: {value}",
+    "evidencePm": "PM: {value}", "extracted": "抽出結果", "summary": "概要"
+  },
+  "conflicts": {
+    "title": "コンフリクト", "hint": "各コンフリクトは実行をまたいで追跡されます。ストーリーを再実行すると、更新・再オープン・自動解決されます。",
+    "filterActive": "未対応 + 確認済み", "filterAllStatuses": "すべてのステータス", "filterAllTypes": "すべての種類",
+    "filterAnyone": "全員", "filterMe": "自分の担当", "filterAllStories": "すべてのストーリー",
+    "empty": "該当するコンフリクトはありません。分析を実行してコンフリクトを検出してください。", "status": "ステータス", "type": "種類",
+    "roleResource": "ロール · リソース", "userStory": "ユーザーストーリー", "assignee": "担当者", "updated": "更新日時",
+    "auto": "自動", "showing": "{total} 件中 {shown} 件を表示。"
+  },
+  "conflictDetail": {
+    "title": "コンフリクト", "autoResolved": "自動的に解決されました", "userStory": "ユーザーストーリー:",
+    "lastDetected": "最終検出 {date}", "viewRun": "実行を表示", "moveTo": "変更先:", "unassigned": "未割り当て",
+    "formerMember": "元メンバー", "activity": "アクティビティ", "system": "システム",
+    "commentPlaceholder": "コメントを追加…", "comment": "コメント", "statusChanged": "{status} に変更しました",
+    "assigneeChanged": "担当者を更新しました"
+  },
+  "activity": {
+    "detected": "がコンフリクトを検出しました", "reopened": "が再オープンしました(再検出)",
+    "auto_resolved": "が自動解決しました(検出されなくなりました)", "status_changed": "がステータスを変更しました {from} → {to}",
+    "assigned": "が {name} に割り当てました", "unassigned": "が担当者を外しました", "comment": "がコメントしました"
+  },
+  "runs": {
+    "title": "分析の実行履歴", "compareSelected": "選択を比較 ({count}/2)", "empty": "このプロジェクトの実行はまだありません。",
+    "select": "比較対象に選択", "ok": "OK", "conflict": "コンフリクト", "compareTitle": "実行を比較",
+    "storyChanged": "ユーザーストーリー / 受け入れ基準が変更されています", "introduced": "新規", "resolved": "解消",
+    "unchanged": "継続", "noConflictsEither": "どちらの実行にもコンフリクトはありません。", "pmChanges": "権限マトリクスの変更"
+  },
+  "report": {
+    "basedOn": "各ユーザーストーリーの最新の実行に基づく · {date} に生成", "export": "Excel レポートを出力",
+    "exporting": "出力中…", "storiesAnalyzed": "分析済みストーリー", "consistency": "整合率",
+    "consistentStories": "整合性のあるストーリー {count} 件", "openConflicts": "未解決のコンフリクト",
+    "unusedAllow": "未使用の Allow 権限", "overGranting": "過剰付与の可能性",
+    "byStatus": "ステータス別コンフリクト", "byType": "種類別コンフリクト", "byRole": "ロール別の未解決コンフリクト",
+    "noConflicts": "コンフリクトはありません。", "noOpenConflicts": "未解決のコンフリクトはありません。", "coverageTitle": "権限カバレッジ",
+    "coverageHint": "ユーザーストーリーで実際に必要とされる権限です(分析済み {count} 件)。どのストーリーにも使われない Allow 権限は、必要以上のアクセスを付与している可能性があります。",
+    "roleResource": "ロール \\ リソース", "legendFull": "すべて使用", "legendPartial": "一部使用",
+    "legendUnused": "未使用の Allow", "legendDeny": "Deny のみ", "unusedTitle": "未使用の Allow 権限",
+    "storiesTitle": "ユーザーストーリー", "notAnalyzed": "未分析", "lastAnalyzed": "最終分析"
+  },
+  "members": {
+    "title": "メンバー", "member": "メンバー", "role": "ロール", "joined": "参加日", "inviteTitle": "メールで招待",
+    "inviteHint": "招待された人には参加用リンク付きのメールが届きます。アカウントがない場合はそこから登録できます。",
+    "emailPlaceholder": "teammate{'@'}company.com", "send": "招待を送信", "sending": "送信中…",
+    "pendingTitle": "保留中の招待", "noPending": "保留中の招待はありません。", "invitedBy": "招待者",
+    "expires": "有効期限", "revoke": "取り消し", "invitationSent": "{email} に招待メールを送信しました",
+    "revokeTitle": "招待を取り消す", "revokeConfirm": "{email} への招待を取り消しますか?メール内のリンクは無効になります。",
+    "roleTitle": "ロールを変更", "roleConfirm": "{email} のロールを {role} に変更しますか?", "roleUpdated": "ロールを更新しました",
+    "leaveTitle": "プロジェクトから退出", "leaveConfirm": "このプロジェクトから退出しますか?アクセスできなくなります。",
+    "removeTitle": "メンバーを外す", "removeConfirm": "{email} をプロジェクトから外しますか?",
+    "left": "プロジェクトから退出しました", "removed": "メンバーを外しました"
+  },
+  "settings": { "title": "プロジェクト設定", "description": "説明", "saved": "プロジェクトを更新しました" },
+  "history": {
+    "title": "全体の履歴", "subtitle": "アクセスできるすべてのパイプライン実行です。", "empty": "保存された実行はありません。",
+    "status": "ステータス", "project": "プロジェクト", "types": "種類", "userStory": "ユーザーストーリー", "when": "日時", "adhoc": "アドホック"
+  },
+  "run": { "title": "実行の詳細", "userStory": "ユーザーストーリー", "noConflicts": "コンフリクトなし" },
+  "profile": {
+    "title": "プロフィール", "subtitle": "個人情報と表示設定。",
+    "memberSince": "登録日 {date}", "lastLogin": "最終ログイン {date}", "personalInfo": "個人情報",
+    "fullName": "氏名", "phone": "電話番号", "jobTitle": "役職", "jobTitlePlaceholder": "例:ビジネスアナリスト",
+    "organization": "所属組織", "bio": "自己紹介", "bioPlaceholder": "役割や仕事について簡単に",
+    "saved": "プロフィールを保存しました", "preferences": "表示設定",
+    "preferencesHint": "アカウントに保存されるため、どの端末でも適用されます。", "theme": "テーマ",
+    "themes": { "light": "ライト", "dark": "ダーク" }, "changePassword": "パスワードを変更",
+    "currentPassword": "現在のパスワード", "passwordChanged": "パスワードを変更しました"
+  },
+  "admin": {
+    "title": "管理", "subtitle": "ユーザー、アクティビティ、システムの概要。",
+    "tabs": { "overview": "概要", "users": "ユーザー", "audit": "監査ログ" }
+  },
+  "adminOverview": {
+    "users": "ユーザー", "usersSub": "有効 {active} · 管理者 {admins}", "disabledUsers": "無効なユーザー",
+    "projects": "プロジェクト", "runs": "分析の実行", "runsSub": "直近7日間で {count} 回",
+    "consistentRuns": "整合性のある実行", "consistentSub": "コンフリクトあり {count} 回", "openConflicts": "未解決のコンフリクト",
+    "openConflictsSub": "未対応 + 確認済み", "conflictsByType": "種類別コンフリクト",
+    "runsPerDay": "分析の実行 · 直近14日間", "noConflicts": "記録されたコンフリクトはありません。", "noRuns": "実行はまだありません。",
+    "feedbackTitle": "モデルへのフィードバック",
+    "feedbackHint": "BA がレビューしたコンフリクト(確認済み・解決済み・誤検知)を含むストーリーは、ml-service 形式のラベル付きデータセットとして出力し、accheck-ml-train で利用できます。",
+    "exportDataset": "データセットを出力 (JSON)", "runsByModel": "モデルバージョン別の実行"
+  },
+  "adminUsers": {
+    "search": "メールまたは名前で検索", "allRoles": "すべてのロール", "allStatuses": "すべてのステータス", "newUser": "新規ユーザー",
+    "empty": "該当するユーザーはいません。", "user": "ユーザー", "role": "ロール", "status": "ステータス", "projects": "プロジェクト",
+    "runs": "実行", "lastLogin": "最終ログイン", "resetPassword": "パスワードを再設定", "reset": "再設定",
+    "disable": "無効化", "enable": "有効化", "pageInfo": "ユーザー {total} 人 · {page}/{pages} ページ",
+    "initialPassword": "初期パスワード(8文字以上)", "roleTitle": "ロールを変更",
+    "roleConfirm": "{email} のロールを「{role}」に変更しますか?", "roleUpdated": "ロールを更新しました",
+    "disableTitle": "ユーザーを無効化", "disableConfirm": "{email} を無効化しますか?直ちにログアウトされます。",
+    "enableTitle": "ユーザーを有効化", "enableConfirm": "{email} を有効化しますか?", "disabled": "ユーザーを無効化しました",
+    "enabled": "ユーザーを有効化しました", "created": "ユーザーを作成しました", "passwordReset": "パスワードを再設定しました"
+  },
+  "adminAudit": {
+    "allActions": "すべての操作", "empty": "記録されたアクティビティはありません。", "when": "日時", "actor": "実行者",
+    "action": "操作", "target": "対象", "detail": "詳細", "ip": "IP", "range": "{total} 件中 {from}–{to}"
+  },
+  "auditActions": {
+    "auth.login": "ログイン", "auth.login_failed": "ログイン失敗", "auth.register": "登録",
+    "auth.change_password": "パスワード変更", "auth.password_reset_requested": "パスワード再設定の請求",
+    "auth.password_reset": "パスワード再設定", "user.create": "ユーザー作成", "user.update": "ユーザー更新",
+    "user.reset_password": "ユーザーのパスワード再設定", "project.create": "プロジェクト作成",
+    "project.update": "プロジェクト更新", "project.delete": "プロジェクト削除", "project.import_excel": "Excel インポート",
+    "project.member_invited": "メンバー招待", "project.member_joined": "プロジェクト参加",
+    "project.member_role_changed": "メンバーのロール変更", "project.member_removed": "メンバー除外",
+    "project.invitation_revoked": "招待の取り消し", "project.pm_restored": "権限マトリクスの復元",
+    "conflict.update": "コンフリクト更新", "analysis.run": "分析の実行", "analysis.job_started": "プロジェクト分析の開始"
+  },
+  "notifications": {
+    "title": "通知", "markAllRead": "すべて既読にする", "empty": "通知はまだありません。",
+    "ariaLabel": "通知(未読 {count} 件)",
+    "project": {
+      "member_invited": { "title": "{project} に招待されました", "body": "{actor} があなたを {role} として招待しました。" },
+      "member_joined": { "title": "{member} が {project} に参加しました", "body": "{role} として招待を承諾しました。" },
+      "member_role_changed": { "title": "{project} でのロールが変更されました", "body": "{actor} があなたのロールを {role} に変更しました。" },
+      "member_removed": { "title": "{project} から外されました", "body": "{actor} があなたをプロジェクトから外しました。" }
+    },
+    "conflict": {
+      "assigned": { "title": "{actor} があなたに {conflict_type} を割り当てました", "body": "{project}: {explanation}" },
+      "status_changed": { "title": "{actor} が {conflict_type} を {to} に変更しました", "body": "{project}: {explanation}" },
+      "commented": { "title": "{actor} が {conflict_type} にコメントしました", "body": "{comment}" }
+    },
+    "analysis": {
+      "job_finished": { "title": "{project} の分析が完了しました", "body": "{succeeded}/{total} 件のストーリーを分析 · 未解決のコンフリクト {open_issues} 件" },
+      "job_failed": { "title": "{project} の分析に失敗しました" }
+    }
+  },
+  "enums": {
+    "systemRole": { "admin": "管理者", "user": "ユーザー" },
+    "userStatus": { "active": "有効", "disabled": "無効" },
+    "projectRole": { "owner": "オーナー", "editor": "編集者", "viewer": "閲覧者" },
+    "invitationStatus": { "pending": "保留中", "accepted": "承諾済み", "revoked": "取り消し済み" },
+    "issueStatus": { "open": "未対応", "acknowledged": "確認済み", "resolved": "解決済み", "false_positive": "誤検知" },
+    "jobStatus": { "queued": "待機中", "running": "実行中", "completed": "完了", "failed": "失敗" },
+    "termKind": { "role": "ロール", "resource": "リソース", "action": "アクション" },
+    "effect": { "Allow": "Allow", "Deny": "Deny" },
+    "conflictType": {
+      "Normal": "正常", "Missing Permission": "権限不足", "Action Conflict": "アクションの競合",
+      "Effect Conflict": "効果の競合", "Scope Conflict": "スコープの競合", "Condition Conflict": "条件の競合"
+    }
+  },
+  "errors": {
+    "unknown": "問題が発生しました。もう一度お試しください。",
+    "session_expired": "セッションの有効期限が切れました。再度ログインしてください。",
+    "account_disabled": "このアカウントは無効化されています。",
+    "admin_required": "管理者権限が必要です。",
+    "already_member": "このユーザーはすでにプロジェクトのメンバーです。",
+    "analysis_job_running": "このプロジェクトではすでに分析が実行中です。",
+    "analysis_rejected": "分析サービスが入力を拒否しました。",
+    "analysis_unavailable": "分析サービスを利用できません。しばらくしてからお試しください。",
+    "body_required": "リクエストが空です。",
+    "cannot_change_self": "自分自身のアカウントを降格または無効化することはできません。",
+    "conflict_not_found": "コンフリクトが見つかりません。",
+    "email_taken": "このメールアドレスはすでに登録されています。",
+    "file_empty": "ファイルが空です。",
+    "file_missing": "ファイルを選択してください(最大 10 MB)。",
+    "file_type": ".xlsx ファイルのみ対応しています。",
+    "internal_error": "サーバーエラーです。しばらくしてからお試しください。",
+    "invalid_assignee": "担当者はこのプロジェクトのオーナーまたは編集者である必要があります。",
+    "invalid_bio": "自己紹介は {max} 文字以内で入力してください。",
+    "invalid_comment": "コメントは 1〜5000 文字で入力してください。",
+    "invalid_credentials": "メールアドレスまたはパスワードが正しくありません。",
+    "invalid_effect": "効果は Allow または Deny である必要があります。",
+    "invalid_email": "メールアドレスが無効です。",
+    "invalid_excel": "Excel ファイルを読み込めませんでした。",
+    "invalid_full_name": "氏名は {max} 文字以内で入力してください。",
+    "invalid_issue_status": "コンフリクトのステータスが無効です。",
+    "invalid_job_title": "役職は {max} 文字以内で入力してください。",
+    "invalid_json": "リクエストの形式が正しくありません。",
+    "invalid_locale": "サポートされていない言語です。",
+    "invalid_organization": "所属組織は {max} 文字以内で入力してください。",
+    "invalid_param": "パラメーターが無効です。",
+    "invalid_phone": "電話番号が無効です。",
+    "invalid_project_name": "プロジェクト名は 1〜255 文字で入力してください。",
+    "invalid_project_role": "ロールはオーナー、編集者、閲覧者のいずれかである必要があります。",
+    "invalid_run_ids": "比較する実行を2つ選択してください。",
+    "invalid_status_filter": "ステータスフィルターが無効です。",
+    "invalid_system_role": "ロールは管理者またはユーザーである必要があります。",
+    "invalid_term_kind": "種類はロール、リソース、アクションのいずれかである必要があります。",
+    "invalid_theme": "サポートされていないテーマです。",
+    "invalid_token": "セッションが無効か、有効期限が切れています。",
+    "invalid_transition": "コンフリクトを {from} から {to} に変更することはできません。",
+    "invalid_user_status": "ステータスは有効または無効である必要があります。",
+    "invalid_version_ids": "選択されたバージョンが無効です。",
+    "invitation_expired": "この招待は有効期限が切れています。",
+    "invitation_not_found": "招待が見つかりません。",
+    "invitation_not_pending": "この招待はすでに無効です。",
+    "invitation_wrong_email": "この招待は別のメールアドレス宛てに送信されています。",
+    "job_not_found": "分析ジョブが見つかりません。",
+    "last_admin": "最後の有効な管理者を外すことはできません。",
+    "last_owner": "プロジェクトには少なくとも1人のオーナーが必要です。",
+    "member_not_found": "メンバーが見つかりません。",
+    "not_authenticated": "ログインしてください。",
+    "not_found": "見つかりません。",
+    "notification_not_found": "通知が見つかりません。",
+    "password_length": "パスワードは {min}〜{max} 文字で入力してください。",
+    "password_unchanged": "新しいパスワードは現在のパスワードと異なる必要があります。",
+    "pm_fields_required": "ロール、アクション、リソースは必須です。",
+    "pm_row_not_found": "権限行が見つかりません。",
+    "project_forbidden": "このプロジェクトでこの操作を行う権限がありません。",
+    "project_no_pm": "プロジェクトに権限マトリクスの行がありません。",
+    "project_no_stories": "プロジェクトにユーザーストーリーがありません。",
+    "project_not_found": "プロジェクトが見つかりません。",
+    "reset_link_invalid": "この再設定リンクは無効か、有効期限が切れています。",
+    "run_not_found": "実行が見つかりません。",
+    "signup_disabled": "セルフ登録は無効になっています。管理者にお問い合わせください。",
+    "story_content_required": "ユーザーストーリーの内容は必須です。",
+    "story_not_found": "ユーザーストーリーが見つかりません。",
+    "term_canonical_required": "正式名称は必須です。",
+    "term_exists": "この用語はすでに辞書に登録されています。",
+    "term_not_found": "用語が見つかりません。",
+    "too_many_login_attempts": "ログインの失敗が多すぎます。しばらくしてからお試しください。",
+    "user_not_found": "ユーザーが見つかりません。",
+    "version_not_found": "バージョンが見つかりません。",
+    "wrong_current_password": "現在のパスワードが正しくありません。"
+  }
+}

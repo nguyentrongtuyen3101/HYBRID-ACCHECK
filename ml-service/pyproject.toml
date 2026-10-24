@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "accheck-ml"
+version = "0.2.0"
+description = "ReqSentinel ML service: Hybrid-ACCheck pipeline (DeBERTa + SBERT + symbolic reasoner)"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.34",
+  "pydantic>=2.10",
+  "pydantic-settings>=2.7",
+  "loguru>=0.7",
+  "numpy>=1.26",
+  "networkx>=3.3",
+  "torch>=2.1",
+  "transformers>=4.45",
+  "sentence-transformers>=3.3",
+  "sentencepiece",
+  "protobuf",
+]
+
+[project.optional-dependencies]
+# Chỉ cần khi train / đánh giá model, không cài vào image serving
+train = [
+  "datasets>=2.20",
+  "evaluate>=0.4",
+  "seqeval>=1.2",
+  "accelerate>=0.30",
+  "scikit-learn>=1.5",
+]
+dev = [
+  "pytest>=8.3",
+  "pytest-asyncio>=0.25",
+  "httpx>=0.28",
+  "ruff>=0.8",
+]
+
+[project.scripts]
+accheck-ml-serve = "accheck_ml.server:main"
+accheck-ml-labels = "accheck_ml.training.generate_bio_labels:main"
+accheck-ml-train = "accheck_ml.training.train_deberta_extractor:main"
+accheck-ml-eval = "accheck_ml.training.evaluate_dataset:main"
+
+[tool.setuptools.packages.find]
+include = ["accheck_ml*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

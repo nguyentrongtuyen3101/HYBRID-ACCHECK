@@ -1,0 +1,379 @@
+/* Bổ sung cho các màn hình mới. app.css giữ nguyên bản gốc (= theme sáng).
+   Màu dùng biến để theme-dark.css ghi đè. */
+:root {
+  --surface: #fff;        /* nền ô nhập, nút, menu */
+  --hover: #f7f7f7;
+  --selected: #f0f0f0;
+  --divider: #e5e5e5;
+  --overlay: rgba(0, 0, 0, 0.35);
+  --on-ink: #fff;         /* chữ trên nền --ink */
+  --warn: #b45309;
+  --warn-bg: #fef6e6;
+  --admin-bg: #fff4e5;
+  --disabled: #777;
+  --disabled-bg: #f1f1f1;
+  --unread-bg: #f6f8ff;
+  --neutral-border: #ccc;
+}
+
+/* Modal dùng chung — cùng style với #modal-us / #modal-pm trong app.css */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fade-in 0.15s ease;
+}
+
+/* ---------- Header: chuông + menu tài khoản ---------- */
+.b-admin { background: var(--admin-bg); color: var(--warn); }
+.b-user { background: var(--paper); color: var(--ink-soft); }
+.b-disabled { background: var(--disabled-bg); color: var(--disabled); }
+
+.account { position: relative; }
+.account-btn {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+.account-btn:hover,
+.account-btn.active { box-shadow: 2px 2px 0 0 var(--ink-soft); }
+.account-alert {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--err);
+  border: 2px solid var(--card);
+}
+.account-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 0 var(--ink);
+  z-index: 50;
+  animation: menu-in 0.12s ease;
+  overflow: hidden;
+}
+.account-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-bottom: 1.5px solid var(--ink);
+}
+.account-avatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--paper);
+  color: var(--ink);
+}
+.account-id { min-width: 0; flex: 1; }
+.account-name { font-weight: 700; font-size: 13px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-email { font-size: 11.5px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.account-item {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid var(--divider);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+}
+.account-item:hover { background: var(--hover); }
+.account-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 13px;
+  color: var(--text);
+}
+.segmented-sm button { padding: 3px 10px; font-size: 12px; }
+.account-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--divider);
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+.status-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--muted); }
+.account-status.ok .status-dot { background: var(--ok); }
+.account-status.degraded .status-dot,
+.account-status.offline .status-dot { background: var(--err); }
+.account-status .muted { margin-left: auto; }
+.account-logout { border-bottom: none; color: var(--err); font-weight: 600; }
+
+@media (max-width: 860px) {
+  .app-header-inner { width: 100%; height: auto; padding: 8px 12px; flex-wrap: wrap; }
+}
+
+/* ---------- Login ---------- */
+.auth-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--paper);
+}
+.auth-card { width: 100%; max-width: 400px; }
+.auth-card .brand { cursor: default; margin-bottom: 18px; }
+
+/* ---------- Admin ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.stat .stat-value { font-size: 24px; font-weight: 700; color: var(--ink); }
+.stat .stat-label { font-size: 12px; color: var(--muted); }
+.bar-row { display: grid; grid-template-columns: 150px 1fr 48px; gap: 8px; align-items: center; font-size: 12px; }
+.bar-track { height: 10px; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.bar-fill { height: 100%; background: var(--ink); }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.toolbar .field { width: auto; min-width: 160px; }
+.pager { display: flex; gap: 8px; align-items: center; justify-content: flex-end; margin-top: 10px; }
+.table-scroll { overflow-x: auto; }
+.mono-sm { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: var(--muted); }
+
+/* ---------- Thông báo ---------- */
+.bell { position: relative; }
+.bell-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 1px 1px 0 0 var(--ink);
+}
+.bell-count {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--err);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+.bell-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  max-height: 440px;
+  overflow-y: auto;
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 0 var(--ink);
+  z-index: 50;
+}
+.bell-head { padding: 10px 12px; border-bottom: 1.5px solid var(--ink); }
+.bell-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid var(--divider);
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.bell-item:hover { background: var(--paper); }
+.bell-item.unread { background: var(--unread-bg); box-shadow: inset 3px 0 0 var(--ink); }
+.bell-title { font-weight: 600; font-size: 13px; }
+.bell-body { font-size: 12px; color: var(--ink-soft); }
+.bell-time { font-size: 11px; color: var(--muted); }
+.link-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* ---------- Project ---------- */
+.tabs-scroll { flex-wrap: wrap; }
+.tab-count {
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--err);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+}
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+.progress { height: 12px; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; background: var(--surface); }
+.progress-fill { height: 100%; background: var(--ink); transition: width 0.3s ease; }
+.table tr.clickable { cursor: pointer; }
+.drawer { max-width: 640px; width: 100%; max-height: calc(100vh - 32px); overflow-y: auto; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 2px solid var(--ink); }
+.timeline li { position: relative; padding: 0 0 12px 8px; font-size: 13px; }
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -21px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+}
+.timeline li.timeline-comment::before { background: var(--ink); }
+.timeline-body {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  white-space: pre-wrap;
+}
+.chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-size: 12px;
+  background: var(--surface);
+}
+.diff-row { padding: 6px 10px; border-left: 4px solid var(--neutral-border); background: var(--paper); font-size: 13px; }
+.diff-add { border-left-color: var(--ok); background: var(--ok-bg); }
+.diff-del { border-left-color: var(--err); background: var(--err-bg); }
+.diff-chg { border-left-color: var(--warn); background: var(--warn-bg); }
+.table.coverage th:first-child { white-space: nowrap; }
+.table.coverage td { text-align: center; font-weight: 600; min-width: 64px; }
+.cov-full { background: var(--ok-bg); color: var(--ok); }
+.cov-partial { background: var(--warn-bg); color: var(--warn); }
+.cov-unused { background: var(--err-bg); color: var(--err); }
+.cov-deny { background: var(--disabled-bg); color: var(--disabled); }
+.cov-empty { background: var(--surface); }
+.legend { display: inline-block; width: 12px; height: 12px; border: 1.5px solid var(--ink); border-radius: 3px; margin-left: 8px; }
+
+/* ---------- Dropdown (CustomSelect) ---------- */
+.custom-select-floating { position: fixed; height: 0; z-index: 9600; }
+.custom-select.is-disabled .custom-select-trigger { opacity: 0.55; cursor: not-allowed; }
+.toolbar .custom-select { width: auto; min-width: 170px; }
+.table .custom-select { min-width: 130px; }
+
+/* ---------- Thanh công cụ header ---------- */
+.header-tools { display: flex; align-items: center; gap: 6px; }
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 1px 1px 0 0 var(--ink);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+}
+.lang-switch .custom-select { width: 74px; }
+.lang-switch .custom-select-trigger { padding: 6px 26px 6px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+
+/* ---------- Profile ---------- */
+.profile-grid { display: grid; grid-template-columns: 260px 1fr; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .profile-grid { grid-template-columns: 1fr; } }
+.avatar {
+  width: 72px;
+  height: 72px;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+.segmented { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 999px; overflow: hidden; }
+.segmented button {
+  border: none;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 6px 14px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.segmented button + button { border-left: 1.5px solid var(--ink); }
+.segmented button.active { background: var(--ink); color: var(--on-ink); font-weight: 600; }
+.char-count { text-align: right; font-size: 11px; color: var(--muted); }
+
+/* ---------- Bản dịch dài hơn (vi/ja): menu header không xuống dòng ---------- */
+.nav button { white-space: nowrap; }
+.app-header .brand-title { white-space: nowrap; }
+
+/* textarea/input mặc định của trình duyệt không kế thừa font */
+.field { font-family: inherit; }

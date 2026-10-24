@@ -1,0 +1,21 @@
+# Bí mật
+.env
+
+# Binary build ra
+/server
+/reqsentinel-api
+*.exe
+*.test
+coverage.out
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

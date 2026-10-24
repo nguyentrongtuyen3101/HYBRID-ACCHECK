@@ -1,0 +1,22 @@
+.venv/
+venv/
+env/
+.env
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Data train không cần trong image serving; data/models (checkpoint) vẫn được copy
+data/raw/
+data/processed/
+
+.vscode/
+.idea/
+tests/
+*.md
