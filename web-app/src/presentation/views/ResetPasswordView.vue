@@ -52,7 +52,7 @@ async function submit() {
         <label class="label" for="confirm-password">{{ t("auth.confirmPassword") }}</label>
         <input id="confirm-password" v-model="confirm" class="field" type="password" autocomplete="new-password" required />
       </div>
-      <button type="submit" class="btn btn-primary" :disabled="busy">{{ t("auth.changePassword") }}</button>
+      <button type="submit" class="btn btn-primary btn-arrow" :disabled="busy">{{ t("auth.changePassword") }}</button>
     </form>
     <div v-if="error" class="alert alert-error mt-3">{{ error }}</div>
     <RouterLink v-if="!done" class="muted mt-3" style="display: block" to="/forgot-password">{{ t("auth.requestNewLink") }}</RouterLink>

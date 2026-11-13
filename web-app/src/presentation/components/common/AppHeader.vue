@@ -5,8 +5,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useContainer } from "../../../application/container.js";
 import NotificationBell from "./NotificationBell.vue";
 import UserMenu from "./UserMenu.vue";
+import BrandLogo from "./BrandLogo.vue";
 
-const LOGO = "https://i.pinimg.com/736x/1b/67/57/1b67571055528fcd7a09ade1f3a03c1c.jpg";
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -24,10 +24,7 @@ const active = computed(() => {
   <header class="app-header">
     <div class="app-header-inner">
       <div class="brand" @click="router.push('/')">
-        <div class="brand-mark">
-          <img class="brand-logo" :src="LOGO" alt="Logo" />
-        </div>
-        <div class="brand-title">{{ t("app.name") }}</div>
+        <BrandLogo />
       </div>
       <nav class="nav">
         <button type="button" :class="{ active: active === 'projects' }" @click="router.push('/')">{{ t("nav.projects") }}</button>

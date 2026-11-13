@@ -183,7 +183,7 @@ onMounted(loadVersions);
     <div class="card">
       <div class="row-between mb-3">
         <div>
-          <h2 style="margin: 0">{{ t("versions.title") }}</h2>
+          <h2>{{ t("versions.title") }}</h2>
           <p class="muted">{{ t("versions.hint") }}</p>
         </div>
         <div v-if="canEdit" class="toolbar">

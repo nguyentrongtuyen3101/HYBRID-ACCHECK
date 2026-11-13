@@ -7,6 +7,7 @@ import { initialsOf } from "../../domain/format.js";
 import { useErrorText, useFormat } from "../composables/i18n.js";
 import { showToast } from "../composables/ui.js";
 import CustomSelect from "../components/common/CustomSelect.vue";
+import PageHeader from "../components/common/PageHeader.vue";
 
 const BIO_MAX = 1000;
 const { t } = useI18n();
@@ -65,16 +66,13 @@ async function changePassword() {
 
 <template>
   <section v-if="user">
-    <div class="mb-3">
-      <h1>{{ t("profile.title") }}</h1>
-      <p class="muted">{{ t("profile.subtitle") }}</p>
-    </div>
+    <PageHeader :eyebrow="t('page.profile.eyebrow')" :title="t('page.profile.title')" :dim="t('page.profile.dim')" :subtitle="t('profile.subtitle')" />
 
     <div class="profile-grid">
       <div class="card stack" style="align-items: center; text-align: center">
         <div class="avatar">{{ initials }}</div>
         <div>
-          <h2 style="margin: 0">{{ user.full_name || user.email }}</h2>
+          <h2>{{ user.full_name || user.email }}</h2>
           <div class="muted">{{ user.job_title || "" }}<template v-if="user.job_title && user.organization"> · </template>{{ user.organization || "" }}</div>
         </div>
         <span class="badge" :class="user.role === 'admin' ? 'b-admin' : 'b-user'">{{ t(`enums.systemRole.${user.role}`) }}</span>

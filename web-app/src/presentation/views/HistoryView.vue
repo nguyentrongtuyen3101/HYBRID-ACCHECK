@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { useContainer } from "../../application/container.js";
 import { useEnumLabel, useErrorText, useFormat } from "../composables/i18n.js";
+import PageHeader from "../components/common/PageHeader.vue";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -25,8 +26,7 @@ onMounted(async () => {
 
 <template>
   <section>
-    <h1 class="mb-3">{{ t("history.title") }}</h1>
-    <p class="muted mb-3">{{ t("history.subtitle") }}</p>
+    <PageHeader :eyebrow="t('page.history.eyebrow')" :title="t('page.history.title')" :dim="t('page.history.dim')" :subtitle="t('history.subtitle')" />
     <div class="card">
       <div v-if="error" class="alert alert-error">{{ error }}</div>
       <div v-else-if="items === null" class="empty">{{ t("common.loading") }}</div>

@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import AdminOverview from "../components/admin/AdminOverview.vue";
 import AdminUsers from "../components/admin/AdminUsers.vue";
 import AdminAudit from "../components/admin/AdminAudit.vue";
+import PageHeader from "../components/common/PageHeader.vue";
 
 const { t } = useI18n();
 const tab = ref("overview");
@@ -12,12 +13,7 @@ const tabs = ["overview", "users", "audit"];
 
 <template>
   <section>
-    <div class="row-between mb-3">
-      <div>
-        <h1>{{ t("admin.title") }}</h1>
-        <p class="muted">{{ t("admin.subtitle") }}</p>
-      </div>
-    </div>
+    <PageHeader :eyebrow="t('page.admin.eyebrow')" :title="t('page.admin.title')" :dim="t('page.admin.dim')" :subtitle="t('admin.subtitle')" />
     <div class="tabs">
       <button v-for="key in tabs" :key="key" type="button" :class="{ active: tab === key }" @click="tab = key">
         {{ t(`admin.tabs.${key}`) }}

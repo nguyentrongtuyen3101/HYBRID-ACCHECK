@@ -62,7 +62,7 @@ onMounted(async () => {
   <div v-if="!stats" class="empty">{{ t("common.loading") }}</div>
   <div v-else>
     <div class="stat-grid mb-3">
-      <div v-for="[name, value, sub] in cards" :key="name" class="card stat">
+      <div v-for="([name, value, sub], i) in cards" :key="name" class="card stat" :class="{ 'stat-accent': i === 4 }">
         <div class="stat-label">{{ name }}</div>
         <div class="stat-value">{{ value }}</div>
         <div class="muted">{{ sub }}</div>
@@ -81,7 +81,7 @@ onMounted(async () => {
     <div class="card">
       <div class="row-between mb-3">
         <div>
-          <h2 style="margin: 0">{{ t("adminOverview.feedbackTitle") }}</h2>
+          <h2>{{ t("adminOverview.feedbackTitle") }}</h2>
           <p class="muted">{{ t("adminOverview.feedbackHint") }}</p>
         </div>
         <button type="button" class="btn btn-primary btn-sm" :disabled="exporting" @click="exportDataset">

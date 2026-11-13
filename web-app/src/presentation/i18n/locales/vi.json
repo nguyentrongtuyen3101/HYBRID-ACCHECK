@@ -7,6 +7,7 @@
     "saving": "Đang lưu…", "view": "Xem", "you": "(bạn)"
   },
   "nav": { "projects": "Dự án", "history": "Lịch sử", "admin": "Quản trị" },
+  "page": {"projects": {"eyebrow": "Không gian làm việc", "title": "Dự án", "dim": "Của bạn"}, "history": {"eyebrow": "Phân tích", "title": "Lịch sử", "dim": "Các lần chạy"}, "run": {"title": "Chi tiết", "dim": "Lần chạy"}, "profile": {"eyebrow": "Tài khoản", "title": "Hồ sơ", "dim": "Cá nhân"}, "admin": {"eyebrow": "Chỉ dành cho admin", "title": "Quản trị", "dim": "Hệ thống"}},
   "header": {
     "accountMenu": "Menu tài khoản", "statusOk": "Hệ thống hoạt động bình thường",
     "mlOfflineHint": "Dịch vụ phân tích không khả dụng",
@@ -18,6 +19,7 @@
     "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
   },
   "auth": {
+    "hero": {"lead": "Phát hiện xung đột giữa user story và ma trận phân quyền ngay từ khâu đặc tả, trước khi chúng trở thành lỗ hổng.", "conflictTypes": "Loại xung đột", "steps": "Bước phân tích", "languages": "Ngôn ngữ"},
     "signIn": "Đăng nhập", "createAccount": "Tạo tài khoản", "email": "Email", "password": "Mật khẩu",
     "fullName": "Họ và tên", "passwordHint": "Mật khẩu (tối thiểu 8 ký tự)", "forgotLink": "Quên mật khẩu?",
     "forgotTitle": "Quên mật khẩu", "forgotIntro": "Nhập email tài khoản, chúng tôi sẽ gửi liên kết đặt lại mật khẩu.",
@@ -43,6 +45,7 @@
     "viewer": "Xem kết quả và bình luận"
   },
   "projects": {
+    "fig": {"stories": "User story", "rows": "Dòng PM", "runs": "Lần chạy", "open": "Xung đột mở"},
     "title": "Dự án", "subtitle": "Quản lý dự án yêu cầu, ma trận phân quyền và các lần phân tích.",
     "createTitle": "Tạo dự án", "name": "Tên", "namePlaceholder": "VD: ACL thương mại điện tử",
     "description": "Mô tả (không bắt buộc)", "descriptionPlaceholder": "Mô tả ngắn",
@@ -97,6 +100,7 @@
     "suggestionsHint": "Các giá trị dùng trong ma trận phân quyền nhưng chưa có mục từ điển.", "quickAdd": "+ thêm"
   },
   "check": {
+    "stepsTitle": "Quy trình phân tích", "steps": {"extract": {"title": "Trích xuất", "body": "DeBERTa đọc user story và AC, lấy ra vai trò, hành động, tài nguyên, phạm vi, điều kiện."}, "normalize": {"title": "Chuẩn hóa", "body": "Từ điển và SBERT đưa các cách gọi khác nhau về cùng một tên chuẩn."}, "align": {"title": "Căn chỉnh", "body": "Ghép từng yêu cầu với dòng ma trận phân quyền gần nghĩa nhất."}, "reason": {"title": "Suy luận", "body": "Bộ luật phân loại 5 loại xung đột, kèm giải thích và bằng chứng."}},
     "projectTitle": "Phân tích toàn bộ dự án",
     "projectHint": "Chạy nền mọi user story và cập nhật bảng xung đột.",
     "analyzeAll": "Phân tích tất cả user story", "waiting": "Đang chờ worker…", "analyzing": "Đang phân tích…",

@@ -59,7 +59,7 @@ async function exportExcel() {
   <div v-else>
     <div class="row-between mb-3">
       <p class="muted">{{ t("report.basedOn", { date: dateTime(report.generated_at) }) }}</p>
-      <button type="button" class="btn btn-primary btn-sm" :disabled="exporting" @click="exportExcel">
+      <button type="button" class="btn btn-primary btn-sm btn-arrow" :disabled="exporting" @click="exportExcel">
         {{ exporting ? t("report.exporting") : t("report.export") }}
       </button>
     </div>
@@ -69,7 +69,7 @@ async function exportExcel() {
         <div class="stat-label">{{ t("report.storiesAnalyzed") }}</div>
         <div class="stat-value">{{ report.stories_analyzed }}/{{ report.stories_total }}</div>
       </div>
-      <div class="card stat">
+      <div class="card stat stat-accent">
         <div class="stat-label">{{ t("report.consistency") }}</div>
         <div class="stat-value">{{ percent(report.consistency_rate) }}</div>
         <div class="muted">{{ t("report.consistentStories", { count: report.stories_consistent }) }}</div>

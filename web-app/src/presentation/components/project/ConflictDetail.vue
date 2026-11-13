@@ -98,7 +98,7 @@ onMounted(load);
   <div class="modal-backdrop" role="dialog" aria-modal="true" @click.self="emit('close')">
     <div class="modal drawer">
       <div class="row-between mb-3">
-        <h3 style="margin: 0">{{ t("conflictDetail.title") }}</h3>
+        <h3>{{ t("conflictDetail.title") }}</h3>
         <button type="button" class="btn btn-secondary btn-sm" @click="emit('close')">{{ t("common.close") }}</button>
       </div>
       <div v-if="error" class="alert alert-error">{{ error }}</div>

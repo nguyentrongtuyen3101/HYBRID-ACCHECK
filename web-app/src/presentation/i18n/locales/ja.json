@@ -7,6 +7,7 @@
     "saving": "保存中…", "view": "表示", "you": "(あなた)"
   },
   "nav": { "projects": "プロジェクト", "history": "履歴", "admin": "管理" },
+  "page": {"projects": {"eyebrow": "ワークスペース", "title": "プロジェクト", "dim": "一覧"}, "history": {"eyebrow": "分析", "title": "履歴", "dim": "実行一覧"}, "run": {"title": "実行", "dim": "詳細"}, "profile": {"eyebrow": "アカウント", "title": "プロフィール", "dim": "設定"}, "admin": {"eyebrow": "管理者専用", "title": "管理", "dim": "コンソール"}},
   "header": {
     "accountMenu": "アカウントメニュー", "statusOk": "システムは正常に稼働中",
     "mlOfflineHint": "分析サービスを利用できません",
@@ -18,6 +19,7 @@
     "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
   },
   "auth": {
+    "hero": {"lead": "ユーザーストーリーと権限マトリクスの矛盾を、脆弱性になる前の仕様段階で検出します。", "conflictTypes": "コンフリクトの種類", "steps": "分析ステップ", "languages": "対応言語"},
     "signIn": "ログイン", "createAccount": "アカウント作成", "email": "メールアドレス", "password": "パスワード",
     "fullName": "氏名", "passwordHint": "パスワード(8文字以上)", "forgotLink": "パスワードをお忘れですか?",
     "forgotTitle": "パスワードの再設定", "forgotIntro": "アカウントのメールアドレスを入力すると、再設定用のリンクをお送りします。",
@@ -43,6 +45,7 @@
     "viewer": "結果の閲覧とコメント"
   },
   "projects": {
+    "fig": {"stories": "ストーリー", "rows": "PM 行", "runs": "実行", "open": "未解決"},
     "title": "プロジェクト", "subtitle": "要件プロジェクト、権限マトリクス、分析実行を管理します。",
     "createTitle": "プロジェクトを作成", "name": "名前", "namePlaceholder": "例:EC サイト ACL",
     "description": "説明(任意)", "descriptionPlaceholder": "短い説明",
@@ -97,6 +100,7 @@
     "suggestionsHint": "権限マトリクスで使われているが辞書に登録されていない値です。", "quickAdd": "+ 追加"
   },
   "check": {
+    "stepsTitle": "分析の流れ", "steps": {"extract": {"title": "抽出", "body": "DeBERTa がストーリーと受け入れ基準からロール、アクション、リソース、スコープ、条件を抽出します。"}, "normalize": {"title": "正規化", "body": "辞書と SBERT で表記ゆれを正式名称にそろえます。"}, "align": {"title": "照合", "body": "各要件を最も近い権限マトリクスの行と対応づけます。"}, "reason": {"title": "推論", "body": "ルールで 5 種類のコンフリクトを分類し、説明と根拠を示します。"}},
     "projectTitle": "プロジェクト全体を分析",
     "projectHint": "すべてのユーザーストーリーをバックグラウンドで分析し、コンフリクトボードを更新します。",
     "analyzeAll": "すべてのストーリーを分析", "waiting": "ワーカーを待機中…", "analyzing": "分析中…",

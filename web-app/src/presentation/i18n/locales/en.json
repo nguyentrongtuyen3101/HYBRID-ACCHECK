@@ -7,6 +7,7 @@
     "saving": "Saving…", "view": "View", "you": "(you)"
   },
   "nav": { "projects": "Projects", "history": "History", "admin": "Admin" },
+  "page": {"projects": {"eyebrow": "Your work", "title": "Projects", "dim": "Workspace"}, "history": {"eyebrow": "Analysis", "title": "History", "dim": "All runs"}, "run": {"title": "Run", "dim": "Details"}, "profile": {"eyebrow": "Account", "title": "Profile", "dim": "Settings"}, "admin": {"eyebrow": "Admins only", "title": "Admin", "dim": "Console"}},
   "header": {
     "accountMenu": "Account menu", "statusOk": "All systems operational",
     "mlOfflineHint": "Analysis service is unavailable",
@@ -18,6 +19,7 @@
     "full": { "vi": "Tiếng Việt", "en": "English", "ja": "日本語" }
   },
   "auth": {
+    "hero": {"lead": "Catch conflicts between user stories and the permission matrix at the specification stage, before they turn into security holes.", "conflictTypes": "Conflict types", "steps": "Analysis steps", "languages": "Languages"},
     "signIn": "Sign in", "createAccount": "Create account", "email": "Email", "password": "Password",
     "fullName": "Full name", "passwordHint": "Password (min 8 characters)", "forgotLink": "Forgot password?",
     "forgotTitle": "Forgot password", "forgotIntro": "Enter your account email and we'll send you a reset link.",
@@ -43,6 +45,7 @@
     "viewer": "Read results and comment"
   },
   "projects": {
+    "fig": {"stories": "Stories", "rows": "PM rows", "runs": "Runs", "open": "Open"},
     "title": "Projects", "subtitle": "Manage requirements projects, permission matrices, and analysis runs.",
     "createTitle": "Create project", "name": "Name", "namePlaceholder": "e.g. E-commerce ACL",
     "description": "Description (optional)", "descriptionPlaceholder": "Short description",
@@ -97,6 +100,7 @@
     "suggestionsHint": "Values used in the permission matrix that have no dictionary entry.", "quickAdd": "+ add"
   },
   "check": {
+    "stepsTitle": "How analysis works", "steps": {"extract": {"title": "Extract", "body": "DeBERTa reads the story and its AC to pull out role, action, resource, scope and condition."}, "normalize": {"title": "Normalize", "body": "The dictionary and SBERT map different wordings to one canonical name."}, "align": {"title": "Align", "body": "Each requirement is matched with the closest permission matrix row."}, "reason": {"title": "Reason", "body": "Rules classify five conflict types, with an explanation and evidence."}},
     "projectTitle": "Analyze the whole project",
     "projectHint": "Runs every user story in the background and updates the conflict board.",
     "analyzeAll": "Analyze all stories", "waiting": "Waiting for a worker…", "analyzing": "Analyzing…",

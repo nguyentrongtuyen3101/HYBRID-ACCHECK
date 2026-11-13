@@ -78,7 +78,7 @@ onMounted(load);
   <div class="card">
     <div class="row-between mb-3">
       <div>
-        <h2 style="margin: 0">{{ t("conflicts.title") }}</h2>
+        <h2>{{ t("conflicts.title") }}</h2>
         <p class="muted">{{ t("conflicts.hint") }}</p>
       </div>
       <div class="toolbar">

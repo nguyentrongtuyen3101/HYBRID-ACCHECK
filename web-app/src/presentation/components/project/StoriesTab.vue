@@ -86,7 +86,7 @@ async function importExcel(event) {
   <div>
     <div class="card">
       <div class="row-between mb-3">
-        <h2 style="margin: 0">{{ t("stories.title") }}</h2>
+        <h2>{{ t("stories.title") }}</h2>
         <div class="row">
           <a class="btn btn-secondary btn-sm btn-download-excel" :href="reqs.templateUrl" download="reqsentinel_import_template.xlsx">
             <svg class="icon-download" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

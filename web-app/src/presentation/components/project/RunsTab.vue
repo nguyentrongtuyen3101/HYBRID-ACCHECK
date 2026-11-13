@@ -54,7 +54,7 @@ const groups = [
 <template>
   <div class="card">
     <div class="row-between mb-3">
-      <h2 style="margin: 0">{{ t("runs.title") }}</h2>
+      <h2>{{ t("runs.title") }}</h2>
       <button type="button" class="btn btn-secondary btn-sm" :disabled="selected.length !== 2" @click="compare">
         {{ t("runs.compareSelected", { count: selected.length }) }}
       </button>

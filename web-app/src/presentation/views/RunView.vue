@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import { useContainer } from "../../application/container.js";
 import { CONFLICT_BADGES } from "../../domain/conflicts.js";
 import { useEnumLabel, useErrorText, useFormat } from "../composables/i18n.js";
+import PageHeader from "../components/common/PageHeader.vue";
 
 const props = defineProps({ id: { type: String, required: true } });
 const { t } = useI18n();
@@ -32,8 +33,11 @@ onMounted(async () => {
 
 <template>
   <section>
-    <button type="button" class="btn btn-secondary btn-sm mb-3" @click="back">{{ t("common.back") }}</button>
-    <h1 class="mb-3">{{ t("run.title") }}</h1>
+    <PageHeader :title="t('page.run.title')" :dim="t('page.run.dim')">
+      <template #meta>
+        <button type="button" class="eyebrow" @click="back">{{ t("common.back") }}</button>
+      </template>
+    </PageHeader>
     <div class="card">
       <div v-if="error" class="alert alert-error">{{ error }}</div>
       <div v-else-if="!run" class="empty">{{ t("common.loading") }}</div>

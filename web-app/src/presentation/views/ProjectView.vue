@@ -15,6 +15,7 @@ import RunsTab from "../components/project/RunsTab.vue";
 import ReportTab from "../components/project/ReportTab.vue";
 import MembersTab from "../components/project/MembersTab.vue";
 import SettingsTab from "../components/project/SettingsTab.vue";
+import PageHeader from "../components/common/PageHeader.vue";
 
 const props = defineProps({ id: { type: String, required: true } });
 const { t } = useI18n();
@@ -84,19 +85,15 @@ onMounted(refresh);
 
 <template>
   <section>
-    <div class="row-between mb-3">
-      <div>
-        <button type="button" class="btn btn-secondary btn-sm" @click="router.push('/')">{{ t("project.backToProjects") }}</button>
-        <h1 class="mt-2">
-          {{ detail?.project.name || t("project.fallbackTitle") }}
-          <span v-if="detail" class="badge b-user" style="margin-left: 6px; vertical-align: middle">{{ label("projectRole", role) }}</span>
-        </h1>
-        <p class="muted">{{ detail?.project.description || "" }}</p>
-      </div>
-      <button v-if="can(role, Permission.ManageProject)" type="button" class="btn btn-danger" @click="deleteProject">
+    <PageHeader :title="detail?.project.name || t('project.fallbackTitle')" :subtitle="detail?.project.description || ''">
+      <template #meta>
+        <button type="button" class="eyebrow" @click="router.push('/')">{{ t("project.backToProjects") }}</button>
+        <span v-if="detail" class="badge" :class="role === 'owner' ? 'b-missing' : 'b-user'">{{ label("projectRole", role) }}</span>
+      </template>
+      <button v-if="can(role, Permission.ManageProject)" type="button" class="btn btn-danger btn-sm" @click="deleteProject">
         {{ t("project.deleteButton") }}
       </button>
-    </div>
+    </PageHeader>
 
     <div v-if="error" class="alert alert-error">{{ error }}</div>
     <div v-else-if="!detail" class="empty">{{ t("common.loading") }}</div>

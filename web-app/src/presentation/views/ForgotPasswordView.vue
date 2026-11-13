@@ -37,7 +37,7 @@ async function submit() {
         <label class="label" for="forgot-email">{{ t("auth.email") }}</label>
         <input id="forgot-email" v-model="email" class="field" type="email" autocomplete="username" required />
       </div>
-      <button type="submit" class="btn btn-primary" :disabled="busy">{{ t("auth.sendLink") }}</button>
+      <button type="submit" class="btn btn-primary btn-arrow" :disabled="busy">{{ t("auth.sendLink") }}</button>
     </form>
     <div v-if="error" class="alert alert-error mt-3">{{ error }}</div>
     <RouterLink class="muted mt-3" style="display: block" to="/login">{{ t("auth.backToSignIn") }}</RouterLink>

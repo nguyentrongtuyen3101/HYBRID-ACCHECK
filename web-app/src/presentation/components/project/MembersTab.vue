@@ -141,7 +141,7 @@ onMounted(loadInvitations);
       <form class="toolbar mb-3" @submit.prevent="invite">
         <input v-model="form.email" class="field" style="flex: 1" type="email" :placeholder="t('members.emailPlaceholder')" required />
         <CustomSelect v-model="form.role" :options="roleOptions" :aria-label="t('members.role')" />
-        <button type="submit" class="btn btn-primary btn-sm" :disabled="inviting">
+        <button type="submit" class="btn btn-primary btn-sm btn-arrow" :disabled="inviting">
           {{ inviting ? t("members.sending") : t("members.send") }}
         </button>
       </form>

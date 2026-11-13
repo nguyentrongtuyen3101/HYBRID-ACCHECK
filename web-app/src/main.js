@@ -3,9 +3,8 @@ import App from "./App.vue";
 import { CONTAINER_KEY, createContainer } from "./application/container.js";
 import { createAppI18n } from "./presentation/i18n/index.js";
 import { createAppRouter } from "./router.js";
-import "./assets/app.css";
-import "./assets/extra.css";
-import "./assets/theme-dark.css";
+import "./assets/tokens.css";
+import "./assets/ui.css";
 
 // Composition root: nối infrastructure + application + presentation.
 const i18n = createAppI18n("en");

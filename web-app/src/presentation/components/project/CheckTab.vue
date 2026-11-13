@@ -60,6 +60,9 @@ async function run() {
 // ---------- Cả project (job nền) ----------
 const jobs = ref([]);
 const activeJob = computed(() => jobs.value.find((j) => j.status === "queued" || j.status === "running"));
+// Bước đang sáng trong khối quy trình: chưa chạy → 1, đang phân tích → 3, có kết quả → 4
+const STEPS = ["extract", "normalize", "align", "reason"];
+const activeStep = computed(() => (running.value || activeJob.value ? 2 : result.value ? 3 : 0));
 const progress = computed(() => {
   const j = activeJob.value;
   return j && j.total ? Math.round((j.processed / j.total) * 100) : 0;
@@ -107,13 +110,22 @@ onBeforeUnmount(() => {
 
 <template>
   <div>
+    <p class="eyebrow">{{ t("check.stepsTitle") }}</p>
+    <div class="steps">
+      <div v-for="(key, i) in STEPS" :key="key" class="step" :class="{ active: activeStep === i }">
+        <span class="step-no">{{ i + 1 }}.</span>
+        <span class="step-title">{{ t(`check.steps.${key}.title`) }}</span>
+        <p class="step-body">{{ t(`check.steps.${key}.body`) }}</p>
+      </div>
+    </div>
+
     <div class="card mb-3">
       <div class="row-between mb-3">
         <div>
-          <h2 style="margin: 0">{{ t("check.projectTitle") }}</h2>
+          <h2>{{ t("check.projectTitle") }}</h2>
           <p class="muted">{{ t("check.projectHint") }}</p>
         </div>
-        <button v-if="canRun" type="button" class="btn btn-primary" :disabled="!!activeJob || !stories.length" @click="startJob">
+        <button v-if="canRun" type="button" class="btn btn-primary btn-arrow" :disabled="!!activeJob || !stories.length" @click="startJob">
           {{ t("check.analyzeAll") }}
         </button>
       </div>

@@ -65,7 +65,7 @@ onMounted(() => emailInput.value?.focus());
         <label class="label" for="login-password">{{ t("auth.password") }}</label>
         <input id="login-password" v-model="login.password" class="field" type="password" autocomplete="current-password" required />
       </div>
-      <button type="submit" class="btn btn-primary" :disabled="busy">{{ t("auth.signIn") }}</button>
+      <button type="submit" class="btn btn-primary btn-arrow" :disabled="busy">{{ t("auth.signIn") }}</button>
       <RouterLink class="muted" to="/forgot-password">{{ t("auth.forgotLink") }}</RouterLink>
     </form>
 
@@ -82,7 +82,7 @@ onMounted(() => emailInput.value?.focus());
         <label class="label" for="reg-password">{{ t("auth.passwordHint") }}</label>
         <input id="reg-password" v-model="reg.password" class="field" type="password" autocomplete="new-password" minlength="8" required />
       </div>
-      <button type="submit" class="btn btn-primary" :disabled="busy">{{ t("auth.createAccount") }}</button>
+      <button type="submit" class="btn btn-primary btn-arrow" :disabled="busy">{{ t("auth.createAccount") }}</button>
     </form>
 
     <div v-if="error" class="alert alert-error mt-3">{{ error }}</div>
