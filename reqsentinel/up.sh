@@ -2,7 +2,8 @@
 # Chạy toàn bộ ReqSentinel bằng 1 lệnh.
 #
 #   ./reqsentinel/up.sh            build image còn thiếu (lần lượt từng cái) rồi chạy tất cả
-#   ./reqsentinel/up.sh rebuild    build lại mọi image sau khi sửa code (layer torch vẫn dùng cache)
+#   ./reqsentinel/up.sh rebuild    build lại mọi image sau khi sửa code / git pull (layer torch vẫn dùng cache)
+#   ./reqsentinel/up.sh rebuild web            chỉ build lại 1 hoặc vài service: ml | api | notification | web
 #   ./reqsentinel/up.sh down       dừng tất cả (giữ dữ liệu)
 #   ./reqsentinel/up.sh logs [svc] xem log
 #   ./reqsentinel/up.sh status     trạng thái + RAM từng container
@@ -108,12 +109,22 @@ case "${1:-up}" in
 EOF
     ;;
   rebuild)
-    need_env; check_memory; build_missing 1
-    c up -d --no-build
+    shift
+    need_env; check_memory
+    if (( $# )); then                       # chỉ build lại các service được nêu tên
+      for svc in "$@"; do
+        [[ " ${SERVICES[*]} " == *" $svc "* ]] || { echo "Không có service '$svc' (chọn: ${SERVICES[*]})"; exit 1; }
+        build_one "$svc"
+      done
+      c up -d --no-build "$@"
+    else
+      build_missing 1
+      c up -d --no-build
+    fi
     wait_ready; show_status
     ;;
   down)   c down ;;
   logs)   shift; c logs -f --tail=100 "$@" ;;
   status) show_status ;;
-  *)      sed -n '2,9p' "$0"; exit 1 ;;
+  *)      sed -n '2,10p' "$0"; exit 1 ;;
 esac

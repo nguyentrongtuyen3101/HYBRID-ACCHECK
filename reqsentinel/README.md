@@ -77,7 +77,8 @@ cp reqsentinel/.env.example reqsentinel/.env
 # Điền JWT_SECRET (>= 32 ký tự, vd `openssl rand -hex 32`) và ADMIN_PASSWORD
 ./reqsentinel/up.sh            # build image còn thiếu + chạy tất cả, đợi tới khi sẵn sàng
 ./reqsentinel/up.sh down       # dừng (giữ dữ liệu)
-./reqsentinel/up.sh rebuild    # build lại sau khi sửa code
+./reqsentinel/up.sh rebuild    # build lại sau khi sửa code / git pull
+./reqsentinel/up.sh rebuild web  # chỉ build lại 1 service (ml | api | notification | web)
 ./reqsentinel/up.sh status     # trạng thái + RAM từng container
 ./reqsentinel/up.sh logs api   # xem log 1 service
 ```

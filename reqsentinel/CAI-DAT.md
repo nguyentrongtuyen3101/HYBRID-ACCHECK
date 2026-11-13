@@ -44,6 +44,23 @@ cd HYBRID-ACCHECK
 - Xong mở http://localhost:8080, đăng nhập bằng `ADMIN_EMAIL` / `ADMIN_PASSWORD` trong `reqsentinel/.env`.
 - Dừng: `./reqsentinel/up.sh down`. Xem thêm lệnh trong [README.md](README.md#chạy-toàn-bộ-bằng-docker-compose).
 
+### 3. Cập nhật khi có code mới
+
+`./reqsentinel/up.sh` chỉ build image **chưa có**, nên sau khi `git pull` hoặc sửa code phải build lại thì mới thấy thay đổi:
+
+```bash
+git pull
+./reqsentinel/up.sh rebuild          # build lại cả 4 service (lần lượt từng cái) rồi chạy lại
+./reqsentinel/up.sh rebuild web      # chỉ build lại giao diện — nhanh hơn nhiều
+./reqsentinel/up.sh rebuild api notification   # build lại vài service
+```
+
+Tên service: `web` (giao diện), `api` (Go), `notification` (Node), `ml` (Python). Build lại `ml` vẫn nhanh vì phần cài
+torch được cache; chỉ khi `ml-service/requirements.txt` đổi mới phải tải lại torch. Dữ liệu (database, hàng đợi) không bị
+mất khi rebuild. Sau khi rebuild `web`, tải lại trình duyệt bằng **Ctrl + F5**.
+
+Các lệnh khác: `./reqsentinel/up.sh status` (trạng thái + RAM từng container), `./reqsentinel/up.sh logs api` (xem log 1 service).
+
 ---
 
 ## Cách 2 — Cài thư viện để chạy / sửa từng service
