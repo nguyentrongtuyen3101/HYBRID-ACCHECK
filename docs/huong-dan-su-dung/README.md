@@ -62,7 +62,7 @@ Một dự án luôn phải còn ít nhất một chủ sở hữu.
 Mở địa chỉ hệ thống, nhập **Email** và **Mật khẩu** rồi bấm **Đăng nhập**. Chưa có tài khoản thì chọn tab **Tạo tài khoản**,
 nhập họ tên, email và mật khẩu (tối thiểu 8 ký tự).
 
-Góc trên của khung đăng nhập có nút chọn ngôn ngữ (VI/EN/JA) và nút chuyển giao diện sáng/tối.
+Màn hình chia đôi: bên trái giới thiệu hệ thống, bên phải là khung đăng nhập. Góc trên bên phải có nút chọn ngôn ngữ (VI/EN/JA) và nút chuyển giao diện sáng/tối.
 
 ![Đăng nhập](images/01-login.png)
 
@@ -235,6 +235,8 @@ Phần **Chưa có trong từ điển** gợi ý các giá trị đang dùng tro
 ## 5. Chạy phân tích
 
 Tab **Chạy phân tích** có hai cách (cần vai trò biên tập hoặc chủ sở hữu; người xem chỉ xem được kết quả).
+Đầu tab là khối **Quy trình phân tích** gồm 4 bước: Trích xuất → Chuẩn hóa → Căn chỉnh → Suy luận; ô màu cam là bước
+đang diễn ra (chưa chạy: bước 1, đang phân tích: bước 3, có kết quả: bước 4).
 
 ### 5.1. Phân tích toàn bộ dự án
 
