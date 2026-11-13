@@ -1,12 +1,17 @@
-# Chạy toàn bộ hệ thống (từ thư mục deploy/): docker compose up --build
+# Chạy toàn bộ hệ thống bằng 1 lệnh: ./reqsentinel/up.sh   (dừng: ./reqsentinel/up.sh down)
+# up.sh build lần lượt từng image (không build song song → không dồn RAM), chỉ build image chưa có,
+# rồi docker compose up -d. Mỗi container có giới hạn RAM (mem_limit) nên không thể ăn hết máy.
 #   UI (Vue)        http://localhost:8080
 #   API (Go)        http://localhost:8000
 #   Email dev       http://localhost:8025   (Mailpit bắt mọi email gửi đi)
 #   RabbitMQ UI     http://localhost:15673  (guest / guest)
 # ML service và notification service chỉ mở trong mạng nội bộ (đi qua nginx của web).
+name: reqsentinel   # tên project cố định: container reqsentinel-*, volume reqsentinel_* (không phụ thuộc tên thư mục)
+
 services:
   db:
     image: postgres:16-alpine
+    mem_limit: 512m
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
@@ -22,6 +27,7 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management
+    mem_limit: 512m
     volumes:
       - rabbitmq:/var/lib/rabbitmq
     ports:
@@ -33,14 +39,23 @@ services:
 
   mailpit:
     image: axllent/mailpit
+    mem_limit: 64m
     ports:
       - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
 
   ml:
     build: ../ml-service
+    image: reqsentinel-ml:latest
+    # Đo thực tế: ~410 MB khi đã nạp model và đang phân tích. Có checkpoint DeBERTa thì tăng ML_MEM_LIMIT lên 2g.
+    mem_limit: ${ML_MEM_LIMIT:-1536m}
     environment:
       INTERNAL_TOKEN: ${ML_SERVICE_TOKEN:-change-me-internal-token}
       LOG_LEVEL: INFO
+      # torch mặc định mở 1 luồng/nhân CPU (16 luồng); giới hạn lại cho nhẹ RAM và CPU
+      OMP_NUM_THREADS: ${ML_THREADS:-2}
+      MKL_NUM_THREADS: ${ML_THREADS:-2}
+      TOKENIZERS_PARALLELISM: "false"
+      MALLOC_ARENA_MAX: "2"
     volumes:
       # checkpoint DeBERTa (data/models/deberta-extractor) + cache SBERT, giữ qua các lần restart
       - ../ml-service/data/models:/srv/data/models
@@ -53,8 +68,11 @@ services:
 
   api:
     build: ../api-service
+    image: reqsentinel-api:latest
+    mem_limit: 256m
     environment:
-      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck?sslmode=disable
+      # Mặc định dùng Postgres trong container; đặt DATABASE_URL trong .env để dùng Supabase
+      DATABASE_URL: ${DATABASE_URL:-postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck?sslmode=disable}
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (min 32 chars)}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD in .env}
@@ -77,8 +95,10 @@ services:
 
   notification:
     build: ../notification-service
+    image: reqsentinel-notification:latest
+    mem_limit: 256m
     environment:
-      DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck
+      DATABASE_URL: ${DATABASE_URL:-postgres://postgres:${POSTGRES_PASSWORD:-postgres}@db:5432/hybrid_accheck}
       RABBITMQ_URL: amqp://guest:guest@rabbitmq:5672
       JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in .env (min 32 chars)}
       # Mặc định gửi vào Mailpit; đặt SMTP_* trong .env để gửi email thật
@@ -96,6 +116,8 @@ services:
 
   web:
     build: ../web-app
+    image: reqsentinel-web:latest
+    mem_limit: 64m
     depends_on:
       - api
       - notification

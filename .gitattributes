@@ -1,0 +1,5 @@
+# Giữ xuống dòng kiểu Linux (LF) cho file chạy trong bash/container, kể cả khi clone trên Windows
+*.sh            text eol=lf
+Dockerfile      text eol=lf
+*.conf          text eol=lf
+.env.example    text eol=lf

@@ -5,7 +5,8 @@ Hệ thống AI hỗ trợ Business Analyst phát hiện **xung đột / thiếu
 
 > Đồ án tốt nghiệp · Pipeline hybrid: DeBERTa + SBERT + Alignment + ACRG + Symbolic Reasoner
 
-Thư mục `deploy/` chứa mọi thứ để chạy **toàn bộ hệ thống** (docker compose + biến môi trường).
+Thư mục `reqsentinel/` chứa mọi thứ để chạy **toàn bộ hệ thống** (docker compose + biến môi trường).
+Cài trên máy mới (Windows / Linux, lệnh copy sẵn): [CAI-DAT.md](CAI-DAT.md).
 Chi tiết từng service xem README trong thư mục của service đó.
 Hướng dẫn sử dụng cho người dùng cuối: [docs/huong-dan-su-dung](../docs/huong-dan-su-dung/README.md).
 
@@ -72,11 +73,22 @@ Admin hệ thống có quyền owner trên mọi project. Project luôn phải c
 ## Chạy toàn bộ bằng Docker Compose
 
 ```bash
-cd deploy
-cp .env.example .env
+cp reqsentinel/.env.example reqsentinel/.env
 # Điền JWT_SECRET (>= 32 ký tự, vd `openssl rand -hex 32`) và ADMIN_PASSWORD
-docker compose up --build
+./reqsentinel/up.sh            # build image còn thiếu + chạy tất cả, đợi tới khi sẵn sàng
+./reqsentinel/up.sh down       # dừng (giữ dữ liệu)
+./reqsentinel/up.sh rebuild    # build lại sau khi sửa code
+./reqsentinel/up.sh status     # trạng thái + RAM từng container
+./reqsentinel/up.sh logs api   # xem log 1 service
 ```
+
+Không chạy `docker compose up --build` trên máy ít RAM: lệnh đó build 4 image **song song** (torch + Go + 2 lần npm).
+`up.sh` build lần lượt từng image, chỉ build image chưa có, và tự dừng build nếu RAM trống của máy xuống dưới
+`MIN_FREE_MB` (mặc định 700 MB). Layer cài torch được cache, nên sau lần đầu `rebuild` chỉ mất khoảng 1 phút.
+
+RAM khi chạy (đo thực tế): cả 7 container khoảng 0,8 GB, trong đó ml-service khoảng 0,5–0,6 GB. Mỗi container có
+`mem_limit` (ml-service 1,5 GB, đổi bằng `ML_MEM_LIMIT`; số luồng torch đổi bằng `ML_THREADS`, mặc định 2), nên
+không container nào chiếm hết RAM của máy. Docker Desktop nên được cấp 3–4 GB (*Settings → Resources → Memory*).
 
 | URL | Mô tả |
 |-----|-------|
@@ -121,7 +133,8 @@ Chạy từng service khi dev: xem README của service (cần Postgres + Rabbit
    thêm `?sslmode=require`. Không dùng *Direct connection* (chỉ IPv6) và *Transaction pooler* cổng 6543
    (không hỗ trợ prepared statement và advisory lock mà migration dùng).
    Mật khẩu có ký tự đặc biệt thì phải URL-encode (vd `@` → `%40`).
-3. Đặt chuỗi đó vào `DATABASE_URL` của **cả** `api-service/.env` và `notification-service/.env`.
+3. Đặt chuỗi đó vào `DATABASE_URL` của **cả** `api-service/.env` và `notification-service/.env`
+   (chạy từng service), hoặc vào `reqsentinel/.env` (chạy bằng `./reqsentinel/up.sh`; khi đó container `db` vẫn chạy nhưng không được dùng).
 4. Chạy api-service: migration tự tạo bảng và tự bật Row Level Security cho mọi bảng trong `public`, nên
    Data API của Supabase (role `anon` / `authenticated`) không đọc được dữ liệu. Có thể tắt hẳn Data API ở
    *Project Settings → Data API* vì app không dùng tới.
