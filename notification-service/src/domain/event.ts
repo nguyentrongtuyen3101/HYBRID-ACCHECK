@@ -26,6 +26,11 @@ export const EventTypes = {
   JobProgress: "analysis.job_progress",
   JobFinished: "analysis.job_finished",
   PasswordResetRequested: "auth.password_reset_requested",
+  // Tác động lên chính tài khoản → luôn gửi email
+  AccountCreated: "account.created",
+  AccountRoleChanged: "account.role_changed",
+  AccountStatusChanged: "account.status_changed",
+  PasswordChanged: "account.password_changed",
 } as const;
 
 export class InvalidEventError extends Error {}

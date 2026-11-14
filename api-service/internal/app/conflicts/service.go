@@ -12,12 +12,14 @@ import (
 type Deps struct {
 	Issues  app.IssueRepository
 	Members app.MemberRepository
+	Users   app.UserRepository // email + ngôn ngữ người được giao
 	Auth    app.Authorizer
 	Events  app.EventPublisher
 	Tx      app.TxManager
 	Audit   app.AuditLog
 	Clock   app.Clock
 	NewID   app.IDGenerator
+	WebURL  string // link mở conflict trong email
 }
 
 type Service struct{ d Deps }
@@ -107,8 +109,18 @@ func (s *Service) Update(ctx context.Context, actor domain.Actor, projectID, iss
 			iss.AssigneeID = in.AssigneeID
 			acts = append(acts, s.activity(iss.ID, actor, domain.ActivityAssigned, nil, nil, in.AssigneeID, now))
 			if in.AssigneeID != nil {
+				extra := map[string]any{}
+				if *in.AssigneeID != actor.ID { // tự giao cho mình thì không cần email
+					u, err := s.d.Users.GetByID(ctx, *in.AssigneeID)
+					if err != nil {
+						return err
+					}
+					extra = app.WithRecipient(map[string]any{
+						"conflict_url": s.d.WebURL + "/projects/" + projectID + "?tab=conflicts&issue=" + iss.ID,
+					}, u)
+				}
 				events = append(events, s.event(domain.EventIssueAssigned, actor, p.Name, iss,
-					domain.Recipients(actor.ID, in.AssigneeID), nil))
+					domain.Recipients(actor.ID, in.AssigneeID), extra))
 			}
 		}
 

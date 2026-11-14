@@ -10,19 +10,36 @@ export class HttpError extends Error {
 
 /**
  * HTTP client dùng chung: gắn token, chuẩn hoá lỗi {"detail": ...}, xử lý 401.
- * @param {{ baseUrl: string, getToken: () => string|null, onUnauthorized: () => void }} opts
+ * @param {{ baseUrl: string, getToken: () => string|null, onUnauthorized: () => void,
+ *   activity?: { start: () => void, end: () => void } }} opts
+ *   activity: báo bắt đầu / kết thúc mỗi request để giao diện hiện chỉ báo đang tải
  */
-export function createHttpClient({ baseUrl, getToken, onUnauthorized }) {
-  async function send(method, path, { body, raw = false } = {}) {
+export function createHttpClient({ baseUrl, getToken, onUnauthorized, activity }) {
+  async function send(method, path, opts = {}) {
+    activity?.start();
+    try {
+      return await request(method, path, opts);
+    } finally {
+      activity?.end();
+    }
+  }
+
+  async function request(method, path, { body, raw = false } = {}) {
     const token = getToken();
     const headers = {};
     if (body !== undefined && !(body instanceof FormData)) headers["Content-Type"] = "application/json";
     if (token) headers.Authorization = `Bearer ${token}`;
-    const res = await fetch(baseUrl + path, {
-      method,
-      headers,
-      body: body === undefined ? undefined : body instanceof FormData ? body : JSON.stringify(body),
-    });
+    let res;
+    try {
+      res = await fetch(baseUrl + path, {
+        method,
+        headers,
+        body: body === undefined ? undefined : body instanceof FormData ? body : JSON.stringify(body),
+      });
+    } catch {
+      // fetch chỉ ném lỗi khi không tới được máy chủ (mất mạng, máy chủ tắt)
+      throw new HttpError(0, "Cannot reach the server", "network_error");
+    }
     if (res.status === 401 && token) {
       onUnauthorized();
       throw new HttpError(401, "Session expired, please log in again", "session_expired");

@@ -257,8 +257,15 @@
       "Effect Conflict": "Effect Conflict", "Scope Conflict": "Scope Conflict", "Condition Conflict": "Condition Conflict"
     }
   },
+  "network": {
+    "loading": "Loading",
+    "slow": "Slow connection, still loading…",
+    "offline": "You are offline. The app will continue when the connection is back.",
+    "backOnline": "Back online"
+  },
   "errors": {
     "unknown": "Something went wrong. Please try again.",
+    "network_error": "Cannot reach the server. Check your connection and try again.",
     "session_expired": "Your session has expired. Please sign in again.",
     "account_disabled": "This account is disabled.",
     "admin_required": "Administrator rights are required.",

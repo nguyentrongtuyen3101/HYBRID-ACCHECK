@@ -89,6 +89,64 @@ describe("email templates", () => {
     expect(email.html).toContain("&lt;script&gt;");
     expect(email.text).toContain("http://web/invitations/x");
   });
+
+  it("renders every template in every language without missing values", () => {
+    const data = {
+      name: "Bob", actorName: "Alice", at: "2026-11-14T08:00:00Z", projectName: "Shop", role: "editor", fromRole: "viewer",
+      inviterName: "Alice", acceptUrl: "http://web/i/x", resetUrl: "http://web/r", url: "http://web/p", forgotUrl: "http://web/f",
+      conflictType: "Scope Conflict", explanation: "PM grants all", email: "bob@x.io", status: "disabled", by: "self",
+    };
+    const templates = [
+      "project_invitation", "password_reset", "member_role_changed", "member_removed", "conflict_assigned",
+      "account_created", "account_role_changed", "account_status_changed", "password_changed",
+    ] as const;
+    for (const t of templates) {
+      for (const locale of ["vi", "en", "ja"] as const) {
+        const email = renderEmail(t, data, locale);
+        expect(email.subject.length, `${t}/${locale}`).toBeGreaterThan(5);
+        expect(email.html, `${t}/${locale}`).not.toMatch(/undefined|null|NaN/);
+        expect(email.text, `${t}/${locale}`).not.toMatch(/undefined|null|NaN/);
+      }
+    }
+    expect(renderEmail("conflict_assigned", data, "vi").html).toContain("Xung đột phạm vi");
+    expect(renderEmail("member_role_changed", data, "vi").text).toContain("Người xem → Biên tập viên");
+  });
+});
+
+describe("account-impacting events always email the affected user", () => {
+  const recipient = { email: "bob@x.io", name: "Bob", locale: "en" };
+
+  it("emails on project role change, removal and conflict assignment", () => {
+    const role = planDelivery(event({ type: "project.member_role_changed", recipients: ["bob"],
+      data: { project_name: "Shop", role: "editor", from_role: "viewer", project_url: "http://web/projects/1", ...recipient } }));
+    expect(role.emails).toEqual([expect.objectContaining({ to: "bob@x.io", template: "member_role_changed", locale: "en" })]);
+    expect(role.notifications).toHaveLength(1);
+
+    const removed = planDelivery(event({ type: "project.member_removed", recipients: ["bob"], data: { project_name: "Shop", ...recipient } }));
+    expect(removed.emails[0]?.template).toBe("member_removed");
+
+    const assigned = planDelivery(event({ type: "conflict.assigned", recipients: ["bob"],
+      data: { project_name: "Shop", issue_id: "i1", conflict_type: "Scope Conflict", conflict_url: "http://web/c", ...recipient } }));
+    expect(assigned.emails[0]).toMatchObject({ template: "conflict_assigned", data: { url: "http://web/c", actorName: "Owner" } });
+  });
+
+  it("sends no email when the event carries no recipient address (e.g. self-assignment)", () => {
+    const plan = planDelivery(event({ type: "conflict.assigned", recipients: [], data: { project_name: "Shop", issue_id: "i1" } }));
+    expect(plan.emails).toEqual([]);
+  });
+
+  it("emails admin changes to the account and password changes", () => {
+    for (const [type, template] of [
+      ["account.created", "account_created"],
+      ["account.role_changed", "account_role_changed"],
+      ["account.status_changed", "account_status_changed"],
+      ["account.password_changed", "password_changed"],
+    ] as const) {
+      const plan = planDelivery(event({ type, data: { ...recipient, role: "admin", status: "disabled", by: "admin" } }));
+      expect(plan.emails, type).toEqual([expect.objectContaining({ to: "bob@x.io", template })]);
+      expect(plan.notifications, type).toEqual([]);
+    }
+  });
 });
 
 // ---------- HandleEvent với fake (không cần DB / SMTP / socket) ----------

@@ -34,7 +34,16 @@ export interface EmailMessage {
   data: Record<string, unknown>;
 }
 
-export type EmailTemplate = "project_invitation" | "password_reset";
+export type EmailTemplate =
+  | "project_invitation"
+  | "password_reset"
+  | "member_role_changed"
+  | "member_removed"
+  | "conflict_assigned"
+  | "account_created"
+  | "account_role_changed"
+  | "account_status_changed"
+  | "password_changed";
 
 export const LOCALES = ["vi", "en", "ja"] as const;
 export type Locale = (typeof LOCALES)[number];

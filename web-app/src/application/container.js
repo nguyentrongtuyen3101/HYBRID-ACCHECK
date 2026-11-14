@@ -17,6 +17,7 @@ import { createHttpClient } from "../infrastructure/http/httpClient.js";
 import { connectNotificationSocket } from "../infrastructure/realtime/notificationSocket.js";
 import { browserEnvironment, documentAppearance, preferenceStorage } from "../infrastructure/browser/environment.js";
 import { sessionStorageAdapter } from "../infrastructure/storage/sessionStorage.js";
+import { createActivityTracker } from "./activity.js";
 import { createNotificationCenter } from "./notifications.js";
 import { createPreferences } from "./preferences.js";
 import { createSession } from "./session.js";
@@ -32,7 +33,9 @@ export function createContainer({ onSessionExpired, onLocaleChange }) {
   const notifyBase = import.meta.env.VITE_NOTIFY_API_BASE || "/api";
 
   let session;
+  const activity = createActivityTracker();
   const httpOpts = {
+    activity,
     getToken: () => session?.token(),
     onUnauthorized: () => {
       session.logout();
@@ -69,7 +72,7 @@ export function createContainer({ onSessionExpired, onLocaleChange }) {
       theme: documentAppearance.theme,
     },
   });
-  return { api, session, notifications, preferences };
+  return { api, session, notifications, preferences, activity };
 }
 
 export function useContainer() {

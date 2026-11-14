@@ -69,6 +69,14 @@ type RequestMeta struct {
 }
 
 // NewEvent tạo sự kiện với id/thời điểm từ IDGenerator/Clock.
+// WithRecipient gắn email, tên, ngôn ngữ của người nhận vào dữ liệu sự kiện để notification-service gửi email.
+func WithRecipient(data map[string]any, u domain.User) map[string]any {
+	for k, v := range domain.RecipientData(u.Email, u.FullName, u.PreferredLocale()) {
+		data[k] = v
+	}
+	return data
+}
+
 func NewEvent(newID IDGenerator, now Clock, typ string, actor *domain.Actor, recipients []string, data map[string]any) domain.Event {
 	if recipients == nil {
 		recipients = []string{}

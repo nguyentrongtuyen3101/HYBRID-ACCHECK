@@ -14,6 +14,27 @@ type Deps struct {
 	Projects app.ProjectRepository
 	Hasher   app.PasswordHasher
 	Audit    app.AuditLog
+	Events   app.EventPublisher // email báo cho người dùng khi admin tác động lên tài khoản
+	Tx       app.TxManager
+	Clock    app.Clock
+	NewID    app.IDGenerator
+	WebURL   string
+}
+
+// notify ghi sự kiện email cho chủ tài khoản (cùng transaction với thay đổi).
+func (s *Service) notify(ctx context.Context, actor domain.Actor, typ string, u domain.User, data map[string]any) error {
+	if s.d.Events == nil {
+		return nil
+	}
+	data["app_url"] = s.d.WebURL + "/"
+	return s.d.Events.Publish(ctx, app.NewEvent(s.d.NewID, s.d.Clock, typ, &actor, nil, app.WithRecipient(data, u)))
+}
+
+func (s *Service) inTx(ctx context.Context, fn func(context.Context) error) error {
+	if s.d.Tx == nil {
+		return fn(ctx)
+	}
+	return s.d.Tx.WithinTx(ctx, fn)
 }
 
 type Service struct{ d Deps }
@@ -47,13 +68,20 @@ func (s *Service) Create(ctx context.Context, actor domain.Actor, in CreateInput
 	if err != nil {
 		return domain.User{}, err
 	}
-	u, err := s.d.Users.Create(ctx, domain.User{Email: email, Profile: domain.Profile{FullName: in.FullName}, Role: in.Role, PasswordHash: &hash})
-	if err != nil {
-		return u, err
-	}
-	s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.create", "user", u.ID,
-		map[string]any{"email": u.Email, "role": u.Role}))
-	return u, nil
+	var u domain.User
+	err = s.inTx(ctx, func(ctx context.Context) error {
+		u, err = s.d.Users.Create(ctx, domain.User{Email: email, Profile: domain.Profile{FullName: in.FullName}, Role: in.Role, PasswordHash: &hash})
+		if err != nil {
+			return err
+		}
+		s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.create", "user", u.ID,
+			map[string]any{"email": u.Email, "role": u.Role}))
+		// Không gửi mật khẩu qua email: admin báo riêng, hoặc người dùng tự đặt bằng "Quên mật khẩu".
+		return s.notify(ctx, actor, domain.EventAccountCreated, u, map[string]any{
+			"role": u.Role, "login_url": s.d.WebURL + "/login", "forgot_url": s.d.WebURL + "/forgot-password",
+		})
+	})
+	return u, err
 }
 
 func (s *Service) Update(ctx context.Context, actor domain.Actor, id string, p domain.UserPatch, meta app.RequestMeta) (domain.User, error) {
@@ -81,22 +109,36 @@ func (s *Service) Update(ctx context.Context, actor domain.Actor, id string, p d
 			return target, domain.Validation("last_admin", "Cannot remove the last active admin")
 		}
 	}
-	u, err := s.d.Users.Update(ctx, id, p)
-	if err != nil {
-		return u, app.NotFoundAs(err, "user_not_found", "User not found")
-	}
-	changes := map[string]any{}
-	if u.Role != target.Role {
-		changes["role"] = map[string]any{"from": target.Role, "to": u.Role}
-	}
-	if u.Status != target.Status {
-		changes["status"] = map[string]any{"from": target.Status, "to": u.Status}
-	}
-	if u.FullName != target.FullName {
-		changes["full_name"] = u.FullName
-	}
-	s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.update", "user", u.ID, changes))
-	return u, nil
+	var u domain.User
+	err = s.inTx(ctx, func(ctx context.Context) error {
+		u, err = s.d.Users.Update(ctx, id, p)
+		if err != nil {
+			return app.NotFoundAs(err, "user_not_found", "User not found")
+		}
+		changes := map[string]any{}
+		if u.Role != target.Role {
+			changes["role"] = map[string]any{"from": target.Role, "to": u.Role}
+		}
+		if u.Status != target.Status {
+			changes["status"] = map[string]any{"from": target.Status, "to": u.Status}
+		}
+		if u.FullName != target.FullName {
+			changes["full_name"] = u.FullName
+		}
+		s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.update", "user", u.ID, changes))
+		if u.Role != target.Role {
+			if err := s.notify(ctx, actor, domain.EventAccountRoleChanged, u,
+				map[string]any{"from_role": target.Role, "role": u.Role}); err != nil {
+				return err
+			}
+		}
+		if u.Status != target.Status {
+			return s.notify(ctx, actor, domain.EventAccountStatusChanged, u,
+				map[string]any{"from_status": target.Status, "status": u.Status})
+		}
+		return nil
+	})
+	return u, err
 }
 
 func (s *Service) ResetPassword(ctx context.Context, actor domain.Actor, id, password string, meta app.RequestMeta) error {
@@ -107,11 +149,19 @@ func (s *Service) ResetPassword(ctx context.Context, actor domain.Actor, id, pas
 	if err != nil {
 		return err
 	}
-	if err := s.d.Users.SetPassword(ctx, id, hash); err != nil {
-		return app.NotFoundAs(err, "user_not_found", "User not found")
-	}
-	s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.reset_password", "user", id, nil))
-	return nil
+	return s.inTx(ctx, func(ctx context.Context) error {
+		if err := s.d.Users.SetPassword(ctx, id, hash); err != nil {
+			return app.NotFoundAs(err, "user_not_found", "User not found")
+		}
+		s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "user.reset_password", "user", id, nil))
+		u, err := s.d.Users.GetByID(ctx, id)
+		if err != nil {
+			return err
+		}
+		return s.notify(ctx, actor, domain.EventPasswordChanged, u, map[string]any{
+			"by": "admin", "login_url": s.d.WebURL + "/login", "forgot_url": s.d.WebURL + "/forgot-password",
+		})
+	})
 }
 
 // BootstrapAdmin tạo admin đầu tiên nếu chưa có, rồi gán project cũ (chưa có chủ) cho admin.

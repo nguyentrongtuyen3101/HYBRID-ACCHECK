@@ -156,10 +156,15 @@ func (s *Service) ChangeMemberRole(ctx context.Context, actor domain.Actor, proj
 		}
 		s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "project.member_role_changed", "project", projectID,
 			map[string]any{"user_id": userID, "from": target.Role, "to": role}))
+		u, err := s.d.Users.GetByID(ctx, userID)
+		if err != nil {
+			return err
+		}
 		return s.d.Events.Publish(ctx, app.NewEvent(s.d.NewID, s.d.Clock, domain.EventMemberRoleChanged, &actor,
-			domain.Recipients(actor.ID, &userID), map[string]any{
-				"project_id": projectID, "project_name": p.Name, "role": role,
-			}))
+			domain.Recipients(actor.ID, &userID), app.WithRecipient(map[string]any{
+				"project_id": projectID, "project_name": p.Name, "role": role, "from_role": target.Role,
+				"project_url": s.d.WebURL + "/projects/" + projectID,
+			}, u)))
 	})
 }
 
@@ -193,8 +198,15 @@ func (s *Service) RemoveMember(ctx context.Context, actor domain.Actor, projectI
 		if userID == actor.ID {
 			return nil
 		}
+		u, err := s.d.Users.GetByID(ctx, userID)
+		if err != nil {
+			return err
+		}
 		return s.d.Events.Publish(ctx, app.NewEvent(s.d.NewID, s.d.Clock, domain.EventMemberRemoved, &actor,
-			domain.Recipients(actor.ID, &userID), map[string]any{"project_id": projectID, "project_name": p.Name}))
+			domain.Recipients(actor.ID, &userID), app.WithRecipient(map[string]any{
+				"project_id": projectID, "project_name": p.Name, "role": target.Role,
+				"app_url": s.d.WebURL + "/",
+			}, u)))
 	})
 }
 

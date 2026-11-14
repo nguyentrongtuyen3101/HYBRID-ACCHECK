@@ -257,8 +257,15 @@
       "Effect Conflict": "Xung đột hiệu lực", "Scope Conflict": "Xung đột phạm vi", "Condition Conflict": "Xung đột điều kiện"
     }
   },
+  "network": {
+    "loading": "Đang tải",
+    "slow": "Mạng chậm, vẫn đang tải…",
+    "offline": "Mất kết nối mạng. Ứng dụng sẽ tự tiếp tục khi có mạng.",
+    "backOnline": "Đã kết nối lại"
+  },
   "errors": {
     "unknown": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+    "network_error": "Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.",
     "session_expired": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
     "account_disabled": "Tài khoản này đã bị khóa.",
     "admin_required": "Cần quyền quản trị.",

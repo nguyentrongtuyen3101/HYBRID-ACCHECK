@@ -24,7 +24,18 @@ const (
 	EventJobProgress            = "analysis.job_progress"
 	EventJobFinished            = "analysis.job_finished"
 	EventPasswordResetRequested = "auth.password_reset_requested"
+
+	// Thao tác tác động lên chính tài khoản người dùng → luôn báo qua email.
+	EventAccountCreated       = "account.created"          // admin tạo tài khoản
+	EventAccountRoleChanged   = "account.role_changed"     // admin đổi vai trò hệ thống
+	EventAccountStatusChanged = "account.status_changed"   // admin khóa / mở khóa
+	EventPasswordChanged      = "account.password_changed" // tự đổi, đặt lại qua link, hoặc admin đặt lại
 )
+
+// RecipientData: thông tin người nhận email đi kèm sự kiện (notification-service không đọc bảng users).
+func RecipientData(email, name string, locale Locale) map[string]any {
+	return map[string]any{"email": email, "name": name, "locale": locale}
+}
 
 // Recipients loại người thực hiện và id trùng.
 func Recipients(actorID string, ids ...*string) []string {

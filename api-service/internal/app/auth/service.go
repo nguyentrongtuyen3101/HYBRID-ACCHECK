@@ -156,11 +156,21 @@ func (s *Service) ChangePassword(ctx context.Context, actor domain.Actor, curren
 	if err != nil {
 		return err
 	}
-	if err := s.d.Users.SetPassword(ctx, u.ID, hash); err != nil {
-		return err
-	}
-	s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "auth.change_password", "user", u.ID, nil))
-	return nil
+	return s.d.Tx.WithinTx(ctx, func(ctx context.Context) error {
+		if err := s.d.Users.SetPassword(ctx, u.ID, hash); err != nil {
+			return err
+		}
+		s.d.Audit.Record(ctx, app.Audit(&actor, meta.IP, "auth.change_password", "user", u.ID, nil))
+		return s.passwordChangedEvent(ctx, u, "self")
+	})
+}
+
+// passwordChangedEvent: email cảnh báo bảo mật mỗi khi mật khẩu đổi (by = self | reset).
+func (s *Service) passwordChangedEvent(ctx context.Context, u domain.User, by string) error {
+	return s.d.Events.Publish(ctx, app.NewEvent(s.d.NewID, s.d.Clock, domain.EventPasswordChanged, nil, nil,
+		app.WithRecipient(map[string]any{
+			"by": by, "login_url": s.d.WebURL + "/login", "forgot_url": s.d.WebURL + "/forgot-password",
+		}, u)))
 }
 
 // ForgotPassword luôn trả nil để không lộ email nào đã đăng ký.
@@ -210,7 +220,14 @@ func (s *Service) ResetPassword(ctx context.Context, token, newPassword string, 
 			return domain.Validation("reset_link_invalid", "Reset link is invalid or has expired")
 		}
 		userID = id
-		return s.d.Users.SetPassword(ctx, id, hash)
+		if err := s.d.Users.SetPassword(ctx, id, hash); err != nil {
+			return err
+		}
+		u, err := s.d.Users.GetByID(ctx, id)
+		if err != nil {
+			return err
+		}
+		return s.passwordChangedEvent(ctx, u, "reset")
 	})
 	if err != nil {
 		return err

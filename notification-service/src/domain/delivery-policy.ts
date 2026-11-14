@@ -1,5 +1,13 @@
 import { type DomainEvent, EventTypes, num, str } from "./event.js";
-import { type DeliveryPlan, type NotificationDraft, type NotificationParams, emptyPlan, toLocale } from "./notification.js";
+import {
+  type DeliveryPlan,
+  type EmailMessage,
+  type EmailTemplate,
+  type NotificationDraft,
+  type NotificationParams,
+  emptyPlan,
+  toLocale,
+} from "./notification.js";
 
 /**
  * Luật nghiệp vụ: mỗi loại sự kiện → ai nhận gì, qua kênh nào.
@@ -38,6 +46,23 @@ function pathOf(url: string): string | null {
   } catch {
     return null;
   }
+}
+
+/**
+ * Email cho chủ tài khoản bị tác động: api-service gắn sẵn email/name/locale người nhận vào `data`.
+ * Không có email (vd tự giao việc cho mình) → không gửi.
+ */
+function emailTo(e: DomainEvent, template: EmailTemplate, data: Record<string, unknown>): EmailMessage[] {
+  const to = str(e.data, "email");
+  if (!to) return [];
+  return [
+    {
+      to,
+      template,
+      locale: toLocale(e.data.locale),
+      data: { name: str(e.data, "name"), actorName: actorName(e), at: e.occurred_at, ...data },
+    },
+  ];
 }
 
 /** Tham số chung của thông báo về conflict. */
@@ -102,6 +127,12 @@ export const deliveryRules: Record<string, DeliveryRule> = {
         body: `${params.actor} changed your role to ${params.role}.`,
         link: projectLink(e),
       }),
+      emails: emailTo(e, "member_role_changed", {
+        projectName: params.project,
+        role: params.role,
+        fromRole: str(e.data, "from_role"),
+        url: str(e.data, "project_url"),
+      }),
     };
   },
 
@@ -114,6 +145,11 @@ export const deliveryRules: Record<string, DeliveryRule> = {
         body: `${params.actor} removed you from the project.`,
         link: null,
       }),
+      emails: emailTo(e, "member_removed", {
+        projectName: params.project,
+        role: str(e.data, "role"),
+        url: str(e.data, "app_url"),
+      }),
     };
   },
 
@@ -125,6 +161,12 @@ export const deliveryRules: Record<string, DeliveryRule> = {
         title: `${params.actor} assigned you a ${params.conflict_type}`,
         body: `${params.project}: ${params.explanation}`,
         link: conflictLink(e),
+      }),
+      emails: emailTo(e, "conflict_assigned", {
+        projectName: params.project,
+        conflictType: params.conflict_type,
+        explanation: params.explanation,
+        url: str(e.data, "conflict_url"),
       }),
     };
   },
@@ -192,6 +234,40 @@ export const deliveryRules: Record<string, DeliveryRule> = {
         data: { name: str(e.data, "name"), resetUrl: str(e.data, "reset_url"), expiresAt: str(e.data, "expires_at") },
       },
     ],
+  }),
+
+  // ---- Tác động lên chính tài khoản: chỉ email (người dùng có thể đang không đăng nhập)
+  [EventTypes.AccountCreated]: (e) => ({
+    ...emptyPlan(),
+    emails: emailTo(e, "account_created", {
+      email: str(e.data, "email"),
+      role: str(e.data, "role"),
+      url: str(e.data, "login_url"),
+      forgotUrl: str(e.data, "forgot_url"),
+    }),
+  }),
+
+  [EventTypes.AccountRoleChanged]: (e) => ({
+    ...emptyPlan(),
+    emails: emailTo(e, "account_role_changed", {
+      fromRole: str(e.data, "from_role"),
+      role: str(e.data, "role"),
+      url: str(e.data, "app_url"),
+    }),
+  }),
+
+  [EventTypes.AccountStatusChanged]: (e) => ({
+    ...emptyPlan(),
+    emails: emailTo(e, "account_status_changed", { status: str(e.data, "status"), url: str(e.data, "app_url") }),
+  }),
+
+  [EventTypes.PasswordChanged]: (e) => ({
+    ...emptyPlan(),
+    emails: emailTo(e, "password_changed", {
+      by: str(e.data, "by"),
+      url: str(e.data, "login_url"),
+      forgotUrl: str(e.data, "forgot_url"),
+    }),
   }),
 };
 

@@ -5,6 +5,7 @@ import { useContainer } from "./application/container.js";
 import { closeConfirm, confirmState } from "./presentation/composables/ui.js";
 import AppHeader from "./presentation/components/common/AppHeader.vue";
 import ConfirmModal from "./presentation/components/common/ConfirmModal.vue";
+import NetworkStatus from "./presentation/components/common/NetworkStatus.vue";
 import ToastContainer from "./presentation/components/common/ToastContainer.vue";
 
 const route = useRoute();
@@ -44,6 +45,7 @@ onBeforeUnmount(() => {
       <RouterView :key="route.path" />
     </div>
   </template>
+  <NetworkStatus />
   <ToastContainer />
   <ConfirmModal />
 </template>

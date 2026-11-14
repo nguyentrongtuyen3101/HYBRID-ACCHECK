@@ -118,12 +118,17 @@ Chạy từng service khi dev: xem README của service (cần Postgres + Rabbit
 |---------|--------|-------|
 | `project.member_invited` | người được mời (nếu đã có tài khoản) | ✓ link chấp nhận lời mời |
 | `project.member_joined` | người mời | |
-| `project.member_role_changed`, `project.member_removed` | thành viên bị đổi role / bị xoá | |
-| `conflict.assigned` | người được giao | |
+| `project.member_role_changed`, `project.member_removed` | thành viên bị đổi role / bị xoá | ✓ người bị đổi role / bị xoá |
+| `conflict.assigned` | người được giao | ✓ người được giao (trừ khi tự giao cho mình) |
 | `conflict.status_changed`, `conflict.commented` | người được giao + người đã tham gia | |
 | `analysis.job_progress` | chỉ realtime (không lưu) | |
 | `analysis.job_finished` | người chạy job | |
 | `auth.password_reset_requested` | | ✓ link đặt lại mật khẩu |
+| `account.created`, `account.role_changed`, `account.status_changed` | | ✓ chủ tài khoản (admin tạo, đổi vai trò hệ thống, khóa / mở khóa) |
+| `account.password_changed` | | ✓ cảnh báo bảo mật: tự đổi, đặt lại qua link, hoặc admin đặt lại |
+
+Mọi thao tác tác động lên tài khoản của một người đều gửi email cho chính người đó. Email theo ngôn ngữ người nhận
+(vi / en / ja), giao diện cùng hệ thiết kế với web-app (`notification-service/src/infrastructure/mail/templates.ts`).
 
 ---
 

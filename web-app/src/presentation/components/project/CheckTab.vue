@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import { useContainer } from "../../../application/container.js";
 import { JOB_STATUS_BADGES } from "../../../domain/conflicts.js";
+import { applyJobProgress, isJobActive, isJobDone } from "../../../domain/jobs.js";
 import { can, Permission } from "../../../domain/roles.js";
 import { useEnumLabel, useErrorText, useFormat } from "../../composables/i18n.js";
 import { showToast } from "../../composables/ui.js";
@@ -59,7 +60,7 @@ async function run() {
 
 // ---------- Cả project (job nền) ----------
 const jobs = ref([]);
-const activeJob = computed(() => jobs.value.find((j) => j.status === "queued" || j.status === "running"));
+const activeJob = computed(() => jobs.value.find(isJobActive));
 // Bước đang sáng trong khối quy trình: chưa chạy → 1, đang phân tích → 3, có kết quả → 4
 const STEPS = ["extract", "normalize", "align", "reason"];
 const activeStep = computed(() => (running.value || activeJob.value ? 2 : result.value ? 3 : 0));
@@ -69,13 +70,13 @@ const progress = computed(() => {
 });
 let pollTimer;
 
-async function loadJobs() {
+async function loadJobs({ silent = false } = {}) {
   try {
     const wasActive = !!activeJob.value;
     jobs.value = await api.analysis.jobs(props.projectId);
     if (wasActive && !activeJob.value) emit("analyzed");
   } catch (e) {
-    showToast(errorText(e), "error");
+    if (!silent) showToast(errorText(e), "error");
   }
 }
 
@@ -89,17 +90,20 @@ async function startJob() {
   }
 }
 
-// Tiến độ đến realtime; nếu mất kết nối socket thì hỏi lại định kỳ
+// Tiến độ đến realtime. Tín hiệu có thể đến sai thứ tự hoặc trễ, nên bỏ qua tín hiệu cũ
+// (applyJobProgress) và luôn hỏi lại máy chủ định kỳ khi có job đang chạy, kể cả khi socket vẫn nối.
 const offProgress = notifications.onSignal("job:progress", (p) => {
   if (p.project_id !== props.projectId) return;
-  const job = jobs.value.find((j) => j.id === p.job_id);
-  if (job) Object.assign(job, { status: p.status, processed: p.processed, failed: p.failed, total: p.total });
-  if (p.status === "completed" || p.status === "failed") loadJobs();
+  applyJobProgress(jobs.value.find((j) => j.id === p.job_id), p);
+  if (isJobDone(p.status) || (p.total && p.processed >= p.total)) loadJobs({ silent: true });
 });
-watch(activeJob, (job) => {
-  clearInterval(pollTimer);
-  if (job) pollTimer = setInterval(() => !notifications.state.connected && loadJobs(), 3000);
-});
+watch(
+  () => activeJob.value?.id,
+  (id) => {
+    clearInterval(pollTimer);
+    if (id) pollTimer = setInterval(() => loadJobs({ silent: true }), notifications.state.connected ? 5000 : 3000);
+  },
+);
 
 onMounted(loadJobs);
 onBeforeUnmount(() => {
